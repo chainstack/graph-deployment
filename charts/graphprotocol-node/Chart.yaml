@@ -1,0 +1,12 @@
+apiVersion: v2
+name: graphprotocol-node
+description: A Helm chart for Graph Protocol Nodes
+type: application
+version: 0.1.0
+keywords:
+  - graphprotocol
+  - ethereum
+home: https://thegraph.com/
+sources:
+  - https://github.com/graphprotocol/graph-node 
+appVersion: latest
