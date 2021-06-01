@@ -3,6 +3,7 @@
 - graphprotocol-node chart check if we missing ports, which should be exposed and where
 - graphprotocol-node chart health checks
 - graphprotocol-node chart check tune requests/limits
+- graphprotocol-node chart check tune probes
 - graphprotocol-node chart cleanup values
 - graphprotocol-node chart do we need persistent storage?
 - graphprotocol-node chart do we need support external components easy way?

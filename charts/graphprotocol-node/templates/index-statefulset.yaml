@@ -15,11 +15,11 @@ spec:
   serviceName: {{ include "graphprotocol-node.fullname" . }}-index
   template:
     metadata:
-    {{- with .Values.podAnnotations }}
       annotations:
         checksum/configmap.yaml: {{ include (print $.Template.BasePath "/configmap.yaml") . | sha256sum }}
-        {{- toYaml . | nindent 8 }}
-    {{- end }}
+        {{- with .Values.podAnnotations }}
+        {{-   toYaml . | nindent 8 }}
+        {{- end }}
       labels:
         role: index
         {{- include "graphprotocol-node.selectorLabels" . | nindent 8 }}
