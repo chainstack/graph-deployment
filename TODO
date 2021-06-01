@@ -5,4 +5,6 @@
 - graphprotocol-node chart check tune requests/limits
 - graphprotocol-node chart cleanup values
 - graphprotocol-node chart do we need persistent storage?
+- graphprotocol-node chart do we need support external components easy way?
+- graphprotocol-node chart do we need support `/var/lib/graph` mount it seems it's only used for coredumps (https://github.com/graphprotocol/graph-node/search?q=%2Fvar%2Flib%2Fgraph)
 - helmfile check if it makes our live easier in this project or not

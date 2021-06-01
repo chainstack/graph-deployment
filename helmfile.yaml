@@ -1,3 +1,6 @@
+helmDefaults:
+  wait: true
+
 repositories:
 - name: bitnami
   url: https://charts.bitnami.com/bitnami
@@ -6,11 +9,13 @@ releases:
 - name: postgres
   chart: bitnami/postgresql
   values:
+  - values/postgres.yaml
   - values/postgres.secret.yaml
 
 - name: graphprotocol-node
   chart: ./charts/graphprotocol-node
   values:
+  - values/graphprotocol-node.yaml
   - values/graphprotocol-node.secret.yaml
   needs:
   - postgres

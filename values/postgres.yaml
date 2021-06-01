@@ -1,0 +1,5 @@
+postgresqlUsername: postgres
+postgresqlPassword: ""
+postgresqlDatabase: graph-node
+
+postgresqlSharedPreloadLibraries: pg_stat_statements
