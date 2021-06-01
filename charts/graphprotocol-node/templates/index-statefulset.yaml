@@ -13,7 +13,6 @@ spec:
       role: index
       {{- include "graphprotocol-node.selectorLabels" . | nindent 6 }}
   serviceName: {{ include "graphprotocol-node.fullname" . }}-index
-
   template:
     metadata:
     {{- with .Values.podAnnotations }}
@@ -22,6 +21,7 @@ spec:
         {{- toYaml . | nindent 8 }}
     {{- end }}
       labels:
+        role: index
         {{- include "graphprotocol-node.selectorLabels" . | nindent 8 }}
     spec:
       {{- with .Values.imagePullSecrets }}
@@ -41,37 +41,12 @@ spec:
               valueFrom:
                 fieldRef:
                   fieldPath: metadata.name
-            - name: postgres_host
-              valueFrom:
-                secretKeyRef:
-                  name: {{ .Values.secrets.postgres }}
-                  key: host
-            - name: postgres_user
-              valueFrom:
-                secretKeyRef:
-                  name: {{ .Values.secrets.postgres }}
-                  key: user
-            - name: postgres_pass
-              valueFrom:
-                secretKeyRef:
-                  name: {{ .Values.secrets.postgres }}
-                  key: password
           envFrom:
             - configMapRef:
                 name: {{ include "graphprotocol-node.fullname" . }}
+            - secretRef:
+                name: {{ include "graphprotocol-node.fullname" . }}
           ports:
-            # - name: http
-            #   containerPort: {{ .Values.container.ports.http }}
-            #   protocol: TCP
-            # - name: ws
-            #   containerPort: {{ .Values.container.ports.ws }}
-            #   protocol: TCP
-            # - name: index-node
-            #   containerPort: {{ .Values.container.ports.indexNode }}
-            #   protocol: TCP
-            # - name: json-rpc 
-            #   containerPort: {{ .Values.container.ports.jsonRpc }}
-            #   protocol: TCP
             - name: metrics 
               containerPort: 8040
               protocol: TCP

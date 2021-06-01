@@ -72,7 +72,7 @@ affinity: {}
 
 ###
 config:
-  ipfs: https://testnet.thegraph.com/ipfs/
+  ipfs: https://ipfs.network.thegraph.com
   #ethereum:
 
 

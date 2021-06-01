@@ -12,3 +12,5 @@ releases:
   chart: ./charts/graphprotocol-node
   values:
   - values/graphprotocol-node.secret.yaml
+  needs:
+  - postgres
