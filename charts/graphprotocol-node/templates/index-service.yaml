@@ -8,10 +8,10 @@ metadata:
 spec:
   type: {{ .Values.service.type }}
   ports:
-    - port: {{ .Values.service.port }}
-      targetPort: http
+    - port: 8040 #TODO: Consider making configurable
+      targetPort: metrics
       protocol: TCP
-      name: http
+      name: metrics
   selector:
     role: index
     {{- include "graphprotocol-node.selectorLabels" . | nindent 4 }}

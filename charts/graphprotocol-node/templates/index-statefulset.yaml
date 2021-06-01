@@ -18,6 +18,7 @@ spec:
     metadata:
     {{- with .Values.podAnnotations }}
       annotations:
+        checksum/configmap.yaml: {{ include (print $.Template.BasePath "/configmap.yaml") . | sha256sum }}
         {{- toYaml . | nindent 8 }}
     {{- end }}
       labels:
@@ -27,7 +28,6 @@ spec:
       imagePullSecrets:
         {{- toYaml . | nindent 8 }}
       {{- end }}
-      serviceAccountName: {{ include "graphprotocol-node.serviceAccountName" . }}
       securityContext:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
       containers:
@@ -36,18 +36,53 @@ spec:
             {{- toYaml .Values.securityContext | nindent 12 }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
+          env:
+            - name: node_id
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.name
+            - name: postgres_host
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.secrets.postgres }}
+                  key: host
+            - name: postgres_user
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.secrets.postgres }}
+                  key: user
+            - name: postgres_pass
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.secrets.postgres }}
+                  key: password
+          envFrom:
+            - configMapRef:
+                name: {{ include "graphprotocol-node.fullname" . }}
           ports:
-            - name: http
-              containerPort: 80
+            # - name: http
+            #   containerPort: {{ .Values.container.ports.http }}
+            #   protocol: TCP
+            # - name: ws
+            #   containerPort: {{ .Values.container.ports.ws }}
+            #   protocol: TCP
+            # - name: index-node
+            #   containerPort: {{ .Values.container.ports.indexNode }}
+            #   protocol: TCP
+            # - name: json-rpc 
+            #   containerPort: {{ .Values.container.ports.jsonRpc }}
+            #   protocol: TCP
+            - name: metrics 
+              containerPort: 8040
               protocol: TCP
-          livenessProbe:
-            httpGet:
-              path: /
-              port: http
-          readinessProbe:
-            httpGet:
-              path: /
-              port: http
+          # livenessProbe:
+          #   httpGet:
+          #     path: /
+          #     port: http
+          # readinessProbe:
+          #   httpGet:
+          #     path: /
+          #     port: http
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
       {{- with .Values.nodeSelector }}
