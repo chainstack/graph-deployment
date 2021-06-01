@@ -7,6 +7,6 @@ metadata:
 data:
   BLOCK_INGESTOR: {{ include "graphprotocol-node.fullname" . }}-index-0 #TODO: Do we need this value to be configurable?
   GRAPH_KILL_IF_UNRESPONSIVE: "true" #TODO: Do we need this value to be configurable?
-  postgres_db: {{ .Values.config.posgresDb }} #TODO: Add required check
+  postgres_db: {{ .Values.posgres.db }} #TODO: Add required check
   ipfs: {{ .Values.config.ipfs }} #TODO: Add required check
   ethereum: {{ .Values.config.ethereum }} #TODO: Add required check + check if it works well with multiline

@@ -5,6 +5,8 @@ repositories:
 releases:
 - name: postgres
   chart: bitnami/postgresql
+  values:
+  - values/postgres.secret.yaml
 
 - name: graphprotocol-node
   chart: ./charts/graphprotocol-node

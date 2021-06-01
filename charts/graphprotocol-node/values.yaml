@@ -73,8 +73,11 @@ affinity: {}
 ###
 config:
   ipfs: https://testnet.thegraph.com/ipfs/
-  postgresDb: graph
   #ethereum:
 
-secrets:
-  postgres: ""
+
+postgres:
+  db: graph
+  host: ""
+  user: ""
+  password: ""
