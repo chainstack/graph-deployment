@@ -9,4 +9,4 @@ keywords:
 home: https://thegraph.com/
 sources:
   - https://github.com/graphprotocol/graph-node 
-appVersion: latest
+appVersion: v0.22.0

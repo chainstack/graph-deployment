@@ -1,16 +1,19 @@
 apiVersion: apps/v1
-kind: Deployment
+kind: StatefulSet
 metadata:
-  name: {{ include "graphprotocol-node.fullname" . }}
+  name: {{ include "graphprotocol-node.fullname" . }}-index
   labels:
+    role: index
     {{- include "graphprotocol-node.labels" . | nindent 4 }}
 spec:
-{{- if not .Values.autoscaling.enabled }}
-  replicas: {{ .Values.replicaCount }}
-{{- end }}
+  # Index stateful set had always 1 replica cause it could be only one block ingestor node (https://github.com/graphprotocol/graph-node/blob/master/docker/start#L86-L88)
+  replicas: 1
   selector:
     matchLabels:
+      role: index
       {{- include "graphprotocol-node.selectorLabels" . | nindent 6 }}
+  serviceName: {{ include "graphprotocol-node.fullname" . }}-index
+
   template:
     metadata:
     {{- with .Values.podAnnotations }}

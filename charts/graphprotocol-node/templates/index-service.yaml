@@ -1,8 +1,9 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: {{ include "graphprotocol-node.fullname" . }}
+  name: {{ include "graphprotocol-node.fullname" . }}-index
   labels:
+    role: index
     {{- include "graphprotocol-node.labels" . | nindent 4 }}
 spec:
   type: {{ .Values.service.type }}
@@ -12,4 +13,5 @@ spec:
       protocol: TCP
       name: http
   selector:
+    role: index
     {{- include "graphprotocol-node.selectorLabels" . | nindent 4 }}

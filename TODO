@@ -1,0 +1,3 @@
+- graphprotocol-node chart check if spliting chart this way is good idea
+- graphprotocol-node chart check if values sharing for index and query nodes is a good idea
+- helmfile check if it makes our live easier in this project or not
