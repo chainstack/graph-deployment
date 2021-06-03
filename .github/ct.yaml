@@ -1,0 +1,7 @@
+# check-version-increment: true #TODO: Enable after first chart version release
+debug: true
+validate-chart-schema: true
+validate-maintainers: true
+validate-yaml: true
+chart-dirs:
+- charts
