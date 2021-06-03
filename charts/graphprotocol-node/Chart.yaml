@@ -8,5 +8,5 @@ keywords:
   - ethereum
 home: https://thegraph.com/
 sources:
-  - https://github.com/graphprotocol/graph-node 
+  - https://github.com/graphprotocol/graph-node
 appVersion: v0.22.0
