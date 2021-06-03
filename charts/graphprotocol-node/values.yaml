@@ -73,7 +73,7 @@ affinity: {}
 ###
 config:
   ipfs: https://ipfs.network.thegraph.com
-  #ethereum:
+  # ethereum:
 
 
 postgres:
