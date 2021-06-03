@@ -9,4 +9,8 @@ keywords:
 home: https://thegraph.com/
 sources:
   - https://github.com/graphprotocol/graph-node
+maintainers:
+  # TODO: Change maintainers list
+  - email: dm3ch@dm3ch.net
+    name: dm3ch
 appVersion: v0.22.0
