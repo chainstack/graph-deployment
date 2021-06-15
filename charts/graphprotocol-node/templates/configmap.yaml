@@ -5,7 +5,7 @@ metadata:
   labels:
     {{- include "graphprotocol-node.labels" . | nindent 4 }}
 data:
-  BLOCK_INGESTOR: {{ include "graphprotocol-node.fullname" . }}-index-0 #TODO: Do we need this value to be configurable?
+  BLOCK_INGESTOR: {{ .Values.blockIngestorNodeId | quote }}
   GRAPH_KILL_IF_UNRESPONSIVE: "true" #TODO: Do we need this value to be configurable?
   postgres_db: {{ .Values.postgres.db }} #TODO: Add required check
   ipfs: {{ .Values.config.ipfs }} #TODO: Add required check

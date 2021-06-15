@@ -13,10 +13,18 @@ releases:
   - values/postgres.yaml
   - values/postgres.secret.yaml
 
-- name: graphprotocol-node
+- name: graphprotocol-node-index
   chart: ./charts/graphprotocol-node
   values:
-  - values/graphprotocol-node.yaml
+  - values/graphprotocol-node-index.yaml
+  - values/graphprotocol-node.secret.yaml
+  needs:
+  - postgres
+
+- name: graphprotocol-node-query
+  chart: ./charts/graphprotocol-node
+  values:
+  - values/graphprotocol-node-query.yaml
   - values/graphprotocol-node.secret.yaml
   needs:
   - postgres

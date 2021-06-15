@@ -80,4 +80,9 @@ postgres:
   db: graph
   host: ""
   user: ""
-  password: ""
+  #password: ""
+
+blockIngestorNodeId: index-node
+
+# Possible values: query-node, index-node
+role: "query-node"

@@ -1,27 +1,31 @@
 apiVersion: apps/v1
-kind: StatefulSet
+kind: Deployment
 metadata:
-  name: {{ include "graphprotocol-node.fullname" . }}-index
+  name: {{ include "graphprotocol-node.fullname" . }}
   labels:
-    role: index
     {{- include "graphprotocol-node.labels" . | nindent 4 }}
 spec:
-  # Index stateful set had always 1 replica cause it could be only one block ingestor node (https://github.com/graphprotocol/graph-node/blob/master/docker/start#L86-L88)
+  {{/* There shouldn't be more than 1 index (ingest) graph-protocol node in installation */}}
+  {{- if eq .Values.role "index-node" -}}
   replicas: 1
+  strategy:
+    type: Recreate
+  {{- else -}}
+  replicas: {{ .Values.replicaCount }}
+  strategy:
+    type: RollingUpdate
+  {{- end }}
   selector:
     matchLabels:
-      role: index
       {{- include "graphprotocol-node.selectorLabels" . | nindent 6 }}
-  serviceName: {{ include "graphprotocol-node.fullname" . }}-index
   template:
     metadata:
       annotations:
-        checksum/configmap.yaml: {{ include (print $.Template.BasePath "/configmap.yaml") . | sha256sum }}
+        checksum/configmap.yaml: {{ include (print $.Template.BasePath "/secret.yaml") . | sha256sum }}
         {{- with .Values.podAnnotations }}
         {{-   toYaml . | nindent 8 }}
         {{- end }}
       labels:
-        role: index
         {{- include "graphprotocol-node.selectorLabels" . | nindent 8 }}
     spec:
       {{- with .Values.imagePullSecrets }}
@@ -38,11 +42,16 @@ spec:
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           env:
             - name: node_id
+              {{/* Index (ingest) node_id should equal BLOCK_INGESTOR env value to work in this mode */}}
+              {{- if eq .Values.role "index-node" -}}
+              value: {{ .Values.blockIngestorNodeId | quote}}
+              {{- else -}}
               valueFrom:
                 fieldRef:
                   fieldPath: metadata.name
+              {{- end }}
             - name: node_role
-              value: index-node
+              value: {{ .Values.role | quote }}
           envFrom:
             - configMapRef:
                 name: {{ include "graphprotocol-node.fullname" . }}

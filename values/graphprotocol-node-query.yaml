@@ -1,13 +1,13 @@
 config:
-  ethereum: ""
+  #ethereum: "SetMe"
 
 postgres:
   db: graph-node 
   host: postgres-postgresql
   user: postgres
-  password: ""
+  #password: "ChangeMe"
 
-replicas: 2
+replicaCount: 2
 
 resources:
   requests:
@@ -16,3 +16,5 @@ resources:
   # limits: TODO: Tune requests/limits during acceptance tests
   #   cpu: 100m
   #   memory: 200Mi
+
+role: "query-node"

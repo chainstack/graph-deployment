@@ -1,5 +1,5 @@
 postgresqlUsername: postgres
-postgresqlPassword: ""
+#postgresqlPassword: "ChangeMe"
 postgresqlDatabase: graph-node
 
 postgresqlSharedPreloadLibraries: pg_stat_statements
