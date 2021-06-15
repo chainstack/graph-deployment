@@ -7,9 +7,27 @@ metadata:
 spec:
   type: {{ .Values.service.type }}
   ports:
-    - port: 8040 #TODO: Consider making configurable, consider adding more ports
+    - port: 8040
       targetPort: metrics
       protocol: TCP
       name: metrics
+    - port: 8020
+      targetPort: json-rpc
+      protocol: TCP
+      name: json-rpc
+    - port: 8000
+      targetPort: graphql
+      protocol: TCP
+      name: graphql
+    - port: 8001
+      targetPort: graphql-ws
+      protocol: TCP
+      name: graphql-ws
+    {{- if eq .Values.role "index-node" }}
+    - port: 8030
+      targetPort: index
+      protocol: TCP
+      name: index
+    {{- end }}
   selector:
     {{- include "graphprotocol-node.selectorLabels" . | nindent 4 }}

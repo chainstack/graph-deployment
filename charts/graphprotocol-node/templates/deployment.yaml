@@ -69,6 +69,20 @@ spec:
             - name: metrics 
               containerPort: 8040
               protocol: TCP
+            - name: json-rpc 
+              containerPort: 8020
+              protocol: TCP
+            - name: graphql
+              containerPort: 8000
+              protocol: TCP
+            - name: graphql-ws
+              containerPort: 8001
+              protocol: TCP
+            {{- if eq .Values.role "index-node" }}
+            - name: index
+              containerPort: 8030
+              protocol: TCP
+            {{- end }}
           livenessProbe:
             httpGet:
               path: /
