@@ -55,15 +55,13 @@ spec:
             - name: node_role
               value: {{ .Values.role | quote }}
             - name: GRAPH_KILL_IF_UNRESPONSIVE
-              value: "true" # TODO: Replace this with liveness probe
+              value: "true"
             - name: postgres_db
               value: {{ required "Postgres name wasn't specified" .Values.postgres.db | quote }}
             - name: postgres_host
               value: {{ required "Postgres host wasn't specified" .Values.postgres.host | quote }}
             - name: ipfs
               value: {{ required "IPFS address wasn't specified" .Values.config.ipfs | quote }}
-            - name: ethereum
-              value: {{ required "Ethereum address wasn't specified" .Values.config.ethereum | quote }}
           envFrom:
             - secretRef:
                 name: {{ include "graphprotocol-node.fullname" . }}
