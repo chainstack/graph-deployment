@@ -41,6 +41,8 @@ spec:
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           env:
+            - name: BLOCK_INGESTOR
+              value: {{ .Values.blockIngestorNodeId | quote }}
             - name: node_id
               {{/* Index (ingest) node_id should equal BLOCK_INGESTOR env value to work in this mode */}}
               {{- if eq .Values.role "index-node" -}}
@@ -52,9 +54,17 @@ spec:
               {{- end }}
             - name: node_role
               value: {{ .Values.role | quote }}
+            - name: GRAPH_KILL_IF_UNRESPONSIVE
+              value: "true" # TODO: Replace this with liveness probe
+            - name: postgres_db
+              value: {{ required "Postgres name wasn't specified" .Values.postgres.db | quote }}
+            - name: postgres_host
+              value: {{ required "Postgres host wasn't specified" .Values.postgres.host | quote }}
+            - name: ipfs
+              value: {{ required "IPFS address wasn't specified" .Values.config.ipfs | quote }}
+            - name: ethereum
+              value: {{ required "Ethereum address wasn't specified" .Values.config.ethereum | quote }}
           envFrom:
-            - configMapRef:
-                name: {{ include "graphprotocol-node.fullname" . }}
             - secretRef:
                 name: {{ include "graphprotocol-node.fullname" . }}
           ports:

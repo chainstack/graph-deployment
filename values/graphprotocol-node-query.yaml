@@ -1,4 +1,5 @@
 config:
+  ipfs: https://ipfs.network.thegraph.com
   #ethereum: "SetMe"
 
 postgres:

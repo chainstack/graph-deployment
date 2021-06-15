@@ -69,10 +69,8 @@ tolerations: []
 
 affinity: {}
 
-
-###
 config:
-  ipfs: https://ipfs.network.thegraph.com
+  # ipfs:
   # ethereum:
 
 
@@ -80,7 +78,7 @@ postgres:
   db: graph
   host: ""
   user: ""
-  #password: ""
+  # password: ""
 
 blockIngestorNodeId: index-node
 
