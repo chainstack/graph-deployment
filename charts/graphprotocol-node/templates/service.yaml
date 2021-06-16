@@ -7,24 +7,24 @@ metadata:
 spec:
   type: {{ .Values.service.type }}
   ports:
-    - port: 8040
+    - port: {{ .Values.service.metricsPort }}
       targetPort: metrics
       protocol: TCP
       name: metrics
-    - port: 8020
+    - port: {{ .Values.service.jsonRpcPort }}
       targetPort: json-rpc
       protocol: TCP
       name: json-rpc
-    - port: 8000
+    - port: {{ .Values.service.graphqlPort }}
       targetPort: graphql
       protocol: TCP
       name: graphql
-    - port: 8001
+    - port: {{ .Values.service.graphqlWsPort }}
       targetPort: graphql-ws
       protocol: TCP
       name: graphql-ws
     {{- if eq .Values.role "index-node" }}
-    - port: 8030
+    - port: {{ .Values.service.indexPort }}
       targetPort: index
       protocol: TCP
       name: index

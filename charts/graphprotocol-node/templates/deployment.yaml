@@ -55,7 +55,7 @@ spec:
             - name: node_role
               value: {{ .Values.role | quote }}
             - name: GRAPH_KILL_IF_UNRESPONSIVE
-              value: "true"
+              value: "false"
             - name: postgres_db
               value: {{ required "Postgres name wasn't specified" .Values.postgres.db | quote }}
             - name: postgres_host
