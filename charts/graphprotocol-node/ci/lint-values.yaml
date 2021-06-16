@@ -1,0 +1,8 @@
+postgres:
+  host: host
+  user: user
+  password: password
+
+config:
+  ipfs: ipfs
+  ethereum: ethereum
