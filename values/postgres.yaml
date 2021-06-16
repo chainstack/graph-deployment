@@ -1,0 +1,14 @@
+postgresqlUsername: postgres
+#postgresqlPassword: "ChangeMe"
+postgresqlDatabase: graph-node
+
+postgresqlSharedPreloadLibraries: pg_stat_statements
+
+
+resources:
+  requests:
+    cpu: 250m
+    memory: 0.5Gi
+  # limits: TODO: Tune requests during acceptance tests
+  #   cpu: 100m
+  #   memory: 200Mi

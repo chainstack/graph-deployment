@@ -1,0 +1,1 @@
+* Forced to run postgres chart with `postgres` db user, cause if user name will be different graph node wouldn't have enough rights to migrate (uses `CREATE EXTENSION`)
