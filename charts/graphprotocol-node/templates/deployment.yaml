@@ -41,7 +41,7 @@ spec:
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           env:
-            {{- if eq .Values.role "index-node" }}
+            {{ if eq .Values.role "index-node" }}
             {{/* Index (ingest) node_id should equal BLOCK_INGESTOR env value to work in this mode */}}
             - name: BLOCK_INGESTOR
               value: {{ .Values.blockIngestorNodeId | quote }}
@@ -49,7 +49,7 @@ spec:
               value: {{ .Values.blockIngestorNodeId | quote}}
             {{- else -}}
             - name: node_id
-               valueFrom:
+              valueFrom:
                 fieldRef:
                   fieldPath: metadata.name
             {{- end }}
@@ -58,11 +58,11 @@ spec:
             - name: GRAPH_KILL_IF_UNRESPONSIVE
               value: "false"
             - name: postgres_db
-              value: {{ required "Postgres name wasn't specified" .Values.postgres.db | quote }}
+              value: {{ required "postgres.db wasn't specified" .Values.postgres.db | quote }}
             - name: postgres_host
-              value: {{ required "Postgres host wasn't specified" .Values.postgres.host | quote }}
+              value: {{ required "postgres.host wasn't specified" .Values.postgres.host | quote }}
             - name: ipfs
-              value: {{ required "IPFS address wasn't specified" .Values.config.ipfs | quote }}
+              value: {{ required "config.ipfs wasn't specified" .Values.config.ipfs | quote }}
           envFrom:
             - secretRef:
                 name: {{ include "graphprotocol-node.fullname" . }}

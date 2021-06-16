@@ -54,15 +54,15 @@ tolerations: []
 affinity: {}
 
 config:
-  # ipfs:
-  # ethereum:
+  ipfs:
+  ethereum:
 
 
 postgres:
   db: graph
-  host: ""
-  user: ""
-  # password: ""
+  host:
+  user:
+  password:
 
 blockIngestorNodeId: index-node
 
