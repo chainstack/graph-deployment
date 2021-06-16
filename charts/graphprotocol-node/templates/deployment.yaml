@@ -41,14 +41,15 @@ spec:
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           env:
+              {{- if eq .Values.role "index-node" -}}
+              {{/* Index (ingest) node_id should equal BLOCK_INGESTOR env value to work in this mode */}}
             - name: BLOCK_INGESTOR
               value: {{ .Values.blockIngestorNodeId | quote }}
             - name: node_id
-              {{/* Index (ingest) node_id should equal BLOCK_INGESTOR env value to work in this mode */}}
-              {{- if eq .Values.role "index-node" -}}
               value: {{ .Values.blockIngestorNodeId | quote}}
               {{- else -}}
-              valueFrom:
+            - name: node_id
+               valueFrom:
                 fieldRef:
                   fieldPath: metadata.name
               {{- end }}
