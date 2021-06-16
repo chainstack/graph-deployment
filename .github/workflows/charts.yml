@@ -11,7 +11,7 @@ jobs:
         uses: helm/chart-testing-action@v2.1.0
 
       - name: Run chart-testing (lint)
-        run: ct lint --all
+        run: ct lint --target-branch=main
 
   kubeval:
     runs-on: ubuntu-latest
