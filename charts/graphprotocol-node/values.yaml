@@ -64,7 +64,7 @@ postgres:
   user:
   password:
 
-blockIngestorNodeId: index-node
+blockIngestorNodeId: index_node # Shouldn't have - sign, cause it would be replaced with _
 
 # Possible values: query-node, index-node
 role: "query-node"

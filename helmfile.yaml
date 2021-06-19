@@ -36,3 +36,5 @@ releases:
   - values/graphprotocol-indexer-agent.secret.yaml
   needs:
   - postgres
+  - graphprotocol-node-index
+  - graphprotocol-node-query
