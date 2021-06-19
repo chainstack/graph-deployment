@@ -5,3 +5,9 @@ postgres:
   host: postgres-postgresql
   user: postgres
   #password: "ChangeMe"
+
+config:
+  ethereum: 
+    #url: "ChangeMe"
+    #address: "ChangeMe"
+    #password: "ChangeMe"

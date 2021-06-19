@@ -54,8 +54,10 @@ tolerations: []
 affinity: {}
 
 config:
-  ipfs:
   ethereum:
+    url:
+    address:
+    password:
 
 
 postgres:

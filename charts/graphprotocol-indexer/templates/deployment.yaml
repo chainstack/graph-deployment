@@ -41,9 +41,9 @@ spec:
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           env:
-            - name: postgres_db
+            - name: INDEXER_AGENT_POSTGRES_DATABASE
               value: {{ required "postgres.db wasn't specified" .Values.postgres.db | quote }}
-            - name: postgres_host
+            - name: INDEXER_AGENT_POSTGRES_HOST
               value: {{ required "postgres.host wasn't specified" .Values.postgres.host | quote }}
           envFrom:
             - secretRef:
