@@ -64,8 +64,12 @@ spec:
             - name: INDEXER_AGENT_COLLECT_RECEIPTS_ENDPOINT
               value: {{ required "config.collectReceiptsEndpoint wasn't specified" .Values.config.collectReceiptsEndpoint | quote }}
             # TODO: 
-            # - name: INDEXER_AGENT_ETHEREUM_NETWORK
-            #   value: "4"
+            - name: INDEXER_AGENT_ETHEREUM_NETWORK
+              value: "rinkeby"
+            - name: INDEXER_AGENT_DAI_CONTRACT
+              value: "0x9e7e607afd22906f7da6f1ec8f432d6f244278be"
+            - name: INDEXER_AGENT_NETWORK_SUBGRAPH_DEPLOYMENT
+              value: "QmUBRDENCjFt57vVjFc3D4EQoYqXJffKiyFyuGYB2BN8Wi"
           envFrom:
             - secretRef:
                 name: {{ include "graphprotocol-indexer.fullname" . }}
