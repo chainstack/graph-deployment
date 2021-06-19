@@ -5,7 +5,7 @@
 replicaCount: 1
 
 image:
-  repository: graphprotocol/indexer-agent
+  repository: ghcr.io/graphprotocol/indexer-agent
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
   tag: ""

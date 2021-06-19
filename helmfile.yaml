@@ -34,5 +34,5 @@ releases:
   values:
   - values/graphprotocol-indexer-agent.yaml
   - values/graphprotocol-indexer-agent.secret.yaml
-  # needs:
-  # - postgres
+  needs:
+  - postgres

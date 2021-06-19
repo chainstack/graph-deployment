@@ -50,14 +50,3 @@ Selector labels
 app.kubernetes.io/name: {{ include "graphprotocol-indexer.name" . }}
 app.kubernetes.io/instance: {{ .Release.Name }}
 {{- end }}
-
-{{/*
-Create the name of the service account to use
-*/}}
-{{- define "graphprotocol-indexer.serviceAccountName" -}}
-{{- if .Values.serviceAccount.create }}
-{{- default (include "graphprotocol-indexer.fullname" .) .Values.serviceAccount.name }}
-{{- else }}
-{{- default "default" .Values.serviceAccount.name }}
-{{- end }}
-{{- end }}

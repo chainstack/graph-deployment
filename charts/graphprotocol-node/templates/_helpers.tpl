@@ -50,14 +50,3 @@ Selector labels
 app.kubernetes.io/name: {{ include "graphprotocol-node.name" . }}
 app.kubernetes.io/instance: {{ .Release.Name }}
 {{- end }}
-
-{{/*
-Create the name of the service account to use
-*/}}
-{{- define "graphprotocol-node.serviceAccountName" -}}
-{{- if .Values.serviceAccount.create }}
-{{- default (include "graphprotocol-node.fullname" .) .Values.serviceAccount.name }}
-{{- else }}
-{{- default "default" .Values.serviceAccount.name }}
-{{- end }}
-{{- end }}
