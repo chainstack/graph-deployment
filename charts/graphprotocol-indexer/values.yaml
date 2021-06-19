@@ -57,13 +57,15 @@ config:
   ethereum:
     url:
     address:
-    password:
-  coordinates: ""
+    mnemonic:
+  coordinates:
   graphEndpoints:
     query:
     admin:
     status:
-
+  publicUrl:
+  networkSubgraphEndpoint: https://gateway.thegraph.com/network
+  collectReceiptsEndpoint: https://gateway.network.thegraph.com/collect-receipts
 
 postgres:
   db: graph

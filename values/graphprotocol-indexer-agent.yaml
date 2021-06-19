@@ -10,9 +10,12 @@ config:
   ethereum: 
     #url: "ChangeMe"
     #address: "ChangeMe"
-    #password: "ChangeMe"
+    #mnemonic: "ChangeMe"
   #coordinates:
   graphEndpoints:
     admin: http://graphprotocol-node-index:8020/
     status: http://graphprotocol-node-query:8030/graphql
     query: http://graphprotocol-node-query:8000/
+  publicUrl: "http://indexer.domain/"
+  networkSubgraphEndpoint: https://gateway.testnet.thegraph.com/network
+  collectReceiptsEndpoint: https://gateway.testnet.thegraph.com/collect-receipts

@@ -57,6 +57,15 @@ spec:
               value: {{ required "config.graphEndpoints.admin wasn't specified" .Values.config.graphEndpoints.admin | quote }}
             - name: INDEXER_AGENT_GRAPH_NODE_STATUS_ENDPOINT
               value: {{ required "config.graphEndpoints.status wasn't specified" .Values.config.graphEndpoints.status | quote }}
+            - name: INDEXER_AGENT_PUBLIC_INDEXER_URL
+              value: {{ required "config.publicUrl wasn't specified" .Values.config.publicUrl | quote }}
+            - name: INDEXER_AGENT_NETWORK_SUBGRAPH_ENDPOINT
+              value: {{ required "config.networkSubgraphEndpoint wasn't specified" .Values.config.networkSubgraphEndpoint | quote }}
+            - name: INDEXER_AGENT_COLLECT_RECEIPTS_ENDPOINT
+              value: {{ required "config.collectReceiptsEndpoint wasn't specified" .Values.config.collectReceiptsEndpoint | quote }}
+            # TODO: 
+            # - name: INDEXER_AGENT_ETHEREUM_NETWORK
+            #   value: "4"
           envFrom:
             - secretRef:
                 name: {{ include "graphprotocol-indexer.fullname" . }}
