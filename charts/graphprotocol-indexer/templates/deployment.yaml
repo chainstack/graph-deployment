@@ -45,6 +45,18 @@ spec:
               value: {{ required "postgres.db wasn't specified" .Values.postgres.db | quote }}
             - name: INDEXER_AGENT_POSTGRES_HOST
               value: {{ required "postgres.host wasn't specified" .Values.postgres.host | quote }}
+            {{- if .Values.config.coordinates }}
+            - name: INDEXER_AGENT_INDEXER_GEO_COORDINATES
+              value: {{ .Values.config.coordinates | quote }}
+            {{- end }}
+            - name: INDEXER_AGENT_INDEX_NODE_IDS
+              value: {{ .Values.blockIngestorNodeId | quote }}
+            - name: INDEXER_AGENT_GRAPH_NODE_QUERY_ENDPOINT
+              value: {{ required "config.graphEndpoints.query wasn't specified" .Values.config.graphEndpoints.query | quote }}
+            - name: INDEXER_AGENT_GRAPH_NODE_ADMIN_ENDPOINT
+              value: {{ required "config.graphEndpoints.admin wasn't specified" .Values.config.graphEndpoints.admin | quote }}
+            - name: INDEXER_AGENT_GRAPH_NODE_STATUS_ENDPOINT
+              value: {{ required "config.graphEndpoints.status wasn't specified" .Values.config.graphEndpoints.status | quote }}
           envFrom:
             - secretRef:
                 name: {{ include "graphprotocol-indexer.fullname" . }}

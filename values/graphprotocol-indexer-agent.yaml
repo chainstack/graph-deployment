@@ -11,3 +11,8 @@ config:
     #url: "ChangeMe"
     #address: "ChangeMe"
     #password: "ChangeMe"
+  #coordinates:
+  graphEndpoints:
+    admin: http://graphprotocol-node-index:8020/
+    status: http://graphprotocol-node-query:8030/graphql
+    query: http://graphprotocol-node-query:8000/

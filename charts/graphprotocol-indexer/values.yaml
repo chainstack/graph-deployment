@@ -58,6 +58,11 @@ config:
     url:
     address:
     password:
+  coordinates: ""
+  graphEndpoints:
+    query:
+    admin:
+    status:
 
 
 postgres:
@@ -66,7 +71,7 @@ postgres:
   user:
   password:
 
-blockIngestorNodeId: index-node
+blockIngestorNodeId: index-node # Should equals to node id of graphprotocol-node with index role
 
 # Possible values: indexer-agent, indexer-service
 role: "indexer-agent"
