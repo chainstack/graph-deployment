@@ -1,0 +1,33 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "graphprotocol-indexer.fullname" . }}
+  labels:
+    {{- include "graphprotocol-indexer.labels" . | nindent 4 }}
+spec:
+  type: {{ .Values.service.type }}
+  ports:
+    - port: {{ .Values.service.metricsPort }}
+      targetPort: metrics
+      protocol: TCP
+      name: metrics
+    - port: {{ .Values.service.jsonRpcPort }}
+      targetPort: json-rpc
+      protocol: TCP
+      name: json-rpc
+    - port: {{ .Values.service.graphqlPort }}
+      targetPort: graphql
+      protocol: TCP
+      name: graphql
+    - port: {{ .Values.service.graphqlWsPort }}
+      targetPort: graphql-ws
+      protocol: TCP
+      name: graphql-ws
+    {{- if eq .Values.role "index-node" }}
+    - port: {{ .Values.service.indexPort }}
+      targetPort: index
+      protocol: TCP
+      name: index
+    {{- end }}
+  selector:
+    {{- include "graphprotocol-indexer.selectorLabels" . | nindent 4 }}

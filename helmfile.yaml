@@ -28,3 +28,11 @@ releases:
   - values/graphprotocol-node.secret.yaml
   needs:
   - postgres
+
+- name: graphprotocol-indexer-agent
+  chart: ./charts/graphprotocol-indexer
+  values:
+  - values/graphprotocol-indexer-agent.yaml
+  - values/graphprotocol-indexer-agent.secret.yaml
+  # needs:
+  # - postgres
