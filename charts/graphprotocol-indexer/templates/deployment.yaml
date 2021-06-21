@@ -40,6 +40,7 @@ spec:
             {{- toYaml .Values.securityContext | nindent 12 }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
+          # command: ['sh', '-c', 'while true; do sleep 1; done']
           env:
             - name: INDEXER_AGENT_POSTGRES_DATABASE
               value: {{ required "postgres.db wasn't specified" .Values.postgres.db | quote }}
@@ -86,14 +87,14 @@ spec:
             - name: syncing
               containerPort: 8001
               protocol: TCP
-          livenessProbe:
-            httpGet:
-              path: /
-              port: metrics
-          readinessProbe:
-            httpGet:
-              path: /
-              port: metrics
+          # livenessProbe:
+          #   httpGet:
+          #     path: /
+          #     port: metrics
+          # readinessProbe:
+          #   httpGet:
+          #     path: /
+          #     port: metrics
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
       {{- with .Values.nodeSelector }}

@@ -63,6 +63,8 @@ spec:
               value: {{ required "postgres.host wasn't specified" .Values.postgres.host | quote }}
             - name: ipfs
               value: {{ required "config.ipfs wasn't specified" .Values.config.ipfs | quote }}
+            - name: GRAPH_ALLOW_NON_DETERMINISTIC_FULLTEXT_SEARCH
+              value: "true"
           envFrom:
             - secretRef:
                 name: {{ include "graphprotocol-node.fullname" . }}
