@@ -1,8 +1,0 @@
-config:
-  ethereum: 
-    url: url
-    address: address
-    password: password
-
-postgres:
-  password: password
