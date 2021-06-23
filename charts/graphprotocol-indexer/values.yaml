@@ -73,8 +73,8 @@ postgres:
   host:
   user:
   password:
-
-blockIngestorNodeId: index_node # Should equals to node id of graphprotocol-node with index role
+# Should equals to node id of graphprotocol-node with index role
+blockIngestorNodeId: index_node
 
 # Possible values: indexer-agent, indexer-service
 role: "indexer-agent"
