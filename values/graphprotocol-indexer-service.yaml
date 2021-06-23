@@ -22,3 +22,8 @@ config:
 
   networkSubgraphEndpoint: https://gateway.testnet.thegraph.com/network
   subgraphDeployment: QmUBRDENCjFt57vVjFc3D4EQoYqXJffKiyFyuGYB2BN8Wi
+
+# ingress:
+#   enabled: true
+#   hosts:
+#   - indexer.domain
