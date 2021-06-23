@@ -60,23 +60,19 @@ spec:
             - name: INDEXER_AGENT_PUBLIC_INDEXER_URL
               value: {{ required "config.publicUrl wasn't specified" .Values.config.publicUrl | quote }}
             - name: INDEXER_AGENT_NETWORK_SUBGRAPH_ENDPOINT
-              value: {{ required "config.networkSubgraphEndpoint wasn't specified" .Values.config.networkSubgraphEndpoint | quote }}
+              value: {{ .Values.config.networkSubgraphEndpoint | quote }}
             - name: INDEXER_AGENT_COLLECT_RECEIPTS_ENDPOINT
-              value: {{ required "config.collectReceiptsEndpoint wasn't specified" .Values.config.collectReceiptsEndpoint | quote }}
-            # TODO: 
+              value: {{ .Values.config.collectReceiptsEndpoint | quote }}
             - name: INDEXER_AGENT_ETHEREUM_NETWORK
-              value: "rinkeby"
+              value: {{ .Values.config.ethereum.network | quote }}
             - name: INDEXER_AGENT_DAI_CONTRACT
-              value: "0x9e7e607afd22906f7da6f1ec8f432d6f244278be"
+              value: {{ .Values.config.daiContract | quote }}
             - name: INDEXER_AGENT_NETWORK_SUBGRAPH_DEPLOYMENT
-              value: "QmUBRDENCjFt57vVjFc3D4EQoYqXJffKiyFyuGYB2BN8Wi"
+              value: {{ .Values.config.subgraphDeployment | quote }}
           envFrom:
             - secretRef:
                 name: {{ include "graphprotocol-indexer.fullname" . }}
           ports:
-            - name: http
-              containerPort: 7600
-              protocol: TCP
             - name: metrics
               containerPort: 7300
               protocol: TCP
@@ -84,16 +80,16 @@ spec:
               containerPort: 8000
               protocol: TCP
             - name: syncing
-              containerPort: 8001
+              containerPort: 8002
               protocol: TCP
-          # livenessProbe:
-          #   httpGet:
-          #     path: /
-          #     port: metrics
-          # readinessProbe:
-          #   httpGet:
-          #     path: /
-          #     port: metrics
+          livenessProbe:
+            httpGet:
+              path: /metrics
+              port: metrics
+          readinessProbe:
+            httpGet:
+              path: /metrics
+              port: metrics
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
       {{- with .Values.nodeSelector }}

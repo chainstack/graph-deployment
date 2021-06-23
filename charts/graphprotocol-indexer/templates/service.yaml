@@ -11,23 +11,13 @@ spec:
       targetPort: metrics
       protocol: TCP
       name: metrics
-    - port: {{ .Values.service.jsonRpcPort }}
-      targetPort: json-rpc
+    - port: {{ .Values.service.managementPort }}
+      targetPort: management
       protocol: TCP
-      name: json-rpc
-    - port: {{ .Values.service.graphqlPort }}
-      targetPort: graphql
+      name: management
+    - port: {{ .Values.service.syncingPort }}
+      targetPort: syncing
       protocol: TCP
-      name: graphql
-    - port: {{ .Values.service.graphqlWsPort }}
-      targetPort: graphql-ws
-      protocol: TCP
-      name: graphql-ws
-    {{- if eq .Values.role "index-node" }}
-    - port: {{ .Values.service.indexPort }}
-      targetPort: index
-      protocol: TCP
-      name: index
-    {{- end }}
+      name: syncing
   selector:
     {{- include "graphprotocol-indexer.selectorLabels" . | nindent 4 }}

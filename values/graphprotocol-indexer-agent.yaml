@@ -8,6 +8,7 @@ postgres:
 
 config:
   ethereum: 
+    network: rinkeby
     #url: "ChangeMe"
     #address: "ChangeMe"
     #mnemonic: "ChangeMe"
@@ -19,7 +20,5 @@ config:
   publicUrl: "http://indexer.domain/"
   networkSubgraphEndpoint: https://gateway.testnet.thegraph.com/network
   collectReceiptsEndpoint: https://gateway.testnet.thegraph.com/collect-receipts
-
-image:
-  repository: dm3ch/graphprotocol-indexer-agent
-  tag: debug-2
+  daiContract: 0x9e7e607afd22906f7da6f1ec8f432d6f244278be
+  subgraphDeployment: QmUBRDENCjFt57vVjFc3D4EQoYqXJffKiyFyuGYB2BN8Wi

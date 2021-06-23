@@ -29,11 +29,9 @@ securityContext: {}
 
 service:
   type: ClusterIP
-  metricsPort: 8040
-  jsonRpcPort: 8020
-  graphqlPort: 8000
-  graphqlWsPort: 8001
-  indexPort: 8030
+  metricsPort: 7300
+  managementPort: 8000
+  syncingPort: 8002
 
 resources: {}
   # We usually recommend not to specify default resources and to leave this as a conscious
@@ -56,6 +54,7 @@ affinity: {}
 config:
   ethereum:
     url:
+    network: mainnet
     address:
     mnemonic:
   coordinates:
@@ -66,6 +65,8 @@ config:
   publicUrl:
   networkSubgraphEndpoint: https://gateway.thegraph.com/network
   collectReceiptsEndpoint: https://gateway.network.thegraph.com/collect-receipts
+  daiContract: 0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48
+  subgraphDeployment: QmaUBw7sr8pBrwNgz6JkbmmGoUU7KJSaeRvCaY3NPDbQ7A
 
 postgres:
   db: graph
