@@ -1,7 +1,6 @@
-role: indexer-agent
+role: indexer-service
 
 config:
-  publicUrl: https://domain.name
   ethereum:
     url: url
     address: address
