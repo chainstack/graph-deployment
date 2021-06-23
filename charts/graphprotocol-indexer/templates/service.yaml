@@ -11,6 +11,7 @@ spec:
       targetPort: metrics
       protocol: TCP
       name: metrics
+    {{- if eq .Values.role "indexer-agent" }}
     - port: {{ .Values.service.managementPort }}
       targetPort: management
       protocol: TCP
@@ -19,5 +20,12 @@ spec:
       targetPort: syncing
       protocol: TCP
       name: syncing
+    {{- end }}
+    {{- if eq .Values.role "indexer-service" }}
+    - port: {{ .Values.service.httpPort }}
+      targetPort: http
+      protocol: TCP
+      name: http
+    {{- end }}
   selector:
     {{- include "graphprotocol-indexer.selectorLabels" . | nindent 4 }}

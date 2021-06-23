@@ -33,6 +33,7 @@ service:
   metricsPort: 7300
   managementPort: 8000
   syncingPort: 8002
+  httpPort: 7600
 
 resources: {}
   # We usually recommend not to specify default resources and to leave this as a conscious
@@ -76,7 +77,7 @@ postgres:
   user:
   password:
 # Should equals to node id of graphprotocol-node with index role
-blockIngestorNodeId: index_node
+blockIngestorNodeIds: index_node
 
 # Possible values: indexer-agent, indexer-service
 role: "indexer-agent"

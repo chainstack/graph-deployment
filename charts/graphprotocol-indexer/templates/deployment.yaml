@@ -47,24 +47,24 @@ spec:
               value: {{ .Values.config.coordinates | quote }}
             {{-   end }}
             - name: INDEXER_AGENT_INDEX_NODE_IDS
-              value: {{ .Values.blockIngestorNodeId | quote }}
+              value: {{ required "config.blockIngestorNodeIds wasn't specified" .Values.blockIngestorNodeIds | quote }}
             - name: INDEXER_AGENT_PUBLIC_INDEXER_URL
               value: {{ required "config.publicUrl wasn't specified" .Values.config.publicUrl | quote }}
             - name: INDEXER_AGENT_COLLECT_RECEIPTS_ENDPOINT
-              value: {{ .Values.config.collectReceiptsEndpoint | quote }}
+              value: {{ required "config.collectReceiptsEndpoint wasn't specified" .Values.config.collectReceiptsEndpoint | quote }}
             - name: INDEXER_AGENT_DAI_CONTRACT
-              value: {{ .Values.config.daiContract | quote }}
+              value: {{ required "config.daiContract wasn't specified" .Values.config.daiContract | quote }}
             {{- end }}
             {{- if eq .Values.role "indexer-service" }}
             - name: INDEXER_SERVICE_CLIENT_SIGNER_ADDRESS
-              value: {{ .Values.config.clientSignerAdress | quote }}  
+              value: {{ required "config.clientSignerAddress wasn't specified" .Values.config.clientSignerAddress | quote }}  
             {{- end }}
             - name: {{ include "graphprotocol-indexer.envPrefix" . }}NETWORK_SUBGRAPH_ENDPOINT
-              value: {{ .Values.config.networkSubgraphEndpoint | quote }}
+              value: {{ required "config.networkSubgraphEndpoint wasn't specified" .Values.config.networkSubgraphEndpoint | quote }}
             - name: {{ include "graphprotocol-indexer.envPrefix" . }}ETHEREUM_NETWORK
-              value: {{ .Values.config.ethereum.network | quote }}
+              value: {{ required "config.ethereum.network wasn't specified" .Values.config.ethereum.network | quote }}
             - name: {{ include "graphprotocol-indexer.envPrefix" . }}NETWORK_SUBGRAPH_DEPLOYMENT
-              value: {{ .Values.config.subgraphDeployment | quote }}
+              value: {{ required "config.subgraphDeployment wasn't specified" .Values.config.subgraphDeployment | quote }}
             - name: {{ include "graphprotocol-indexer.envPrefix" . }}POSTGRES_DATABASE
               value: {{ required "postgres.db wasn't specified" .Values.postgres.db | quote }}
             - name: {{ include "graphprotocol-indexer.envPrefix" . }}POSTGRES_HOST
@@ -82,12 +82,19 @@ spec:
             - name: metrics
               containerPort: 7300
               protocol: TCP
+            {{- if eq .Values.role "indexer-agent" }}
             - name: management
               containerPort: 8000
               protocol: TCP
             - name: syncing
               containerPort: 8002
               protocol: TCP
+            {{- end }}
+            {{- if eq .Values.role "indexer-service" }}
+            - name: http
+              containerPort: 7600
+              protocol: TCP
+            {{- end }}
           livenessProbe:
             httpGet:
               path: /metrics

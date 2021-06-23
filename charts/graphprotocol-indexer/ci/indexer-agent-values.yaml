@@ -2,7 +2,7 @@ role: indexer-agent
 
 config:
   publicUrl: https://domain.name
-  ethereum: 
+  ethereum:
     url: url
     address: address
     mnemonic: mnemonic
