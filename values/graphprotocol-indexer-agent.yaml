@@ -14,8 +14,12 @@ config:
   #coordinates:
   graphEndpoints:
     admin: http://graphprotocol-node-index:8020/
-    status: http://graphprotocol-node-query:8030/graphql
+    status: http://graphprotocol-node-index:8030/graphql
     query: http://graphprotocol-node-query:8000/
   publicUrl: "http://indexer.domain/"
   networkSubgraphEndpoint: https://gateway.testnet.thegraph.com/network
   collectReceiptsEndpoint: https://gateway.testnet.thegraph.com/collect-receipts
+
+image:
+  repository: dm3ch/graphprotocol-indexer-agent
+  tag: debug-2

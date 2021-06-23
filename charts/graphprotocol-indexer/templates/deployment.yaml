@@ -40,7 +40,6 @@ spec:
             {{- toYaml .Values.securityContext | nindent 12 }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
-          # command: ['sh', '-c', 'while true; do sleep 1; done']
           env:
             - name: INDEXER_AGENT_POSTGRES_DATABASE
               value: {{ required "postgres.db wasn't specified" .Values.postgres.db | quote }}
