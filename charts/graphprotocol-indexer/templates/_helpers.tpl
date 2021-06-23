@@ -50,3 +50,19 @@ Selector labels
 app.kubernetes.io/name: {{ include "graphprotocol-indexer.name" . }}
 app.kubernetes.io/instance: {{ .Release.Name }}
 {{- end }}
+
+{{/*
+Select image repository based on role
+*/}}
+{{- define "graphprotocol-indexer.imageRepository" -}}
+{{-   if eq .Values.role "indexer-agent" -}}{{ .Values.image.agentRepository }}{{- end -}}
+{{-   if eq .Values.role "indexer-service" -}}{{ .Values.image.serviceRepository }}{{- end -}}
+{{- end }}
+
+{{/*
+Select env prefix
+*/}}
+{{- define "graphprotocol-indexer.envPrefix" -}}
+{{-   if eq .Values.role "indexer-agent" -}}INDEXER_AGENT_{{- end -}}
+{{-   if eq .Values.role "indexer-service" -}}INDEXER_SERVICE_{{- end -}}
+{{- end }}

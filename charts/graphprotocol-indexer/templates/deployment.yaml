@@ -38,37 +38,43 @@ spec:
         - name: {{ .Chart.Name }}
           securityContext:
             {{- toYaml .Values.securityContext | nindent 12 }}
-          image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+          image: "{{ include "graphprotocol-indexer.imageRepository" . }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           env:
-            - name: INDEXER_AGENT_POSTGRES_DATABASE
-              value: {{ required "postgres.db wasn't specified" .Values.postgres.db | quote }}
-            - name: INDEXER_AGENT_POSTGRES_HOST
-              value: {{ required "postgres.host wasn't specified" .Values.postgres.host | quote }}
-            {{- if .Values.config.coordinates }}
+            {{- if eq .Values.role "indexer-agent" }}
+            {{-   if .Values.config.coordinates }}
             - name: INDEXER_AGENT_INDEXER_GEO_COORDINATES
               value: {{ .Values.config.coordinates | quote }}
-            {{- end }}
+            {{-   end }}
             - name: INDEXER_AGENT_INDEX_NODE_IDS
               value: {{ .Values.blockIngestorNodeId | quote }}
-            - name: INDEXER_AGENT_GRAPH_NODE_QUERY_ENDPOINT
-              value: {{ required "config.graphEndpoints.query wasn't specified" .Values.config.graphEndpoints.query | quote }}
-            - name: INDEXER_AGENT_GRAPH_NODE_ADMIN_ENDPOINT
-              value: {{ required "config.graphEndpoints.admin wasn't specified" .Values.config.graphEndpoints.admin | quote }}
-            - name: INDEXER_AGENT_GRAPH_NODE_STATUS_ENDPOINT
-              value: {{ required "config.graphEndpoints.status wasn't specified" .Values.config.graphEndpoints.status | quote }}
             - name: INDEXER_AGENT_PUBLIC_INDEXER_URL
               value: {{ required "config.publicUrl wasn't specified" .Values.config.publicUrl | quote }}
-            - name: INDEXER_AGENT_NETWORK_SUBGRAPH_ENDPOINT
-              value: {{ .Values.config.networkSubgraphEndpoint | quote }}
             - name: INDEXER_AGENT_COLLECT_RECEIPTS_ENDPOINT
               value: {{ .Values.config.collectReceiptsEndpoint | quote }}
-            - name: INDEXER_AGENT_ETHEREUM_NETWORK
-              value: {{ .Values.config.ethereum.network | quote }}
             - name: INDEXER_AGENT_DAI_CONTRACT
               value: {{ .Values.config.daiContract | quote }}
-            - name: INDEXER_AGENT_NETWORK_SUBGRAPH_DEPLOYMENT
+            {{- end }}
+            {{- if eq .Values.role "indexer-service" }}
+            - name: INDEXER_SERVICE_CLIENT_SIGNER_ADDRESS
+              value: {{ .Values.config.clientSignerAdress | quote }}  
+            {{- end }}
+            - name: {{ include "graphprotocol-indexer.envPrefix" . }}NETWORK_SUBGRAPH_ENDPOINT
+              value: {{ .Values.config.networkSubgraphEndpoint | quote }}
+            - name: {{ include "graphprotocol-indexer.envPrefix" . }}ETHEREUM_NETWORK
+              value: {{ .Values.config.ethereum.network | quote }}
+            - name: {{ include "graphprotocol-indexer.envPrefix" . }}NETWORK_SUBGRAPH_DEPLOYMENT
               value: {{ .Values.config.subgraphDeployment | quote }}
+            - name: {{ include "graphprotocol-indexer.envPrefix" . }}POSTGRES_DATABASE
+              value: {{ required "postgres.db wasn't specified" .Values.postgres.db | quote }}
+            - name: {{ include "graphprotocol-indexer.envPrefix" . }}POSTGRES_HOST
+              value: {{ required "postgres.host wasn't specified" .Values.postgres.host | quote }}
+            - name: {{ include "graphprotocol-indexer.envPrefix" . }}GRAPH_NODE_QUERY_ENDPOINT
+              value: {{ required "config.graphEndpoints.query wasn't specified" .Values.config.graphEndpoints.query | quote }}
+            - name: {{ include "graphprotocol-indexer.envPrefix" . }}GRAPH_NODE_ADMIN_ENDPOINT
+              value: {{ required "config.graphEndpoints.admin wasn't specified" .Values.config.graphEndpoints.admin | quote }}
+            - name: {{ include "graphprotocol-indexer.envPrefix" . }}GRAPH_NODE_STATUS_ENDPOINT
+              value: {{ required "config.graphEndpoints.status wasn't specified" .Values.config.graphEndpoints.status | quote }}            
           envFrom:
             - secretRef:
                 name: {{ include "graphprotocol-indexer.fullname" . }}

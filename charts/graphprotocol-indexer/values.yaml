@@ -5,7 +5,8 @@
 replicaCount: 1
 
 image:
-  repository: ghcr.io/graphprotocol/indexer-agent
+  agentRepository: ghcr.io/graphprotocol/indexer-agent
+  serviceRepository: ghcr.io/graphprotocol/indexer-service
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
   tag: ""
@@ -67,6 +68,7 @@ config:
   collectReceiptsEndpoint: https://gateway.network.thegraph.com/collect-receipts
   daiContract: 0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48
   subgraphDeployment: QmaUBw7sr8pBrwNgz6JkbmmGoUU7KJSaeRvCaY3NPDbQ7A
+  clientSignerAddress: 0x982D10c56b8BBbD6e09048F5c5f01b43C65D5aE0
 
 postgres:
   db: graph
