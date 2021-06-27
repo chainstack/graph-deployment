@@ -1,23 +1,16 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include "graphprotocol-indexer.fullname" . }}
+  name: {{ include "graphprotocol-indexer-service.fullname" . }}
   labels:
-    {{- include "graphprotocol-indexer.labels" . | nindent 4 }}
+    {{- include "graphprotocol-indexer-service.labels" . | nindent 4 }}
 spec:
-  {{/* There shouldn't be more than 1 indexer agent instance in installation */}}
-  {{- if eq .Values.role "indexer-agent" -}}
-  replicas: 1
-  strategy:
-    type: Recreate
-  {{- else -}}
   replicas: {{ .Values.replicaCount }}
   strategy:
     type: RollingUpdate
-  {{- end }}
   selector:
     matchLabels:
-      {{- include "graphprotocol-indexer.selectorLabels" . | nindent 6 }}
+      {{- include "graphprotocol-indexer-service.selectorLabels" . | nindent 6 }}
   template:
     metadata:
       annotations:
@@ -26,7 +19,7 @@ spec:
         {{-   toYaml . | nindent 8 }}
         {{- end }}
       labels:
-        {{- include "graphprotocol-indexer.selectorLabels" . | nindent 8 }}
+        {{- include "graphprotocol-indexer-service.selectorLabels" . | nindent 8 }}
     spec:
       {{- with .Values.imagePullSecrets }}
       imagePullSecrets:
@@ -38,63 +31,37 @@ spec:
         - name: {{ .Chart.Name }}
           securityContext:
             {{- toYaml .Values.securityContext | nindent 12 }}
-          image: "{{ include "graphprotocol-indexer.imageRepository" . }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           env:
-            {{- if eq .Values.role "indexer-agent" }}
-            {{-   if .Values.config.coordinates }}
-            - name: INDEXER_AGENT_INDEXER_GEO_COORDINATES
-              value: {{ .Values.config.coordinates | quote }}
-            {{-   end }}
-            - name: INDEXER_AGENT_INDEX_NODE_IDS
-              value: {{ required "config.blockIngestorNodeIds wasn't specified" .Values.blockIngestorNodeIds | quote }}
-            - name: INDEXER_AGENT_PUBLIC_INDEXER_URL
-              value: {{ required "config.publicUrl wasn't specified" .Values.config.publicUrl | quote }}
-            - name: INDEXER_AGENT_COLLECT_RECEIPTS_ENDPOINT
-              value: {{ required "config.collectReceiptsEndpoint wasn't specified" .Values.config.collectReceiptsEndpoint | quote }}
-            - name: INDEXER_AGENT_DAI_CONTRACT
-              value: {{ required "config.daiContract wasn't specified" .Values.config.daiContract | quote }}
-            {{- end }}
-            {{- if eq .Values.role "indexer-service" }}
             - name: INDEXER_SERVICE_CLIENT_SIGNER_ADDRESS
               value: {{ required "config.clientSignerAddress wasn't specified" .Values.config.clientSignerAddress | quote }}  
-            {{- end }}
-            - name: {{ include "graphprotocol-indexer.envPrefix" . }}NETWORK_SUBGRAPH_ENDPOINT
+            - name: INDEXER_SERVICE_NETWORK_SUBGRAPH_ENDPOINT
               value: {{ required "config.networkSubgraphEndpoint wasn't specified" .Values.config.networkSubgraphEndpoint | quote }}
-            - name: {{ include "graphprotocol-indexer.envPrefix" . }}ETHEREUM_NETWORK
+            - name: INDEXER_SERVICE_ETHEREUM_NETWORK
               value: {{ required "config.ethereum.network wasn't specified" .Values.config.ethereum.network | quote }}
-            - name: {{ include "graphprotocol-indexer.envPrefix" . }}NETWORK_SUBGRAPH_DEPLOYMENT
+            - name: INDEXER_SERVICE_NETWORK_SUBGRAPH_DEPLOYMENT
               value: {{ required "config.subgraphDeployment wasn't specified" .Values.config.subgraphDeployment | quote }}
-            - name: {{ include "graphprotocol-indexer.envPrefix" . }}POSTGRES_DATABASE
+            - name: INDEXER_SERVICE_POSTGRES_DATABASE
               value: {{ required "postgres.db wasn't specified" .Values.postgres.db | quote }}
-            - name: {{ include "graphprotocol-indexer.envPrefix" . }}POSTGRES_HOST
+            - name: INDEXER_SERVICE_POSTGRES_HOST
               value: {{ required "postgres.host wasn't specified" .Values.postgres.host | quote }}
-            - name: {{ include "graphprotocol-indexer.envPrefix" . }}GRAPH_NODE_QUERY_ENDPOINT
+            - name: INDEXER_SERVICE_GRAPH_NODE_QUERY_ENDPOINT
               value: {{ required "config.graphEndpoints.query wasn't specified" .Values.config.graphEndpoints.query | quote }}
-            - name: {{ include "graphprotocol-indexer.envPrefix" . }}GRAPH_NODE_ADMIN_ENDPOINT
+            - name: INDEXER_SERVICE_GRAPH_NODE_ADMIN_ENDPOINT
               value: {{ required "config.graphEndpoints.admin wasn't specified" .Values.config.graphEndpoints.admin | quote }}
-            - name: {{ include "graphprotocol-indexer.envPrefix" . }}GRAPH_NODE_STATUS_ENDPOINT
+            - name: INDEXER_SERVICE_GRAPH_NODE_STATUS_ENDPOINT
               value: {{ required "config.graphEndpoints.status wasn't specified" .Values.config.graphEndpoints.status | quote }}            
           envFrom:
             - secretRef:
-                name: {{ include "graphprotocol-indexer.fullname" . }}
+                name: {{ include "graphprotocol-indexer-service.fullname" . }}
           ports:
             - name: metrics
               containerPort: 7300
               protocol: TCP
-            {{- if eq .Values.role "indexer-agent" }}
-            - name: management
-              containerPort: 8000
-              protocol: TCP
-            - name: syncing
-              containerPort: 8002
-              protocol: TCP
-            {{- end }}
-            {{- if eq .Values.role "indexer-service" }}
             - name: http
               containerPort: 7600
               protocol: TCP
-            {{- end }}
           livenessProbe:
             httpGet:
               path: /metrics

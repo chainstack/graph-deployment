@@ -2,7 +2,7 @@
 {{/*
 Expand the name of the chart.
 */}}
-{{- define "graphprotocol-indexer.name" -}}
+{{- define "graphprotocol-indexer-service.name" -}}
 {{- default .Chart.Name .Values.nameOverride | trunc 63 | trimSuffix "-" }}
 {{- end }}
 
@@ -11,7 +11,7 @@ Create a default fully qualified app name.
 We truncate at 63 chars because some Kubernetes name fields are limited to this (by the DNS naming spec).
 If release name contains chart name it will be used as a full name.
 */}}
-{{- define "graphprotocol-indexer.fullname" -}}
+{{- define "graphprotocol-indexer-service.fullname" -}}
 {{- if .Values.fullnameOverride }}
 {{- .Values.fullnameOverride | trunc 63 | trimSuffix "-" }}
 {{- else }}
@@ -27,16 +27,16 @@ If release name contains chart name it will be used as a full name.
 {{/*
 Create chart name and version as used by the chart label.
 */}}
-{{- define "graphprotocol-indexer.chart" -}}
+{{- define "graphprotocol-indexer-service.chart" -}}
 {{- printf "%s-%s" .Chart.Name .Chart.Version | replace "+" "_" | trunc 63 | trimSuffix "-" }}
 {{- end }}
 
 {{/*
 Common labels
 */}}
-{{- define "graphprotocol-indexer.labels" -}}
-helm.sh/chart: {{ include "graphprotocol-indexer.chart" . }}
-{{ include "graphprotocol-indexer.selectorLabels" . }}
+{{- define "graphprotocol-indexer-service.labels" -}}
+helm.sh/chart: {{ include "graphprotocol-indexer-service.chart" . }}
+{{ include "graphprotocol-indexer-service.selectorLabels" . }}
 {{- if .Chart.AppVersion }}
 app.kubernetes.io/version: {{ .Chart.AppVersion | quote }}
 {{- end }}
@@ -46,23 +46,7 @@ app.kubernetes.io/managed-by: {{ .Release.Service }}
 {{/*
 Selector labels
 */}}
-{{- define "graphprotocol-indexer.selectorLabels" -}}
-app.kubernetes.io/name: {{ include "graphprotocol-indexer.name" . }}
+{{- define "graphprotocol-indexer-service.selectorLabels" -}}
+app.kubernetes.io/name: {{ include "graphprotocol-indexer-service.name" . }}
 app.kubernetes.io/instance: {{ .Release.Name }}
-{{- end }}
-
-{{/*
-Select image repository based on role
-*/}}
-{{- define "graphprotocol-indexer.imageRepository" -}}
-{{-   if eq .Values.role "indexer-agent" -}}{{ .Values.image.agentRepository }}{{- end -}}
-{{-   if eq .Values.role "indexer-service" -}}{{ .Values.image.serviceRepository }}{{- end -}}
-{{- end }}
-
-{{/*
-Select env prefix
-*/}}
-{{- define "graphprotocol-indexer.envPrefix" -}}
-{{-   if eq .Values.role "indexer-agent" -}}INDEXER_AGENT_{{- end -}}
-{{-   if eq .Values.role "indexer-service" -}}INDEXER_SERVICE_{{- end -}}
 {{- end }}

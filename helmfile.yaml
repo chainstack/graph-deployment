@@ -46,7 +46,7 @@ releases:
   - graphprotocol-node-query
 
 - name: graphprotocol-indexer-service
-  chart: ./charts/graphprotocol-indexer
+  chart: ./charts/graphprotocol-indexer-service
   labels:
     part: indexer-service
   values:
