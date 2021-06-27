@@ -16,7 +16,7 @@ releases:
 - name: graphprotocol-node-index
   chart: ./charts/graphprotocol-node
   labels:
-    part: node-index
+    component: node-index
   values:
   - values/graphprotocol-node-index.yaml
   - values/graphprotocol-node.secret.yaml
@@ -26,7 +26,7 @@ releases:
 - name: graphprotocol-node-query
   chart: ./charts/graphprotocol-node
   labels:
-    part: node-query
+    component: node-query
   values:
   - values/graphprotocol-node-query.yaml
   - values/graphprotocol-node.secret.yaml
@@ -36,7 +36,7 @@ releases:
 - name: graphprotocol-indexer-agent
   chart: ./charts/graphprotocol-indexer-agent
   labels:
-    part: indexer-agent
+    component: indexer-agent
   values:
   - values/graphprotocol-indexer-agent.yaml
   - values/graphprotocol-indexer-agent.secret.yaml
@@ -48,7 +48,7 @@ releases:
 - name: graphprotocol-indexer-service
   chart: ./charts/graphprotocol-indexer-service
   labels:
-    part: indexer-service
+    component: indexer-service
   values:
   - values/graphprotocol-indexer-service.yaml
   - values/graphprotocol-indexer-service.secret.yaml
