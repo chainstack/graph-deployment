@@ -34,7 +34,7 @@ releases:
   - postgres
 
 - name: graphprotocol-indexer-agent
-  chart: ./charts/graphprotocol-indexer
+  chart: ./charts/graphprotocol-indexer-agent
   labels:
     part: indexer-agent
   values:

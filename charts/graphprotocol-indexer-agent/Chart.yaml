@@ -1,0 +1,16 @@
+apiVersion: v2
+name: graphprotocol-indexer-agent
+description: A Helm chart for Graph Protocol Indexer components
+type: application
+version: 0.1.0
+keywords:
+  - graphprotocol
+  - ethereum
+home: https://thegraph.com/
+sources:
+  - https://github.com/graphprotocol/indexer
+maintainers:
+  # TODO: Change maintainers list
+  - email: dm3ch@dm3ch.net
+    name: dm3ch
+appVersion: v0.16.0

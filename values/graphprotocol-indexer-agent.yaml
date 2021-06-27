@@ -1,5 +1,3 @@
-role: indexer-agent
-
 postgres:
   db: graph-node 
   host: postgres-postgresql

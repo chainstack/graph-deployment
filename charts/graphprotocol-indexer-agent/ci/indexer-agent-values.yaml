@@ -1,0 +1,15 @@
+config:
+  publicUrl: https://domain.name
+  ethereum:
+    url: url
+    address: address
+    mnemonic: mnemonic
+  graphEndpoints:
+    admin: http://graphprotocol-node-index:8020/
+    status: http://graphprotocol-node-index:8030/graphql
+    query: http://graphprotocol-node-query:8000/
+
+postgres:
+  host: host
+  user: user
+  password: password

@@ -1,0 +1,75 @@
+# Default values for graphprotocol-indexer.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+image:
+  repository: ghcr.io/graphprotocol/indexer-agent
+  pullPolicy: IfNotPresent
+  # Overrides the image tag whose default is the chart appVersion.
+  tag: ""
+
+imagePullSecrets: []
+nameOverride: ""
+fullnameOverride: ""
+
+podAnnotations: {}
+
+podSecurityContext: {}
+  # fsGroup: 2000
+
+securityContext: {}
+  # capabilities:
+  #   drop:
+  #   - ALL
+  # readOnlyRootFilesystem: true
+  # runAsNonRoot: true
+  # runAsUser: 1000
+
+service:
+  type: ClusterIP
+  metricsPort: 7300
+  managementPort: 8000
+  syncingPort: 8002
+
+resources: {}
+  # We usually recommend not to specify default resources and to leave this as a conscious
+  # choice for the user. This also increases chances charts run on environments with little
+  # resources, such as Minikube. If you do want to specify resources, uncomment the following
+  # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
+  # limits:
+  #   cpu: 100m
+  #   memory: 128Mi
+  # requests:
+  #   cpu: 100m
+  #   memory: 128Mi
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}
+
+config:
+  ethereum:
+    url:
+    network: mainnet
+    address:
+    mnemonic:
+  coordinates:
+  graphEndpoints:
+    query:
+    admin:
+    status:
+  publicUrl:
+  networkSubgraphEndpoint: https://gateway.thegraph.com/network
+  collectReceiptsEndpoint: https://gateway.network.thegraph.com/collect-receipts
+  daiContract: 0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48
+  subgraphDeployment: QmaUBw7sr8pBrwNgz6JkbmmGoUU7KJSaeRvCaY3NPDbQ7A
+
+postgres:
+  db: graph
+  host:
+  user:
+  password:
+# Should equals to node id of graphprotocol-node with index role
+blockIngestorNodeIds: index_node
