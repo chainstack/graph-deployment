@@ -10,9 +10,6 @@ config:
   clientSignerAddress: 0xe1EC4339019eC9628438F8755f847e3023e4ff9c
   ethereum: 
     network: rinkeby
-    # url: "ChangeMe"
-    # address: "ChangeMe"
-    # mnemonic: "ChangeMe"
   graphEndpoints:
     admin: http://graphprotocol-node-index:8020/
     status: http://graphprotocol-node-index:8030/graphql
@@ -20,8 +17,3 @@ config:
 
   networkSubgraphEndpoint: https://gateway.testnet.thegraph.com/network
   subgraphDeployment: QmUBRDENCjFt57vVjFc3D4EQoYqXJffKiyFyuGYB2BN8Wi
-
-# ingress:
-#   enabled: true
-#   hosts:
-#   - indexer.domain

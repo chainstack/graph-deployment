@@ -2,19 +2,14 @@ postgres:
   db: graph-node 
   host: postgres-postgresql
   user: postgres
-  # password: "ChangeMe"
 
 config:
   ethereum: 
     network: rinkeby
-    # url: "ChangeMe"
-    # address: "ChangeMe"
-    # mnemonic: "ChangeMe"
   graphEndpoints:
     admin: http://graphprotocol-node-index:8020/
     status: http://graphprotocol-node-index:8030/graphql
     query: http://graphprotocol-node-query:8000/
-  # publicUrl: "http://indexer.domain/"
   networkSubgraphEndpoint: https://gateway.testnet.thegraph.com/network
   collectReceiptsEndpoint: https://gateway.testnet.thegraph.com/collect-receipts
   daiContract: 0x9e7e607afd22906f7da6f1ec8f432d6f244278be

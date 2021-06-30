@@ -1,13 +1,10 @@
 config:
   ipfs: https://ipfs.network.thegraph.com
-  #ethereum: "SetMe"
 
 postgres:
   db: graph-node 
   host: postgres-postgresql
   user: postgres
-  #password: "ChangeMe"
-
 replicaCount: 2
 
 resources:
