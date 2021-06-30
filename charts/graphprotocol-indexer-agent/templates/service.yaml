@@ -1,0 +1,23 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "graphprotocol-indexer-agent.fullname" . }}
+  labels:
+    {{- include "graphprotocol-indexer-agent.labels" . | nindent 4 }}
+spec:
+  type: {{ .Values.service.type }}
+  ports:
+    - port: {{ .Values.service.metricsPort }}
+      targetPort: metrics
+      protocol: TCP
+      name: metrics
+    - port: {{ .Values.service.managementPort }}
+      targetPort: management
+      protocol: TCP
+      name: management
+    - port: {{ .Values.service.syncingPort }}
+      targetPort: syncing
+      protocol: TCP
+      name: syncing
+  selector:
+    {{- include "graphprotocol-indexer-agent.selectorLabels" . | nindent 4 }}

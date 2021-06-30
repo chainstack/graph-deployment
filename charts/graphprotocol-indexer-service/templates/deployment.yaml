@@ -1,0 +1,86 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "graphprotocol-indexer-service.fullname" . }}
+  labels:
+    {{- include "graphprotocol-indexer-service.labels" . | nindent 4 }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  strategy:
+    type: RollingUpdate
+  selector:
+    matchLabels:
+      {{- include "graphprotocol-indexer-service.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      annotations:
+        checksum/secret.yaml: {{ include (print $.Template.BasePath "/secret.yaml") . | sha256sum }}
+        {{- with .Values.podAnnotations }}
+        {{-   toYaml . | nindent 8 }}
+        {{- end }}
+      labels:
+        {{- include "graphprotocol-indexer-service.selectorLabels" . | nindent 8 }}
+    spec:
+      {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      securityContext:
+        {{- toYaml .Values.podSecurityContext | nindent 8 }}
+      containers:
+        - name: {{ .Chart.Name }}
+          securityContext:
+            {{- toYaml .Values.securityContext | nindent 12 }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          env:
+            - name: INDEXER_SERVICE_CLIENT_SIGNER_ADDRESS
+              value: {{ required "config.clientSignerAddress wasn't specified" .Values.config.clientSignerAddress | quote }}  
+            - name: INDEXER_SERVICE_NETWORK_SUBGRAPH_ENDPOINT
+              value: {{ required "config.networkSubgraphEndpoint wasn't specified" .Values.config.networkSubgraphEndpoint | quote }}
+            - name: INDEXER_SERVICE_ETHEREUM_NETWORK
+              value: {{ required "config.ethereum.network wasn't specified" .Values.config.ethereum.network | quote }}
+            - name: INDEXER_SERVICE_NETWORK_SUBGRAPH_DEPLOYMENT
+              value: {{ required "config.subgraphDeployment wasn't specified" .Values.config.subgraphDeployment | quote }}
+            - name: INDEXER_SERVICE_POSTGRES_DATABASE
+              value: {{ required "postgres.db wasn't specified" .Values.postgres.db | quote }}
+            - name: INDEXER_SERVICE_POSTGRES_HOST
+              value: {{ required "postgres.host wasn't specified" .Values.postgres.host | quote }}
+            - name: INDEXER_SERVICE_GRAPH_NODE_QUERY_ENDPOINT
+              value: {{ required "config.graphEndpoints.query wasn't specified" .Values.config.graphEndpoints.query | quote }}
+            - name: INDEXER_SERVICE_GRAPH_NODE_ADMIN_ENDPOINT
+              value: {{ required "config.graphEndpoints.admin wasn't specified" .Values.config.graphEndpoints.admin | quote }}
+            - name: INDEXER_SERVICE_GRAPH_NODE_STATUS_ENDPOINT
+              value: {{ required "config.graphEndpoints.status wasn't specified" .Values.config.graphEndpoints.status | quote }}            
+          envFrom:
+            - secretRef:
+                name: {{ include "graphprotocol-indexer-service.fullname" . }}
+          ports:
+            - name: metrics
+              containerPort: 7300
+              protocol: TCP
+            - name: http
+              containerPort: 7600
+              protocol: TCP
+          livenessProbe:
+            httpGet:
+              path: /metrics
+              port: metrics
+          readinessProbe:
+            httpGet:
+              path: /metrics
+              port: metrics
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}

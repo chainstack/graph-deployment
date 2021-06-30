@@ -1,11 +1,11 @@
-# Default values for graphprotocol-node.
+# Default values for graphprotocol-indexer.
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
 
 replicaCount: 1
 
 image:
-  repository: graphprotocol/graph-node
+  repository: ghcr.io/graphprotocol/indexer-service
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
   tag: ""
@@ -29,11 +29,8 @@ securityContext: {}
 
 service:
   type: ClusterIP
-  metricsPort: 8040
-  jsonRpcPort: 8020
-  graphqlPort: 8000
-  graphqlWsPort: 8001
-  indexPort: 8030
+  metricsPort: 7300
+  httpPort: 7600
 
 resources: {}
   # We usually recommend not to specify default resources and to leave this as a conscious
@@ -54,9 +51,18 @@ tolerations: []
 affinity: {}
 
 config:
-  ipfs:
   ethereum:
-
+    url:
+    network: mainnet
+    address:
+    mnemonic:
+  graphEndpoints:
+    query:
+    admin:
+    status:
+  networkSubgraphEndpoint: https://gateway.thegraph.com/network
+  subgraphDeployment: QmaUBw7sr8pBrwNgz6JkbmmGoUU7KJSaeRvCaY3NPDbQ7A
+  clientSignerAddress: 0x982D10c56b8BBbD6e09048F5c5f01b43C65D5aE0
 
 postgres:
   db: graph
@@ -64,8 +70,15 @@ postgres:
   user:
   password:
 
-# Shouldn't have - sign, cause it would be replaced with _
-blockIngestorNodeId: index_node
-
-# Possible values: query-node, index-node
-role: "query-node"
+ingress:
+  enabled: false
+  annotations: {}
+    # kubernetes.io/ingress.class: nginx
+    # kubernetes.io/tls-acme: "true"
+  hosts:
+    - host: chart-example.local
+      paths: []
+  tls: []
+  #  - secretName: chart-example-tls
+  #    hosts:
+  #      - chart-example.local
