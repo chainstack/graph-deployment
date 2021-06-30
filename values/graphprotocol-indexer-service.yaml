@@ -1,4 +1,4 @@
-replicas: 2
+replicaCount: 2
 
 postgres:
   db: graph-node 
