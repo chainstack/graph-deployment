@@ -5,7 +5,7 @@ We don't guarantee that charts won't have major breaking changes until the early
 Also this repo could be split into separate terraform and charts repos in future.
 
 ## Helm Charts
-Currently implemented 3 helm charts (can be found in `charts` directory):
+Currently 3 helm charts are implemented (see `charts` directory):
 * graphprotocol-node - deploys graphprotocol index and query nodes
 * graphprotocol-indexer-agent - deploys graphprotocol indexer agent
 * graphprotocol-indexer-service - deploys graphprotocol indexer agent
