@@ -12,7 +12,7 @@ Currently 3 helm charts are implemented (see `charts` directory):
 
 ## Helmfile
 For now we are using helmfile to deploy charts to test environment.
-All values files that used for our testenv (configured to work with The Graph testnet) lives in `values` directory.
+All values files that used for our testenv (configured to work with The Graph testnet) live in `values` directory.
 
 There's:
 * `<name>.yaml` - files containing common configuration options
