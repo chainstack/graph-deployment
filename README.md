@@ -2,7 +2,7 @@
 Current status of all IaaC components in this repo should be considered as *alpha* for now.
 We don't guarantee that charts won't have major breaking changes until the early stage of the development is done.
 
-Also this repo could be split in future to separate terraform and charts repos.
+Also this repo could be split into separate terraform and charts repos in future.
 
 ## Helm Charts
 Currently implemented 3 helm charts (can be found in `charts` directory):
