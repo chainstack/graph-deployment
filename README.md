@@ -1,6 +1,6 @@
 # This repo contains IaaC for deploying The Graph indexer to existing k8s cluster.
 Current status of all IaaC components in this repo should be considered as *alpha* for now.
-We not guarantee that charts/e.t.c wouldn't have major breaking changes until stabilization.
+We don't guarantee that charts won't have major breaking changes until the early stage of the development is done.
 
 Also this repo could be split in future to separate terraform and charts repos.
 
