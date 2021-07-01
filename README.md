@@ -15,11 +15,11 @@ For now we are using helmfile to deploy charts to test environment.
 All values files that used for our testenv (configured to work with The Graph testnet) live in `values` directory.
 
 There's:
-* `<name>.yaml` - files containing common configuration options
-* `<name>.secret.example.yaml` - files containing structure of sensitive configuration options. You need to copy example files removing `.example` from name and fill configuration options.
+* `<name>.yaml` - contains common configuration options
+* `<name>.secret.example.yaml` - contain sensitive configuration options. You need to copy example files, remove `.example` from name and fill in the configuration options.
 
 Currently we have 3 external dependencies for our installation:
-* Ethereum archival node (rinkeby for testnet)
+* Ethereum archive node (rinkeby for testnet)
 * The Graph IPFS endpoint (could be found it The Graph Docs)
 * Cloud Provider managed ingress controller to make indexer endpoint public (needed to participate in The Graph net).
 
