@@ -11,8 +11,8 @@ resources:
   requests:
     cpu: 50m
     memory: 100Mi
-  # limits: TODO: Tune requests/limits during acceptance tests
-  #   cpu: 100m
-  #   memory: 200Mi
+  limits: #TODO: Tune requests/limits during acceptance tests
+    cpu: 100m
+    memory: 200Mi
 
 role: "query-node"
