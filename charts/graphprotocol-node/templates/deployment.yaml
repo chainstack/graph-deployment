@@ -46,7 +46,7 @@ spec:
             - name: BLOCK_INGESTOR
               value: {{ .Values.blockIngestorNodeId | quote }}
             - name: node_id
-              value: {{ .Values.blockIngestorNodeId | quote}}
+              value: {{ .Values.blockIngestorNodeId | quote }}
             {{- else -}}
             - name: node_id
               valueFrom:
