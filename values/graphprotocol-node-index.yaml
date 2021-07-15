@@ -9,9 +9,9 @@ postgres:
 resources:
   requests:
     cpu: 1
-    memory: 100Mi
+    memory: 0.5Gi
   limits: #TODO: Tune requests/limits during acceptance tests
     cpu: 1.5
-    memory: 200Mi
+    memory: 1Gi
 
 role: "index-node"
