@@ -13,9 +13,6 @@ resources:
     cpu: "2.5"
     memory: 1Gi
 
-global:
-  postgresql:
-    storageClass: ssd
-
 persistence:
-  size: 100Gi
+  size: 250Gi
+  storageClass: ssd
