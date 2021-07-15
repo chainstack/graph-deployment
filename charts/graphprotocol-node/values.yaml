@@ -55,8 +55,14 @@ affinity: {}
 
 config:
   ipfs:
-  ethereum:
-
+  chains: {}
+    # mainnet:
+    #   providers:
+    #   - label: name
+    #     transport: rpc
+    #     url: url
+    #     features: [ archive ]
+    #     headers: {"Authorization": "Bearer foo"}
 
 postgres:
   db: graph
