@@ -1,7 +1,3 @@
 *.secret.yaml
-tmp
 
-terraform/.terraform
-terraform/terraform.auto.tfvars
-terraform/terraform.tfstate
-terraform/terraform.tfstate.backup
+terraform
