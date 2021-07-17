@@ -86,7 +86,20 @@ Fully synced subgraph should have `deployment_head` number equals to `ethereum_c
 First you need to port-forward graphql ports (http and ws) to your machine in separate terminals
 ```
 kubectl -n <namespace> port-forward svc/graphprotocol-node-query 8000:8000
-kubectl -n <namespace> port-forward svc/graphprotocol-node-query 8001:8001
 ```
 
-Now you can re
+*Note: graphql websocket is exposed on separate 8001 port*
+
+Now you can access graphql request UI in browser via http://localhost:8000/subgraphs/name/example/graphql
+
+You can try to perform this test query:
+```
+{
+  gravatars {
+    id
+    owner
+    displayName
+    imageUrl
+  }
+}
+```
