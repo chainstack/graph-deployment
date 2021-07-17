@@ -1,0 +1,19 @@
+replicaCount: 2
+
+postgres:
+  db: graph-node 
+  host: postgres-postgresql
+  user: postgres
+  # password: "ChangeMe"
+
+config:
+  clientSignerAddress: 0xe1EC4339019eC9628438F8755f847e3023e4ff9c
+  ethereum: 
+    network: rinkeby
+  graphEndpoints:
+    admin: http://graphprotocol-node-index:8020/
+    status: http://graphprotocol-node-index:8030/graphql
+    query: http://graphprotocol-node-query:8000/
+
+  networkSubgraphEndpoint: https://gateway.testnet.thegraph.com/network
+  subgraphDeployment: QmYnGeUXVNZd3MupWqPwZekCriF2CVkpoXZbuSZB9t7eQS

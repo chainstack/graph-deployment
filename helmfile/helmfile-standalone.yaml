@@ -1,0 +1,43 @@
+helmDefaults:
+  wait: true
+
+repositories:
+- name: bitnami
+  url: https://charts.bitnami.com/bitnami
+- name: helm-stable
+  url: https://charts.helm.sh/stable
+
+releases:
+- name: postgres
+  chart: bitnami/postgresql
+  version: ~10.4.9
+  values:
+  - values/postgres.yaml
+  - values/postgres.secret.yaml
+
+- name: ipfs
+  chart: helm-stable/ipfs
+  labels:
+    component: ipfs
+
+- name: graphprotocol-node-index
+  chart: ../charts/graphprotocol-node
+  labels:
+    component: node-index
+  values:
+  - values/graphprotocol-node-index.yaml
+  - values/graphprotocol-node.secret.yaml
+  needs:
+  - postgres
+  - ipfs
+
+- name: graphprotocol-node-query
+  chart: ../charts/graphprotocol-node
+  labels:
+    component: node-query
+  values:
+  - values/graphprotocol-node-query.yaml
+  - values/graphprotocol-node.secret.yaml
+  needs:
+  - postgres
+  - ipfs
