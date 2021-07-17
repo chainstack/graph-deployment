@@ -103,3 +103,5 @@ You can try to perform this test query:
   }
 }
 ```
+
+If all is ok you would get response containing indexed info
