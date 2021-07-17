@@ -1,42 +1,40 @@
-# Network
+# Graph Protocol indexer helmfile
+Graph protocol indexer could be installed in two different modes:
+* Network mode - participating in network, process requests and get commision
+* Standalone mode - private installation that would be used, managed only by owner.
+
+## Network mode
 You can deploy graph nodes in network mode. In this case you would participate in graph network. It would deploy additional graph indexer components, that are needed to participate in network.
 
-## Instalation
+### Instalation
+Prepare values in `values` directory first.
 ```
 helmfile -f helmfile-network.yaml -n <namespace> apply
 ```
+**TODO: document full installation, setup and usage** - https://github.com/chainstack/graph-deployment/issues/15
 
-## Instalation
-Prepare values in `values` directory first.
-
-```
-helmfile -f helmfile-standalone.yaml -n <namespace> apply
-```
-
-# Standalone
+## Standalone mode
 You can deploy graph nodes in standalone mode. In this case you wouldn't participate in graph network and would have separate IPFS node. It allows you to install subgraphs locally to your own node, without sharing nodes with Graph network
 
-## Instalation
+### Instalation
 Prepare values in `values` directory first.
 For test subgraph installation bellow I'm using graph-node installation connected to external ethereum mainnet endpoint, cause example subgraph by default indexing contract located in ethereum mainnet.
 
-
 ```
 helmfile -f helmfile-standalone.yaml -n <namespace> apply
 ```
 
-
-## Deploy subgraph
+### Deploy subgraph
 This instruction is based on https://thegraph.com/docs/developer/quick-start
 
-### Clone example subgraph
+#### Clone example subgraph
 I'm using https://github.com/graphprotocol/example-subgraph as an example
 ```
 git clone git@github.com:graphprotocol/example-subgraph.git
 cd example-subgraph
 ```
 
-### Run port-forward to access internal endpoints
+#### Run port-forward to access internal endpoints
 During deploy of subgraph you need access to internal ports of installation.
 You need to run this command in separate terminals.
 After deploy you can kill port-forwarding processed by `Ctrl+C`
@@ -45,7 +43,7 @@ kubectl -n <namespace> port-forward svc/ipfs-ipfs 5001:5001
 kubectl -n <namespace> port-forward svc/graphprotocol-node-index 8020:8020
 ```
 
-### Deploy example subgraph
+#### Deploy example subgraph
 You need to install graph-cli first
 ```
 npm install -g @graphprotocol/graph-cli
