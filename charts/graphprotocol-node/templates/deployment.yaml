@@ -21,7 +21,7 @@ spec:
   template:
     metadata:
       annotations:
-        checksum/configmap.yaml: {{ include (print $.Template.BasePath "/configmap.yaml") . | sha256sum }}
+        checksum/secret.yaml: {{ include (print $.Template.BasePath "/secret.yaml") . | sha256sum }}
         {{- with .Values.podAnnotations }}
         {{-   toYaml . | nindent 8 }}
         {{- end }}
@@ -97,8 +97,8 @@ spec:
             readOnly: true
       volumes:
       - name: config
-        configMap:
-          name: {{ include "graphprotocol-node.fullname" . }}
+        secret:
+          secretName: {{ include "graphprotocol-node.fullname" . }}-config
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}
