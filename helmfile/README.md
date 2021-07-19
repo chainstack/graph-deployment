@@ -1,7 +1,7 @@
 # Graph Protocol indexer helmfile
 Graph protocol indexer could be installed in two different modes:
-* Network mode - node participates in network, processes requests and gets commission
-* Standalone mode - private installation that would be used, managed only by owner.
+* Network mode - node participates in network, processes external requests and gets commission.
+* Standalone mode - node doesn't participates in network. Processes only your own subgraph and requests.
 
 ## Network mode
 You can deploy graph node in network mode. In this case additional graph indexer components gets deployed, so that the node can join the graph network.
