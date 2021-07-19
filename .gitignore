@@ -1,1 +1,8 @@
 *.secret.yaml
+
+# Variables file with secret values for test purposes
+# Need to find better place for tfvars in future
+terraform/terraform.auto.tfvars
+terraform/terraform.tfstate*
+terraform/.terraform*
+terraform/tmp
