@@ -16,4 +16,4 @@ config:
     query: http://graphprotocol-node-query:8000/
 
   networkSubgraphEndpoint: https://gateway.testnet.thegraph.com/network
-  subgraphDeployment: QmUBRDENCjFt57vVjFc3D4EQoYqXJffKiyFyuGYB2BN8Wi
+  subgraphDeployment: QmYnGeUXVNZd3MupWqPwZekCriF2CVkpoXZbuSZB9t7eQS

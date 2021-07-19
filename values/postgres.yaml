@@ -7,8 +7,12 @@ postgresqlSharedPreloadLibraries: pg_stat_statements
 
 resources:
   requests:
-    cpu: 250m
+    cpu: "2"
     memory: 0.5Gi
-  # limits: TODO: Tune requests during acceptance tests
-  #   cpu: 100m
-  #   memory: 200Mi
+  limits: #TODO: Tune requests during acceptance tests
+    cpu: "2.5"
+    memory: 1Gi
+
+persistence:
+  size: 250Gi
+  storageClass: ssd
