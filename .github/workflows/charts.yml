@@ -1,8 +1,6 @@
 name: Helm charts
 on:
   pull_request:
-    paths:
-      - "charts/**"
 jobs:
   lint:
     runs-on: ubuntu-latest

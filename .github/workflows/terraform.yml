@@ -1,8 +1,6 @@
 name: Terraform
 on:
   pull_request:
-    paths:
-      - "terraform/**"
 jobs:
   lint:
     runs-on: ubuntu-latest
