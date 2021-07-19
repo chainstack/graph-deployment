@@ -27,6 +27,9 @@ releases:
   values:
   - values/graphprotocol-node-index.yaml
   - values/graphprotocol-node.secret.yaml
+  # Overrides ipfs endpoint to local
+  - config:
+      ipfs: http://ipfs-ipfs:5001/
   needs:
   - postgres
   - ipfs
@@ -38,6 +41,9 @@ releases:
   values:
   - values/graphprotocol-node-query.yaml
   - values/graphprotocol-node.secret.yaml
+  # Overrides ipfs endpoint to local
+  - config:
+      ipfs: http://ipfs-ipfs:5001/
   needs:
   - postgres
   - ipfs
