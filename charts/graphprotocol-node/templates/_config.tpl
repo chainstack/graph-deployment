@@ -1,3 +1,4 @@
+# Config.toml based on https://github.com/graphprotocol/graph-node/blob/5613dca92213810b3cca57979f5facc2d670e34a/docs/config.md#configuring-multiple-databases
 {{- define "graphprotocol-node.config" -}}
 {{- $pgHost := required "postgres.host wasn't specified" .Values.postgres.host }}
 {{- $pgDB := required "postgres.db wasn't specified" .Values.postgres.db }}
