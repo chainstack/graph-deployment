@@ -1,16 +1,16 @@
 module "vpc" {
-  source = "terraform-aws-modules/vpc/aws"
+  source  = "terraform-aws-modules/vpc/aws"
   version = "~>3.2.0"
-  name = var.name
-  cidr = var.vpc_cidr
+  name    = var.name
+  cidr    = var.vpc_cidr
 
-  azs             = var.avalability_zones
+  azs            = var.avalability_zones
   public_subnets = var.public_subnet_cidrs
 
   enable_nat_gateway = true
 
   public_subnet_tags = {
-    "kubernetes.io/role/elb" = 1
+    "kubernetes.io/role/elb"            = 1
     "kubernetes.io/cluster/${var.name}" = "owned"
   }
 }
@@ -37,8 +37,8 @@ module "cluster" {
   subnets         = module.vpc.public_subnets
   vpc_id          = module.vpc.vpc_id
 
-  enable_irsa = true
+  enable_irsa      = true
   write_kubeconfig = false
 
-  worker_groups = var.worker_groups
+  node_groups = var.node_groups
 }

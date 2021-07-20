@@ -30,7 +30,7 @@ resource "aws_iam_policy" "aws-load-balancer-controller" {
 
 resource "helm_release" "ingress" {
   name       = "ingress"
-  namespace = "kube-system"
+  namespace  = "kube-system"
   chart      = "aws-load-balancer-controller"
   repository = "https://aws.github.io/eks-charts"
   version    = "v1.2.3"
@@ -41,18 +41,18 @@ resource "helm_release" "ingress" {
   }
 
   set {
-    name = "ingressClass"
+    name  = "ingressClass"
     value = "null"
   }
 
   set {
-    name = "serviceAccount.name"
+    name  = "serviceAccount.name"
     value = "aws-load-balancer-controller"
   }
 
   set {
-      name = "serviceAccount.annotations.eks\\.amazonaws\\.com/role-arn"
-      value = module.iam_assumable_role_admin.iam_role_arn
+    name  = "serviceAccount.annotations.eks\\.amazonaws\\.com/role-arn"
+    value = module.iam_assumable_role_admin.iam_role_arn
   }
 
   depends_on = [
