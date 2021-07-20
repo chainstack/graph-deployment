@@ -40,3 +40,15 @@ aws eks --region <region-code> update-kubeconfig --name <cluster_name>
 ```
 kubectl get ns,node
 ```
+
+## Destroy terraform
+**If you have active services or ingresses in your cluster that are associated with a load balancer, you must delete those services/ingresses before deleting the cluster so that the load balancers are deleted properly. Otherwise, you can have orphaned resources in your VPC that prevent you from being able to delete the VPC.**
+This step would delete all resources that were created by terraform.
+
+Go to the `terraform/gcp` directory and run following command in terminal:
+```
+terraform destroy
+```
+
+After calculating diff you would be asked if you want to apply changes, type yes and press enter.
+After command successful finish all created resources.
