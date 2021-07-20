@@ -24,7 +24,7 @@ variable "region" {
 variable "zones" {
   description = "Zones to host the cluster in"
   type        = list(string)
-  default     = ["us-central1-a"]
+  default     = ["us-central1-a", "us-central1-b", "us-central1-c"]
 }
 
 variable "ip_range_nodes" {
