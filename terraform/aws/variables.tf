@@ -1,81 +1,96 @@
-variable "project_id" {
-  description = "Project ID for all created resources"
-  type        = string
-}
-
 variable "name" {
   description = "The name of the cluster"
   type        = string
   default     = "graph-indexer"
 }
 
-variable "regional" {
-  description = "Whether is a regional cluster (WARNING: changing this after cluster creation is destructive!) "
-  type        = bool
-  default     = true
-}
-
 variable "region" {
   description = "The region to host the cluster in"
   type        = string
-  default     = "us-central1"
+  default     = "us-east-1"
 }
 
-variable "zones" {
+variable "avalability_zones" {
   description = "Zones to host the cluster in"
   type        = list(string)
-  default     = ["us-central1-a"]
+  default     = ["us-east-1a", "us-east-1b", "us-east-1c"]
 }
 
-variable "ip_range_nodes" {
-  type        = string
-  description = "The ip range of the subnet that would be used for nodes"
-  default     = "10.128.0.0/20"
+variable "vpc_cidr" {
+  description = "IP range that would be used for created VPC"
+  type = string
+  default = "172.31.0.0/16"
 }
 
-variable "ip_range_pods" {
-  type        = string
-  description = "The secondary ip range of subnet that would be used for pods"
-  default     = "10.32.0.0/14"
+variable "public_subnet_cidrs" {
+  description = "IP ranges for public subnetworks, that would be created in VPC. Ranges must be subranges of vpc_cidr."
+  type = list(string)
+  default = ["172.31.0.0/20", "172.31.16.0/20", "172.31.32.0/20"]
 }
+# variable "project_id" {
+#   description = "Project ID for all created resources"
+#   type        = string
+# }
 
-variable "ip_range_services" {
-  type        = string
-  description = "The secondary ip range of subnet that would be used for pods"
-  default     = "10.36.0.0/20"
-}
 
-variable "node_pools" {
-  type        = list(map(string))
-  description = "List of maps containing node pools"
-  default = [
-    {
-      name               = "default"
-      machine_type       = "e2-standard-4"
-      initial_node_count = 1
-      min_count          = 0
-      max_count          = 3
-      auto_repair        = true
-      auto_upgrade       = true
-      preemptible        = true
-    }
-  ]
-}
 
-variable "node_pools_taints" {
-  type        = map(list(object({ key = string, value = string, effect = string })))
-  description = "Map of lists containing node taints by node-pool name"
-  default     = {}
-}
+# variable "regional" {
+#   description = "Whether is a regional cluster (WARNING: changing this after cluster creation is destructive!) "
+#   type        = bool
+#   default     = true
+# }
 
-variable "node_pools_labels" {
-  type        = map(map(string))
-  description = "Map of maps containing node labels by node-pool name"
-  default     = {}
-}
 
-variable "release_channel" {
-  type        = string
-  description = "Specifies release channel for kubernetes versions"
-  default     = "STABLE"
-}
+
+# variable "ip_range_nodes" {
+#   type        = string
+#   description = "The ip range of the subnet that would be used for nodes"
+#   default     = "10.128.0.0/20"
+# }
+
+# variable "ip_range_pods" {
+#   type        = string
+#   description = "The secondary ip range of subnet that would be used for pods"
+#   default     = "10.32.0.0/14"
+# }
+
+# variable "ip_range_services" {
+#   type        = string
+#   description = "The secondary ip range of subnet that would be used for pods"
+#   default     = "10.36.0.0/20"
+# }
+
+# variable "node_pools" {
+#   type        = list(map(string))
+#   description = "List of maps containing node pools"
+#   default = [
+#     {
+#       name               = "default"
+#       machine_type       = "e2-standard-4"
+#       initial_node_count = 1
+#       min_count          = 0
+#       max_count          = 3
+#       auto_repair        = true
+#       auto_upgrade       = true
+#       preemptible        = true
+#     }
+#   ]
+# }
+
+# variable "node_pools_taints" {
+#   type        = map(list(object({ key = string, value = string, effect = string })))
+#   description = "Map of lists containing node taints by node-pool name"
+#   default     = {}
+# }
+
+# variable "node_pools_labels" {
+#   type        = map(map(string))
+#   description = "Map of maps containing node labels by node-pool name"
+#   default     = {}
+# }
+
+# variable "release_channel" {
+#   type        = string
+#   description = "Specifies release channel for kubernetes versions"
+#   default     = "STABLE"
+# }
