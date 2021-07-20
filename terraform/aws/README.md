@@ -32,14 +32,8 @@ After calculating diff you would be asked if you want to apply changes, type yes
 After command successful finish kubernetes cluster would be created.
 
 ### Get kubectl config for created cluster
-For zonal cluster run:
 ```
-gcloud container clusters get-credentials <cluster_name> --zone <cluster_zone> --project <gcp_project>
-```
-
-For regional cluster run:
-```
-gcloud container clusters get-credentials <cluster_name> --region <cluster_region> --project <gcp_project>
+aws eks --region <region-code> update-kubeconfig --name <cluster_name>
 ```
 
 ### Test that kubectl config works

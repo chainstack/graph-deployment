@@ -27,70 +27,21 @@ variable "public_subnet_cidrs" {
   type = list(string)
   default = ["172.31.0.0/20", "172.31.16.0/20", "172.31.32.0/20"]
 }
-# variable "project_id" {
-#   description = "Project ID for all created resources"
-#   type        = string
-# }
 
+variable "kubernetes_version" {
+  description = "Kubernetes version that would be installed"
+  type = string
+  default = "1.18"
+}
 
-
-# variable "regional" {
-#   description = "Whether is a regional cluster (WARNING: changing this after cluster creation is destructive!) "
-#   type        = bool
-#   default     = true
-# }
-
-
-
-# variable "ip_range_nodes" {
-#   type        = string
-#   description = "The ip range of the subnet that would be used for nodes"
-#   default     = "10.128.0.0/20"
-# }
-
-# variable "ip_range_pods" {
-#   type        = string
-#   description = "The secondary ip range of subnet that would be used for pods"
-#   default     = "10.32.0.0/14"
-# }
-
-# variable "ip_range_services" {
-#   type        = string
-#   description = "The secondary ip range of subnet that would be used for pods"
-#   default     = "10.36.0.0/20"
-# }
-
-# variable "node_pools" {
-#   type        = list(map(string))
-#   description = "List of maps containing node pools"
-#   default = [
-#     {
-#       name               = "default"
-#       machine_type       = "e2-standard-4"
-#       initial_node_count = 1
-#       min_count          = 0
-#       max_count          = 3
-#       auto_repair        = true
-#       auto_upgrade       = true
-#       preemptible        = true
-#     }
-#   ]
-# }
-
-# variable "node_pools_taints" {
-#   type        = map(list(object({ key = string, value = string, effect = string })))
-#   description = "Map of lists containing node taints by node-pool name"
-#   default     = {}
-# }
-
-# variable "node_pools_labels" {
-#   type        = map(map(string))
-#   description = "Map of maps containing node labels by node-pool name"
-#   default     = {}
-# }
-
-# variable "release_channel" {
-#   type        = string
-#   description = "Specifies release channel for kubernetes versions"
-#   default     = "STABLE"
-# }
+variable "worker_groups" {
+  description = "Definition of worker groups"
+  type = any # https://github.com/terraform-aws-modules/terraform-aws-eks/blob/master/variables.tf#L108
+  default = [
+    {
+      instance_type = "m4.xlarge"
+      spot_price    = "0.10"
+      asg_max_size  = 3
+    }
+  ]
+}
