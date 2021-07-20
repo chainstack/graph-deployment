@@ -8,6 +8,11 @@ module "vpc" {
   public_subnets = var.public_subnet_cidrs
 
   enable_nat_gateway = true
+
+  public_subnet_tags = {
+    "kubernetes.io/role/elb" = 1
+    "kubernetes.io/cluster/${var.name}" = "owned"
+  }
 }
 
 data "aws_eks_cluster" "cluster" {
