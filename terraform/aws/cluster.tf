@@ -24,6 +24,14 @@ provider "kubernetes" {
   token                  = data.aws_eks_cluster_auth.cluster.token
 }
 
+provider "helm" {
+  kubernetes {
+    host                   = data.aws_eks_cluster.cluster.endpoint
+    cluster_ca_certificate = base64decode(data.aws_eks_cluster.cluster.certificate_authority.0.data)
+    token                  = data.aws_eks_cluster_auth.cluster.token
+  }
+}
+
 module "cluster" {
   source          = "terraform-aws-modules/eks/aws"
   version         = "~>17.1.0"
@@ -35,4 +43,26 @@ module "cluster" {
   write_kubeconfig = false
 
   worker_groups = var.worker_groups
+}
+
+resource "helm_release" "ingress" {
+  name       = "ingress"
+  namespace = "kube-system"
+  chart      = "aws-load-balancer-controller"
+  repository = "https://aws.github.io/eks-charts"
+  version    = "v1.2.3"
+
+  set {
+    name  = "clusterName"
+    value = var.name
+  }
+
+  set {
+    name = "ingressClass"
+    value = "null"
+  }
+
+  depends_on = [
+    module.cluster
+  ]
 }
