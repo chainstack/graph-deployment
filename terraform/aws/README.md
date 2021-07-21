@@ -1,5 +1,5 @@
 # GCP terraform
-This terraform project creates kubernetes cluster in GCP from scratch, it's required to deploy The Graph indexer on later steps.
+This terraform project creates kubernetes cluster in AWS from scratch, it's required to deploy The Graph indexer on later steps.
 
 ## Install prerequisites
 | Tool | Recommended version | Install documentation link |
@@ -19,11 +19,11 @@ aws configure
 And input Access Key ID and Secret Access Key.
 
 ### Fill variables
-Copy example variables file `terraform.example.tfvars` to `terraform.tfvars` in the `terraform/gcp` directory.
-Fill `gcp_project` variable. You also can override other variables defined in `variables.tf`
+Copy example variables file `terraform.example.tfvars` to `terraform.tfvars` in the `terraform/aws` directory.
+You also override variables defined in `variables.tf`
 
 ### Run terraform apply
-Go to the `terraform/gcp` directory and run following command in terminal:
+Go to the `terraform/aws` directory and run following command in terminal:
 ```
 terraform apply
 ```
@@ -45,7 +45,7 @@ kubectl get ns,node
 **If you have active services or ingresses in your cluster that are associated with a load balancer, you must delete those services/ingresses before deleting the cluster so that the load balancers are deleted properly. Otherwise, you can have orphaned resources in your VPC that prevent you from being able to delete the VPC.**
 This step would delete all resources that were created by terraform.
 
-Go to the `terraform/gcp` directory and run following command in terminal:
+Go to the `terraform/aws` directory and run following command in terminal:
 ```
 terraform destroy
 ```
