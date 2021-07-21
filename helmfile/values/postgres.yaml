@@ -15,4 +15,4 @@ resources:
 
 persistence:
   size: 250Gi
-  storageClass: ssd
+  storageClass: premium-rwo
