@@ -20,7 +20,7 @@ And input Access Key ID and Secret Access Key.
 
 ### Fill variables
 Copy example variables file `terraform.example.tfvars` to `terraform.tfvars` in the `terraform/aws` directory.
-You also override variables defined in `variables.tf`
+You can also override variables defined in `variables.tf`
 
 ### Run terraform apply
 Go to the `terraform/aws` directory and run following command in terminal:
