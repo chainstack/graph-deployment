@@ -1,5 +1,5 @@
 # AWS terraform
-This terraform project creates kubernetes cluster in AWS from scratch, it's required to deploy The Graph indexer on later steps.
+This terraform project creates kubernetes cluster in AWS from scratch. It's required in order deploy The Graph indexer on later steps.
 
 ## Install prerequisites
 | Tool | Recommended version | Install documentation link |
