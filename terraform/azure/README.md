@@ -31,7 +31,7 @@ After calculating the diff you will be asked if you want to apply changes. Type 
 
 ### Get kubectl config for created cluster
 ```
-aws eks --region <region-code> update-kubeconfig --name <cluster_name>
+az aks get-credentials --resource-group <name> --name <name>
 ```
 
 ### Test that kubectl config works
