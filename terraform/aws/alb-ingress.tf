@@ -41,16 +41,6 @@ resource "helm_release" "alb_ingress_controller" {
   }
 
   set {
-    name  = "ingressClass"
-    value = "null"
-  }
-
-  set {
-    name  = "disableIngressClassAnnotation"
-    value = true
-  }
-
-  set {
     name  = "serviceAccount.name"
     value = "aws-load-balancer-controller"
   }
