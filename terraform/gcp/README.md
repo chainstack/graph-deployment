@@ -45,3 +45,13 @@ gcloud container clusters get-credentials <cluster_name> --region <cluster_regio
 ```
 kubectl get ns,node
 ```
+
+## Destroy terraform
+This step deletes all resources that were created by terraform.
+
+Go to the `terraform/gcp` directory and run following command in terminal:
+```
+terraform destroy
+```
+
+After calculating the diff you will be asked if you want to apply changes. Type `yes` and press `enter`.
