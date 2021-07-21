@@ -8,7 +8,7 @@ provider "helm" {
 
 provider "http" {}
 
-module "iam_assumable_role_admin" {
+module "iam_assumable_role_admin_alb_ingress" {
   source                        = "terraform-aws-modules/iam/aws//modules/iam-assumable-role-with-oidc"
   version                       = "~>4.2.0"
   create_role                   = true
@@ -28,8 +28,8 @@ resource "aws_iam_policy" "aws-load-balancer-controller" {
   policy      = data.http.aws-load-balancer-controller-policy.body
 }
 
-resource "helm_release" "ingress" {
-  name       = "ingress"
+resource "helm_release" "alb_ingress_controller" {
+  name       = "alb-ingress-controller"
   namespace  = "kube-system"
   chart      = "aws-load-balancer-controller"
   repository = "https://aws.github.io/eks-charts"
@@ -46,13 +46,18 @@ resource "helm_release" "ingress" {
   }
 
   set {
+    name  = "disableIngressClassAnnotation"
+    value = true
+  }
+
+  set {
     name  = "serviceAccount.name"
     value = "aws-load-balancer-controller"
   }
 
   set {
     name  = "serviceAccount.annotations.eks\\.amazonaws\\.com/role-arn"
-    value = module.iam_assumable_role_admin.iam_role_arn
+    value = module.iam_assumable_role_admin_alb_ingress.iam_role_arn
   }
 
   depends_on = [
