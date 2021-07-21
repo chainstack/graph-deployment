@@ -47,12 +47,11 @@ kubectl get ns,node
 ```
 
 ## Destroy terraform
-This step would delete all resources that were created by terraform.
+This step deletes all resources that were created by terraform.
 
 Go to the `terraform/gcp` directory and run following command in terminal:
 ```
 terraform destroy
 ```
 
-After calculating diff you would be asked if you want to apply changes, type yes and press enter.
-After command successful finish all created resources.
+After calculating the diff you will be asked if you want to apply changes. Type `yes` and press `enter`.
