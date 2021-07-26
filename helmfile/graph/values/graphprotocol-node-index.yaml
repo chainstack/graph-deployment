@@ -2,17 +2,16 @@ config:
   ipfs: https://ipfs.network.thegraph.com
 
 postgres:
-  db: graph-node 
+  db: graph-node
   host: postgres-postgresql
   user: postgres
-replicaCount: 2
 
 resources:
   requests:
-    cpu: 50m
-    memory: 100Mi
+    cpu: 1
+    memory: 0.5Gi
   limits: #TODO: Tune requests/limits during acceptance tests
-    cpu: 100m
-    memory: 200Mi
+    cpu: 1.5
+    memory: 1Gi
 
-role: "query-node"
+role: "index-node"

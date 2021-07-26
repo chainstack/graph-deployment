@@ -14,7 +14,7 @@ releases:
   - values/postgres.secret.yaml
 
 - name: graphprotocol-node-index
-  chart: ../charts/graphprotocol-node
+  chart: ../../charts/graphprotocol-node
   labels:
     component: node-index
   values:
@@ -24,7 +24,7 @@ releases:
   - postgres
 
 - name: graphprotocol-node-query
-  chart: ../charts/graphprotocol-node
+  chart: ../../charts/graphprotocol-node
   labels:
     component: node-query
   values:
@@ -34,7 +34,7 @@ releases:
   - postgres
 
 - name: graphprotocol-indexer-agent
-  chart: ../charts/graphprotocol-indexer-agent
+  chart: ../../charts/graphprotocol-indexer-agent
   labels:
     component: indexer-agent
   values:
@@ -46,7 +46,7 @@ releases:
   - graphprotocol-node-query
 
 - name: graphprotocol-indexer-service
-  chart: ../charts/graphprotocol-indexer-service
+  chart: ../../charts/graphprotocol-indexer-service
   labels:
     component: indexer-service
   values:
