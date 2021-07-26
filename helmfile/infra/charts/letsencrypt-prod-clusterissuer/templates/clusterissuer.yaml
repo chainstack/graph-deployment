@@ -4,10 +4,10 @@ metadata:
   name: letsencrypt-prod
 spec:
   acme:
-    email: dm3ch@dm3ch.net
+    email: {{ .Values.email | quote }}
     server: https://acme-v02.api.letsencrypt.org/directory
     privateKeySecretRef:
-      name: issuer-account-key
+      name: letsencrypt-prod
     solvers:
     - http01:
         ingress:

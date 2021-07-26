@@ -5,6 +5,11 @@ repositories:
 - name: jetstack
   url: https://charts.jetstack.io
 
+environments:
+  default:
+    values:
+    - values.yaml
+
 releases:
 - name: cert-manager
   chart: jetstack/cert-manager
@@ -13,6 +18,8 @@ releases:
   - installCRDs: true
 
 - name: letsencrypt-prod-clusterissuer
-  chart: ./manifests/letsencrypt-prod-clusterissuer
+  chart: ./charts/letsencrypt-prod-clusterissuer
+  values:
+  - email: "{{ .Values.email }}"
   needs:
   - cert-manager
