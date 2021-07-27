@@ -5,6 +5,7 @@ repos:
     -   id: trailing-whitespace
     -   id: end-of-file-fixer
     -   id: check-added-large-files
+    -   id: check-yaml
 - repo: git://github.com/antonbabenko/pre-commit-terraform
   rev: v1.50.0
   hooks:
