@@ -37,3 +37,7 @@ releases:
   version: ~17.0.3
   # Fixes CRD installation
   disableValidationOnInstall: true
+  values:
+  - prometheus:
+      prometheusSpec:
+        serviceMonitorSelectorNilUsesHelmValues: false

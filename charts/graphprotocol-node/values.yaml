@@ -75,3 +75,6 @@ blockIngestorNodeId: index_node
 
 # Possible values: query-node, index-node
 role: "query-node"
+
+monitoring:
+  enabled: false

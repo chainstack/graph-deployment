@@ -16,3 +16,6 @@ resources:
     memory: 200Mi
 
 role: "query-node"
+
+monitoring:
+  enabled: true
