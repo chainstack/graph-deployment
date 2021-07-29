@@ -41,3 +41,6 @@ releases:
   - prometheus:
       prometheusSpec:
         serviceMonitorSelectorNilUsesHelmValues: false
+    grafana:
+      persistence:
+        enabled: true
