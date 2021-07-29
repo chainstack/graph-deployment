@@ -18,7 +18,7 @@ releases:
   - installCRDs: true
 
 - name: letsencrypt-prod-clusterissuer
-  chart: ./charts/letsencrypt-prod-clusterissuer
+  chart: ../charts/letsencrypt-prod-clusterissuer
   values:
   - email: "{{ .Values.email }}"
   needs:
