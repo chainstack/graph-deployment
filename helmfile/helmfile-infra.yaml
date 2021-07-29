@@ -29,5 +29,3 @@ releases:
 - name: kubernetes-dashboard
   chart: kubernetes-dashboard/kubernetes-dashboard
   version: ~4.3.1
-  values:
-  - protocolHttp: false
