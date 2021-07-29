@@ -1,6 +1,4 @@
-*.secret.yaml
-
-helmfile/infra/values.yaml
+helmfile/values/*.secret.yaml
 
 # Variables file with secret values for test purposes
 # Need to find better place for tfvars in future
