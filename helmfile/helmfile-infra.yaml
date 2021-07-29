@@ -6,6 +6,8 @@ repositories:
   url: https://charts.jetstack.io
 - name: kubernetes-dashboard
   url: https://kubernetes.github.io/dashboard/
+- name: prometheus-community
+  url: https://prometheus-community.github.io/helm-charts
 
 environments:
   default:
@@ -29,3 +31,9 @@ releases:
 - name: kubernetes-dashboard
   chart: kubernetes-dashboard/kubernetes-dashboard
   version: ~4.3.1
+
+- name: prometheus-stack
+  chart: prometheus-community/kube-prometheus-stack
+  version: ~17.0.3
+  # Fixes CRD installation
+  disableValidationOnInstall: true
