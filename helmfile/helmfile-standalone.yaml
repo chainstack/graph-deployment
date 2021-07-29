@@ -21,7 +21,7 @@ releases:
     component: ipfs
 
 - name: graphprotocol-node-index
-  chart: ../../charts/graphprotocol-node
+  chart: ../charts/graphprotocol-node
   labels:
     component: node-index
   values:
@@ -35,7 +35,7 @@ releases:
   - ipfs
 
 - name: graphprotocol-node-query
-  chart: ../../charts/graphprotocol-node
+  chart: ../charts/graphprotocol-node
   labels:
     component: node-query
   values:

@@ -8,7 +8,7 @@ repositories:
 environments:
   default:
     values:
-    - values.yaml
+    - ./infra.secret.yaml
 
 releases:
 - name: cert-manager
