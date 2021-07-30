@@ -115,7 +115,7 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "rate(container_cpu_usage_seconds_total{container!=\"POD\",namespace=\"$namespace\"}[5m]) / on (namespace, pod, container) group_left kube_pod_container_resource_limits{resource=\"cpu\", container!=\"POD\",namespace=\"$namespace\"}",
+          "expr": "rate(container_cpu_usage_seconds_total{container!=\"POD\",namespace=\"$namespace\"}[5m]) / on (namespace, pod, container) group_left max by (namespace, pod, container) (kube_pod_container_resource_limits{resource=\"cpu\", container!=\"POD\",namespace=\"$namespace\"})",
           "interval": "",
           "legendFormat": "{{ namespace }}/{{pod}}  {{ container }}",
           "refId": "A"
@@ -199,7 +199,7 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "rate(container_cpu_usage_seconds_total{container!=\"POD\",namespace=\"$namespace\"}[5m]) / on (namespace, pod, container) group_left kube_pod_container_resource_requests{resource=\"cpu\", container!=\"POD\",namespace=\"$namespace\"}",
+          "expr": "rate(container_cpu_usage_seconds_total{container!=\"POD\",namespace=\"$namespace\"}[5m]) / on (namespace, pod, container) group_left max by (namespace, pod, container) (kube_pod_container_resource_requests{resource=\"cpu\", container!=\"POD\",namespace=\"$namespace\"})",
           "interval": "",
           "legendFormat": "{{ namespace }}/{{pod}}  {{ container }}",
           "refId": "A"
@@ -283,7 +283,7 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "rate(container_memory_usage_bytes{container!=\"POD\",namespace=\"$namespace\"}[5m]) / on (namespace, pod, container) group_left kube_pod_container_resource_limits{resource=\"memory\", container!=\"POD\",namespace=\"$namespace\"}",
+          "expr": "rate(container_memory_usage_bytes{container!=\"POD\",namespace=\"$namespace\"}[5m]) / on (namespace, pod, container) group_left max by (namespace, pod, container) (kube_pod_container_resource_limits{resource=\"memory\", container!=\"POD\",namespace=\"$namespace\"})",
           "interval": "",
           "legendFormat": "{{ namespace }}/{{pod}}  {{ container }}",
           "refId": "A"
@@ -367,7 +367,7 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "rate(container_memory_usage_bytes{container!=\"POD\",namespace=\"$namespace\"}[5m]) / on (namespace, pod, container) group_left kube_pod_container_resource_requests{resource=\"memory\", container!=\"POD\",namespace=\"$namespace\"}",
+          "expr": "rate(container_memory_usage_bytes{container!=\"POD\",namespace=\"$namespace\"}[5m]) / on (namespace, pod, container) group_left max by (namespace, pod, container) (kube_pod_container_resource_requests{resource=\"memory\", container!=\"POD\",namespace=\"$namespace\"})",
           "interval": "",
           "legendFormat": "{{ namespace }}/{{pod}}  {{ container }}",
           "refId": "A"
