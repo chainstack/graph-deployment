@@ -14,3 +14,6 @@ config:
   collectReceiptsEndpoint: https://gateway.testnet.thegraph.com/collect-receipts
   daiContract: 0x9e7e607afd22906f7da6f1ec8f432d6f244278be
   subgraphDeployment: QmYnGeUXVNZd3MupWqPwZekCriF2CVkpoXZbuSZB9t7eQS
+
+monitoring:
+  enabled: true

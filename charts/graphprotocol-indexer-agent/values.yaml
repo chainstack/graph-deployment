@@ -73,3 +73,6 @@ postgres:
   password:
 # Should equals to node id of graphprotocol-node with index role
 blockIngestorNodeIds: index_node
+
+monitoring:
+  enabled: false

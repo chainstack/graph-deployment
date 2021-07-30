@@ -82,3 +82,6 @@ ingress:
   #  - secretName: chart-example-tls
   #    hosts:
   #      - chart-example.local
+
+monitoring:
+  enabled: false
