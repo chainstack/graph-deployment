@@ -41,6 +41,12 @@ releases:
   - prometheus:
       prometheusSpec:
         serviceMonitorSelectorNilUsesHelmValues: false
+        storageSpec:
+          volumeClaimTemplate:
+            spec:
+             resources:
+               requests:
+                 storage: 10Gi
     grafana:
       persistence:
         enabled: true
