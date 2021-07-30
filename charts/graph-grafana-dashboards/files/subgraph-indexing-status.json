@@ -1,14 +1,5 @@
 {
-  "__inputs": [
-    {
-      "name": "DS_POSTGRESQL",
-      "label": "PostgreSQL",
-      "description": "",
-      "type": "datasource",
-      "pluginId": "postgres",
-      "pluginName": "PostgreSQL"
-    }
-  ],
+  "__inputs": [],
   "__requires": [
     {
       "type": "grafana",
@@ -56,7 +47,7 @@
   "links": [],
   "panels": [
     {
-      "datasource": "${DS_POSTGRESQL}",
+      "datasource": "postgres",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -374,7 +365,7 @@
     },
     {
       "columns": [],
-      "datasource": "${DS_POSTGRESQL}",
+      "datasource": "postgres",
       "fontSize": "100%",
       "gridPos": {
         "h": 8,
@@ -575,7 +566,7 @@
       "type": "table-old"
     },
     {
-      "datasource": "${DS_POSTGRESQL}",
+      "datasource": "postgres",
       "fieldConfig": {
         "defaults": {
           "custom": {
@@ -832,7 +823,7 @@
       "type": "table"
     },
     {
-      "datasource": "${DS_POSTGRESQL}",
+      "datasource": "postgres",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -1251,7 +1242,7 @@
     },
     {
       "columns": [],
-      "datasource": "${DS_POSTGRESQL}",
+      "datasource": "postgres",
       "fontSize": "80%",
       "gridPos": {
         "h": 4,
@@ -1359,7 +1350,7 @@
     },
     {
       "columns": [],
-      "datasource": "${DS_POSTGRESQL}",
+      "datasource": "postgres",
       "fontSize": "80%",
       "gridPos": {
         "h": 4,
