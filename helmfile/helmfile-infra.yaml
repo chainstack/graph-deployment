@@ -23,6 +23,8 @@ releases:
 
 - name: letsencrypt-prod-clusterissuer
   chart: ../charts/letsencrypt-prod-clusterissuer
+  # Fixes CRD installation
+  disableValidationOnInstall: true
   values:
   - email: "{{ .Values.email }}"
   needs:
@@ -31,6 +33,9 @@ releases:
 - name: kubernetes-dashboard
   chart: kubernetes-dashboard/kubernetes-dashboard
   version: ~4.3.1
+
+- name: graph-grafana-dashboards
+  chart: ../charts/graph-grafana-dashboards
 
 - name: prometheus-stack
   chart: prometheus-community/kube-prometheus-stack
@@ -48,5 +53,12 @@ releases:
                requests:
                  storage: 10Gi
     grafana:
+      sidecar:
+        dashboards:
+          annotations:
+            grafana_folder: "Kubernetes"
+          folderAnnotation: "grafana_folder"
+          provider:
+            foldersFromFilesStructure: true
       persistence:
         enabled: true

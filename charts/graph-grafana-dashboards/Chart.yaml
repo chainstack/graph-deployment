@@ -1,0 +1,9 @@
+apiVersion: v2
+name: graph-grafana-dashboards
+description: A dumb helm chart to deploy grafana dashboard jsons
+type: application
+version: 0.1.0
+maintainers:
+  # TODO: Change maintainers list
+  - email: dm3ch@dm3ch.net
+    name: dm3ch

@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Release.Name }}
+  labels:
+    grafana_dashboard: "1"
+  annotations:
+    grafana_folder: "The Graph"
+data:
+{{ (.Files.Glob "files/*").AsConfig | indent 2 }}
