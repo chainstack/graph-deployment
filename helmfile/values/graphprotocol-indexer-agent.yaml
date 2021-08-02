@@ -1,10 +1,10 @@
 postgres:
-  db: graph-node 
+  db: graph-node
   host: postgres-postgresql
   user: postgres
 
 config:
-  ethereum: 
+  ethereum:
     network: rinkeby
   graphEndpoints:
     admin: http://graphprotocol-node-index:8020/

@@ -1,0 +1,25 @@
+helmDefaults:
+  wait: true
+
+repositories:
+- name: jetstack
+  url: https://charts.jetstack.io
+
+environments:
+  default:
+    values:
+    - ./values/infra.secret.yaml
+
+releases:
+- name: cert-manager
+  chart: jetstack/cert-manager
+  version: ~1.4.1
+  values:
+  - installCRDs: true
+
+- name: letsencrypt-prod-clusterissuer
+  chart: ../charts/letsencrypt-prod-clusterissuer
+  values:
+  - email: "{{ .Values.email }}"
+  needs:
+  - cert-manager

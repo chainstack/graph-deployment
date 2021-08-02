@@ -1,0 +1,9 @@
+apiVersion: v2
+name: letsencrypt-prod-clusterissuer
+description: Dumb helm-chart to create letsencrypt cluster issuer
+type: application
+version: 0.1.0
+maintainers:
+  # TODO: Change maintainers list
+  - email: dm3ch@dm3ch.net
+    name: dm3ch

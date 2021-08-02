@@ -35,7 +35,7 @@ cd example-subgraph
 
 #### Run port-forward to access internal endpoints
 During the deployment of a subgraph you need an access to the internal ports of the installation.
-The following commands should be run to access the deployed components locally. 
+The following commands should be run to access the deployed components locally.
 When subgraph is deployed, you can kill the port-forwarding processes by `Ctrl+C`
 ```
 kubectl -n <namespace> port-forward svc/ipfs-ipfs 5001:5001
