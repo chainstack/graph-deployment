@@ -40,13 +40,13 @@ Open the following link in a browser. Don't forget to replace `<namespace>` with
 On login page, select `kubeconfig` option and upload your kubeconfig file located in `~/.kube/config` by default. Note: typically this directory is hidden.
 
 ### Grafana
-Run following command it would return address (for me it's I'll use it in next steps):
+Run the following command to configure forwarding between grafana k8s service and your local machine:
 ```
 kubectl -n <namespace> port-forward svc/prometheus-stack-grafana 8001:80
 ```
 
-Open `http://localhost:8001`, you would be redirected to login screen.
-Basic credentials user:`admin` password:`prom-operator`.
-There's two folders with Dashboards:
+Open `http://localhost:8001`, you will be redirected to a login screen.
+Use the following basic authentication credentials to login:`admin:prom-operator`.
+There are two folders with Dashboards:
 - Kubernetes - kubernetes cluster monitoring info
 - The Graph - graphprotocol installation subgraph status and application specific monitoring info
