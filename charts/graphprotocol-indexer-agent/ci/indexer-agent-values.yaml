@@ -13,3 +13,7 @@ postgres:
   host: host
   user: user
   password: password
+
+service:
+  annotations:
+    test: "test"

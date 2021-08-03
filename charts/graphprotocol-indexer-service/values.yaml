@@ -28,6 +28,7 @@ securityContext: {}
   # runAsUser: 1000
 
 service:
+  annotations: {}
   type: ClusterIP
   metricsPort: 7300
   httpPort: 7600
