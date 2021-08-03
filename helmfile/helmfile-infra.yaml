@@ -4,6 +4,8 @@ helmDefaults:
 repositories:
 - name: jetstack
   url: https://charts.jetstack.io
+- name: kubernetes-dashboard
+  url: https://kubernetes.github.io/dashboard/
 
 environments:
   default:
@@ -23,3 +25,7 @@ releases:
   - email: "{{ .Values.email }}"
   needs:
   - cert-manager
+
+- name: kubernetes-dashboard
+  chart: kubernetes-dashboard/kubernetes-dashboard
+  version: ~4.3.1
