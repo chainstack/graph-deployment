@@ -1,0 +1,14 @@
+{{- if .Values.monitoring.enabled -}}
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: {{ include "graphprotocol-indexer-service.fullname" . }}
+  labels:
+    {{- include "graphprotocol-indexer-service.labels" . | nindent 4 }}
+spec:
+  selector:
+    matchLabels:
+    {{- include "graphprotocol-indexer-service.selectorLabels" . | nindent 6 }}
+  endpoints:
+  - port: metrics
+{{- end -}}

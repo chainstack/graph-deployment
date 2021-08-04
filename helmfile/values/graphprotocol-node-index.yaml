@@ -15,3 +15,6 @@ resources:
     memory: 1Gi
 
 role: "index-node"
+
+monitoring:
+  enabled: true

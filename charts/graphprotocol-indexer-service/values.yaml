@@ -28,6 +28,7 @@ securityContext: {}
   # runAsUser: 1000
 
 service:
+  annotations: {}
   type: ClusterIP
   metricsPort: 7300
   httpPort: 7600
@@ -82,3 +83,6 @@ ingress:
   #  - secretName: chart-example-tls
   #    hosts:
   #      - chart-example.local
+
+monitoring:
+  enabled: false

@@ -28,6 +28,7 @@ securityContext: {}
   # runAsUser: 1000
 
 service:
+  annotations: {}
   type: ClusterIP
   metricsPort: 8040
   jsonRpcPort: 8020
@@ -75,3 +76,6 @@ blockIngestorNodeId: index_node
 
 # Possible values: query-node, index-node
 role: "query-node"
+
+monitoring:
+  enabled: false

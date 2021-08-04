@@ -8,3 +8,7 @@ config:
   ethereum: ethereum
 
 role: "index-node"
+
+service:
+  annotations:
+    test: "test"

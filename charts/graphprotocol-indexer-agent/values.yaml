@@ -26,6 +26,7 @@ securityContext: {}
   # runAsUser: 1000
 
 service:
+  annotations: {}
   type: ClusterIP
   metricsPort: 7300
   managementPort: 8000
@@ -73,3 +74,6 @@ postgres:
   password:
 # Should equals to node id of graphprotocol-node with index role
 blockIngestorNodeIds: index_node
+
+monitoring:
+  enabled: false
