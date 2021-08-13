@@ -71,7 +71,7 @@ During the deployment of a subgraph you need an access to the internal ports of 
 The following commands should be run to access the deployed components locally.
 When subgraph is deployed, you can kill the port-forwarding processes by `Ctrl+C`
 ```
-kubectl -n <namespace> port-forward svc/ipfs-ipfs 5001:5001 &
+kubectl -n <namespace> port-forward svc/ipfs-ipfs 5001:5001 & \
 kubectl -n <namespace> port-forward svc/graphprotocol-node-index 8020:8020
 ```
 
