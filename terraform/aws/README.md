@@ -20,19 +20,32 @@ And input Access Key ID and Secret Access Key.
 
 ### Fill variables
 Copy example variables file `terraform.example.tfvars` to `terraform.tfvars` in the `terraform/aws` directory.
+Most variables are optional and terraform will prompt you for variables if you have not filled required variables.
 You can also override variables defined in `variables.tf`
 
 ### Run terraform apply
 Go to the `terraform/aws` directory and run following command in terminal:
 ```
+# you will need to run terraform init if terraform has yet to be initialiized
+# a .terraform.lock.hcl file will be present if terraform is initialized
+terraform init 
+
 terraform apply
 ```
 
 After calculating the diff you will be asked if you want to apply changes. Type `yes` and press `enter`.
 
 ### Get kubectl config for created cluster
+If you are using AWS CLI version ealier than 1.16.156 you will need to install `aws-iam-authenticator` before you can run `aws eks`. 
+[Installation instructions](https://docs.aws.amazon.com/eks/latest/userguide/install-aws-iam-authenticator.html).
+
+If you are using AWS CLI verion 1.16.156 or later you can run `aws eks get-token` instead.
+
 ```
 aws eks --region <region-code> update-kubeconfig --name <cluster_name>
+
+# If you use the default values provided in variables.tf you can run
+aws eks --region us-east-1 update-kubeconfig --name graph-indexer
 ```
 
 ### Test that kubectl config works
