@@ -3,25 +3,58 @@ Graph protocol indexer could be installed in two different modes:
 * Network mode - node participates in network, processes external requests and gets commission.
 * Standalone mode - node doesn't join in the graph network, processes only your own subgraph and requests.
 
+## Prerequisites
+You will need to install the following tools before proceeding
+1. [kubectl](https://kubernetes.io/docs/tasks/tools/) 
+2. [helmfile](https://github.com/roboll/helmfile)
+3. [helm-diff](https://github.com/databus23/helm-diff)
+4. [helm-secrets](https://github.com/jkroepke/helm-secrets)
+
 ## Network mode
 You can deploy graph node in network mode. In this case additional graph indexer components gets deployed, so that the node can join the graph network.
 
-### Instalation
-Prepare values in `values` directory first.
+### Installation
+Prepare values in `values` directory first. `<namespace>` can be any string of your choice.
 ```
 helmfile -f helmfile-network.yaml -n <namespace> apply
 ```
+
 **TODO: document full installation, setup and usage** - https://github.com/chainstack/graph-deployment/issues/15
 
 ## Standalone mode
 You can deploy graph nodes in standalone mode. In this case separate IPFS node gets deployed together with the graph node. It allows you to install subgraphs locally without connecting to the Graph network.
-### Instalation
-Prepare values in `values` directory first.
+
+### Installation
+Prepare values in `values` directory first. `<namespace>` can be any string of your choice.
+
 In the example bellow external ethereum mainnet endpoint is used, cause the indexing contract for the example subgraph is located in ethereum mainnet.
 
 ```
 helmfile -f helmfile-standalone.yaml -n <namespace> apply
 ```
+
+## Potential Installation Bugs and Troubleshooting
+
+### Monitoring Infrastructure Not Present
+```
+Error: Failed to render chart: exit status 1: Error: unable to build kubernetes objects from release manifest: unable to recognize "": no matches for kind "ServiceMonitor" in version "monitoring.coreos.com/v1"
+```
+
+If you experienced the error above, it means you do not have the monitoring infrastructure components configured.
+See `INFRA_README.md` for setup instructions.
+If monitoring is not a priority or desired feature you can do away with it. Under the `values` folder, set monitoring to false in affected files.
+```
+monitoring:
+  enabled: false
+```
+
+### Timeouts and Pods experiencing `CrashLoopBackOff`
+Should timeouts be experienced or if you noticed that some pods are experiencing `CrashLoopBackOff` errors when you run `kubectl get pods -n <namespace>`,
+it suggests that there are configuration errors.
+
+Some possible errors could be
+1. Blank fields in files found in `value`, if the field is not needed or optional. Remember to comment them out.
+
 
 ### Deploy subgraph
 This instruction is based on https://thegraph.com/docs/developer/quick-start
