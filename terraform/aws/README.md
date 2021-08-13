@@ -5,7 +5,7 @@ This terraform project creates kubernetes cluster in AWS from scratch. It's requ
 | Tool | Recommended version | Install documentation link |
 | ------------ | ------------ | ------------ |
 | Terraform | `~> 1.0.2` | https://learn.hashicorp.com/tutorials/terraform/install-cli#install-terraform |
-| Kubectl | Latest | https://kubernetes.io/docs/tasks/tools/#kubectl |
+| Kubectl | Latest `> 2.0.0` | https://kubernetes.io/docs/tasks/tools/#kubectl |
 | AWS cli | Latest | https://docs.aws.amazon.com/cli/latest/userguide/install-cliv2.html |
 
 ## Apply terraform
@@ -28,7 +28,7 @@ Go to the `terraform/aws` directory and run following command in terminal:
 ```
 # you will need to run terraform init if terraform has yet to be initialiized
 # a .terraform.lock.hcl file will be present if terraform is initialized
-terraform init 
+terraform init
 
 terraform apply
 ```
@@ -36,16 +36,30 @@ terraform apply
 After calculating the diff you will be asked if you want to apply changes. Type `yes` and press `enter`.
 
 ### Get kubectl config for created cluster
-If you are using AWS CLI version ealier than 1.16.156 you will need to install `aws-iam-authenticator` before you can run `aws eks`. 
-[Installation instructions](https://docs.aws.amazon.com/eks/latest/userguide/install-aws-iam-authenticator.html).
+---
+**Note: Using AWS CLI version 1.x.x**
 
-If you are using AWS CLI verion 1.16.156 or later you can run `aws eks get-token` instead. 
+We highly recommends you to use 2.x.x version of AWS CLI.
+
+You can check your AWS CLI version by running following command:
+```
+aws --version
+```
+
+But if you are using AWS CLI v1 the next notes could help you:
+* If you are using AWS CLI version ealier than 1.16.156 you will need to install `aws-iam-authenticator` before you can run `aws eks`.
+[Installation instructions](https://docs.aws.amazon.com/eks/latest/userguide/install-aws-iam-authenticator.html).
+* If you are using AWS CLI verion 1.16.156 or later you can run `aws eks get-token` instead.
 More information about creating kubeconfig for Amazon EKS can be found [here](https://docs.aws.amazon.com/eks/latest/userguide/create-kubeconfig.html).
+---
+
 
 ```
 aws eks --region <region-code> update-kubeconfig --name <cluster_name>
+```
 
-# If you use the default values provided in variables.tf you can run
+If you use the default values provided in variables.tf it would be:
+```
 aws eks --region us-east-1 update-kubeconfig --name graph-indexer
 ```
 
