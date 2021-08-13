@@ -28,7 +28,7 @@ helmfile -n <namespace> apply
 ```
 
 ## Usage
-### Kubernetes Dashvoard
+### Kubernetes Dashboard
 Run the following command to configure a proxy between your local machine and k8s API:
 ```
 kubectl proxy
