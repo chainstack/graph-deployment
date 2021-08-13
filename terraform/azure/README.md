@@ -19,11 +19,16 @@ Browser with Microsoft login page would be opened. Log in to your account.
 
 ### Fill variables
 Copy example variables file `terraform.example.tfvars` to `terraform.tfvars` in the `terraform/azure` directory.
+Most variables are optional and terraform will prompt you for variables if you have not filled required variables.
 You can also override variables defined in `variables.tf`
 
 ### Run terraform apply
 Go to the `terraform/azure` directory and run following command in terminal:
 ```
+# you will need to run terraform init if terraform has yet to be initialiized
+# a .terraform.lock.hcl file will be present if terraform is initialized
+terraform init 
+
 terraform apply
 ```
 
