@@ -8,7 +8,6 @@ You will need to install the following tools before proceeding
 1. [kubectl](https://kubernetes.io/docs/tasks/tools/) 
 2. [helmfile](https://github.com/roboll/helmfile)
 3. [helm-diff](https://github.com/databus23/helm-diff)
-4. [helm-secrets](https://github.com/jkroepke/helm-secrets)
 
 ## Network mode
 You can deploy graph node in network mode. In this case additional graph indexer components gets deployed, so that the node can join the graph network.
