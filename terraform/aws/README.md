@@ -39,7 +39,8 @@ After calculating the diff you will be asked if you want to apply changes. Type 
 If you are using AWS CLI version ealier than 1.16.156 you will need to install `aws-iam-authenticator` before you can run `aws eks`. 
 [Installation instructions](https://docs.aws.amazon.com/eks/latest/userguide/install-aws-iam-authenticator.html).
 
-If you are using AWS CLI verion 1.16.156 or later you can run `aws eks get-token` instead.
+If you are using AWS CLI verion 1.16.156 or later you can run `aws eks get-token` instead. 
+More information about creating kubeconfig for Amazon EKS can be found [here](https://docs.aws.amazon.com/eks/latest/userguide/create-kubeconfig.html).
 
 ```
 aws eks --region <region-code> update-kubeconfig --name <cluster_name>
