@@ -162,7 +162,7 @@ Once the changed have been applied get the external ip for the the query service
 $ kubectl get svc -n graph
 NAME                           TYPE           CLUSTER-IP      EXTERNAL-IP       PORT(S)                                                       AGE
 graphprotocol-node-index       ClusterIP      some ip         <none>            8040/TCP,8020/TCP,8000/TCP,8001/TCP,8030/TCP                  64m
-graphprotocol-node-query       LoadBalancer   some ip         *CNAME you want*  8040:31563/TCP,8020:32350/TCP,8000:30795/TCP,8001:31281/TCP   64m
+graphprotocol-node-query       LoadBalancer   some ip         *Service external address (CNAME or IP)*  8040:31563/TCP,8020:32350/TCP,8000:30795/TCP,8001:31281/TCP   64m
 ipfs-ipfs                      ClusterIP      some ip         <none>            5001/TCP,8080/TCP                                             65m
 postgres-postgresql            ClusterIP      some ip         <none>            5432/TCP                                                      65m
 postgres-postgresql-headless   ClusterIP      None            <none>            5432/TCP                                                      65m
