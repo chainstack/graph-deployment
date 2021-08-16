@@ -5,8 +5,8 @@ This terraform project creates kubernetes cluster in AWS from scratch. It's requ
 | Tool | Recommended version | Install documentation link |
 | ------------ | ------------ | ------------ |
 | Terraform | `~> 1.0.2` | https://learn.hashicorp.com/tutorials/terraform/install-cli#install-terraform |
-| Kubectl | Latest `> 2.0.0` | https://kubernetes.io/docs/tasks/tools/#kubectl |
-| AWS cli | Latest | https://docs.aws.amazon.com/cli/latest/userguide/install-cliv2.html |
+| Kubectl | Latest | https://kubernetes.io/docs/tasks/tools/#kubectl |
+| AWS cli | Latest `> 2.0.0` | https://docs.aws.amazon.com/cli/latest/userguide/install-cliv2.html |
 
 ## Apply terraform
 ### Auth in aws
