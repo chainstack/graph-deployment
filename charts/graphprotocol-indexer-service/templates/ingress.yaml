@@ -30,4 +30,4 @@ spec:
               serviceName: {{ include "graphprotocol-indexer-service.fullname" $ }}
               servicePort: http
     {{- end }}
-  {{- end }}
+{{- end }}
