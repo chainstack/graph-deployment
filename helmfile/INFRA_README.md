@@ -2,6 +2,10 @@
 This directory contains helmfile and helm charts that are used to install infra applications to k8s cluster.
 
 ## Components
+### Nginx Ingress
+[Nginx Ingress](https://www.nginx.com/products/nginx-ingress-controller/) is an [Kubernetes Ingress Controller](https://kubernetes.io/docs/concepts/services-networking/ingress-controllers/) that handles http/https routing and TLS termination.
+We are using 3rd party ingress controller instead of clouds' built-in to prevent maintaining different configurations and different TLS certs' issuing mechanisms.
+
 ### Cert-Manager
 Cert-Manager is an application for automatic https certificate issuing and renewal.
 https://cert-manager.io/docs/
@@ -34,7 +38,7 @@ Run the following command to configure a proxy between your local machine and k8
 kubectl proxy
 ```
 
-Open the following link in a browser. Don't forget to replace `<namespace>` with the actual namespace used during the installation. 
+Open the following link in a browser. Don't forget to replace `<namespace>` with the actual namespace used during the installation.
 `http://127.0.0.1:8001/api/v1/namespaces/<namespace>/services/https:kubernetes-dashboard:https/proxy/`.
 
 On login page, select `kubeconfig` option and upload your kubeconfig file located in `~/.kube/config` by default. Note: typically this directory is hidden.
