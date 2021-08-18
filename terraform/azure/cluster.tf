@@ -19,17 +19,16 @@ module "cluster" {
   source  = "Azure/aks/azurerm"
   version = "~>4.13.0"
 
-  resource_group_name             = azurerm_resource_group.resource_group.name
-  cluster_name                    = var.name
-  prefix                          = var.prefix
-  kubernetes_version              = var.kubernetes_version
-  orchestrator_version            = var.kubernetes_version
-  vnet_subnet_id                  = module.network.vnet_subnets[0]
-  os_disk_size_gb                 = var.os_disk_size_gb
-  sku_tier                        = var.sku_tier
-  network_plugin                  = var.network_plugin
-  enable_http_application_routing = true
-  enable_auto_scaling             = true
+  resource_group_name  = azurerm_resource_group.resource_group.name
+  cluster_name         = var.name
+  prefix               = var.prefix
+  kubernetes_version   = var.kubernetes_version
+  orchestrator_version = var.kubernetes_version
+  vnet_subnet_id       = module.network.vnet_subnets[0]
+  os_disk_size_gb      = var.os_disk_size_gb
+  sku_tier             = var.sku_tier
+  network_plugin       = var.network_plugin
+  enable_auto_scaling  = true
 
   agents_min_count = var.agents_min_count
   agents_max_count = var.agents_max_count
