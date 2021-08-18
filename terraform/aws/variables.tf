@@ -39,9 +39,10 @@ variable "node_groups" {
   type        = any # https://github.com/terraform-aws-modules/terraform-aws-eks/blob/master/variables.tf#L329
   default = {
     default = {
-      desired_capacity = 1
-      max_capacity     = 3
-      min_capacity     = 1
+      desired_capacity  = 1
+      max_capacity      = 3
+      min_capacity      = 1
+      enable_monitoring = false
 
       instance_types = ["m4.xlarge"]
       capacity_type  = "SPOT"
