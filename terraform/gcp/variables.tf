@@ -79,3 +79,15 @@ variable "release_channel" {
   description = "Specifies release channel for kubernetes versions"
   default     = "STABLE"
 }
+
+variable "monitoring_enabled" {
+  type        = bool
+  description = "Enables GCP built in metrics collection (Disabled by default to prevent extra spents)"
+  default     = false
+}
+
+variable "logging_enabled" {
+  type        = bool
+  description = "Enables GCP built in logs collection (Disabled by default to prevent extra spents)"
+  default     = false
+}
