@@ -25,7 +25,8 @@ spec:
     - host: {{ . | quote }}
       http:
         paths:
-          - path: /*
+          - path: /
+            pathType: Prefix
             backend:
               serviceName: {{ include "graphprotocol-node.fullname" $ }}
               servicePort: graphql
@@ -59,7 +60,8 @@ spec:
     - host: {{ . | quote }}
       http:
         paths:
-          - path: /*
+          - path: /
+            pathType: Prefix
             backend:
               serviceName: {{ include "graphprotocol-node.fullname" $ }}
               servicePort: graphql-ws

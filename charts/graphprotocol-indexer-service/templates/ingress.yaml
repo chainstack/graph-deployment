@@ -25,7 +25,8 @@ spec:
     - host: {{ . | quote }}
       http:
         paths:
-          - path: /*
+          - path: /
+            pathType: Prefix
             backend:
               serviceName: {{ include "graphprotocol-indexer-service.fullname" $ }}
               servicePort: http
