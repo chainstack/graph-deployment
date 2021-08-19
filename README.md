@@ -4,6 +4,11 @@ We don't guarantee that charts won't have major breaking changes until the early
 
 Also this repo could be split into separate terraform and charts repos in future.
 
+## Quickstart
+1. Set up your Kubernetes cluster. See the `terraform` for specific cloud provider integration. AWS, Azure, and GCP are supported. See the relevant `README.md` in `terraform/<provider name` for further instructions on how to set up the Kubernetes cluster. The terraform setup will take approximately 10 minutes.
+2. Set up the values in `helmfile/values`. Copy example files, remove `.example` from name and fill in the configuration options. Documentation regarding the values are still a work in progress.
+3. Once the values are filled you can proceed to setup the Kubernetes cluster with helm. More instructions can be found in `helmfile/README.md` and `helmfile/INFRA_README.md`.
+
 ## Helm Charts
 Currently 3 helm charts are implemented (see `charts` directory):
 * graphprotocol-node - deploys graphprotocol index and query nodes
