@@ -2,18 +2,20 @@ helmDefaults:
   wait: true
 
 repositories:
-- name: bitnami
-  url: https://charts.bitnami.com/bitnami
+# - name: bitnami
+#   url: https://charts.bitnami.com/bitnami
 - name: helm-stable
   url: https://charts.helm.sh/stable
 
 releases:
+# - name: postgres
+#   chart: bitnami/postgresql
+#   version: ~10.4.9
+#   values:
+#   - values/postgres.yaml
+#   - values/postgres.secret.yaml
 - name: postgres
-  chart: bitnami/postgresql
-  version: ~10.4.9
-  values:
-  - values/postgres.yaml
-  - values/postgres.secret.yaml
+  chart: ../charts/postgres
 
 - name: ipfs
   chart: helm-stable/ipfs

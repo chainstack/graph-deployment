@@ -1,0 +1,16 @@
+# Default values for postgres.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+nameOverride: ""
+fullnameOverride: ""
+
+numberOfInstances: 2
+volume:
+  size: 250Gi
+users:
+  graph-node: []
+    # - superuser
+    # - createdb
+databases: {}
+postgresql:
+  version: "13"
