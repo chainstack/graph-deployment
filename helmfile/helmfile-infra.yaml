@@ -10,6 +10,8 @@ repositories:
   url: https://kubernetes.github.io/dashboard/
 - name: prometheus-community
   url: https://prometheus-community.github.io/helm-charts
+- name: postgres-operator
+  url: https://opensource.zalando.com/postgres-operator/charts/postgres-operator
 
 environments:
   default:
@@ -20,6 +22,10 @@ releases:
 - name: ingress-nginx
   chart: ingress-nginx/ingress-nginx
   version: ~3.35.0
+
+- name: postgres-operator
+  chart: postgres-operator/postgres-operator
+  version: ~1.6.3
 
 - name: cert-manager
   chart: jetstack/cert-manager
