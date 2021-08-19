@@ -31,7 +31,7 @@ variable "public_subnet_cidrs" {
 variable "kubernetes_version" {
   description = "Kubernetes version that would be installed"
   type        = string
-  default     = "1.18"
+  default     = "1.19"
 }
 
 variable "node_groups" {
