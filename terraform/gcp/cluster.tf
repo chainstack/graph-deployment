@@ -39,6 +39,9 @@ module "gke" {
   remove_default_node_pool          = true
   disable_legacy_metadata_endpoints = true
 
+  logging_service    = var.logging_enabled ? "logging.googleapis.com/kubernetes" : "none"
+  monitoring_service = var.monitoring_enabled ? "monitoring.googleapis.com/kubernetes" : "none"
+
   node_pools        = var.node_pools
   node_pools_labels = var.node_pools_labels
   node_pools_taints = var.node_pools_taints
