@@ -91,9 +91,3 @@ variable "logging_enabled" {
   description = "Enables GCP built in logs collection (Disabled by default to prevent extra spents)"
   default     = false
 }
-
-variable "gke_ingress_controller" {
-  type        = bool
-  description = "Enables GCE ingress controller in cluster"
-  default     = false
-}
