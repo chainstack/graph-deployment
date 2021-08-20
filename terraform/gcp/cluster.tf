@@ -26,7 +26,7 @@ module "vpc" {
 
 module "gke" {
   source                            = "terraform-google-modules/kubernetes-engine/google"
-  version                           = "~>15.0.2"
+  version                           = "~>16.0.1"
   project_id                        = var.project_id
   name                              = var.name
   regional                          = var.regional
@@ -38,6 +38,7 @@ module "gke" {
   ip_range_services                 = "services"
   remove_default_node_pool          = true
   disable_legacy_metadata_endpoints = true
+  http_load_balancing               = false
 
   logging_service    = var.logging_enabled ? "logging.googleapis.com/kubernetes" : "none"
   monitoring_service = var.monitoring_enabled ? "monitoring.googleapis.com/kubernetes" : "none"

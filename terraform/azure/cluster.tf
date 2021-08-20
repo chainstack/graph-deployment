@@ -28,7 +28,7 @@ module "cluster" {
   os_disk_size_gb                 = var.os_disk_size_gb
   sku_tier                        = var.sku_tier
   network_plugin                  = var.network_plugin
-  enable_http_application_routing = true
+  enable_http_application_routing = false
   enable_auto_scaling             = true
 
   agents_min_count = var.agents_min_count

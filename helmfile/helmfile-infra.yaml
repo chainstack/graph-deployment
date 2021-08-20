@@ -2,6 +2,8 @@ helmDefaults:
   wait: true
 
 repositories:
+- name: ingress-nginx
+  url: https://kubernetes.github.io/ingress-nginx
 - name: jetstack
   url: https://charts.jetstack.io
 - name: kubernetes-dashboard
@@ -15,6 +17,10 @@ environments:
     - ./values/infra.secret.yaml
 
 releases:
+- name: ingress-nginx
+  chart: ingress-nginx/ingress-nginx
+  version: ~3.35.0
+
 - name: cert-manager
   chart: jetstack/cert-manager
   version: ~1.4.1
