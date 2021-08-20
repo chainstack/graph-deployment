@@ -29,6 +29,7 @@ module "gke" {
   version                           = "~>16.0.1"
   project_id                        = var.project_id
   name                              = var.name
+  kubernetes_version                = var.kubernetes_version
   regional                          = var.regional
   region                            = var.region
   zones                             = var.zones

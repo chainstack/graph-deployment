@@ -80,6 +80,12 @@ variable "release_channel" {
   default     = "STABLE"
 }
 
+variable "kubernetes_version" {
+  type        = string
+  description = "The Kubernetes version of the masters. If set to 'latest' it will pull latest available version in the selected region."
+  default     = "latest"
+}
+
 variable "monitoring_enabled" {
   type        = bool
   description = "Enables GCP built in metrics collection (Disabled by default to prevent extra spents)"
