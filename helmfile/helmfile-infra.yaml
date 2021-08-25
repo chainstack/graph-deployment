@@ -40,6 +40,9 @@ releases:
   chart: kubernetes-dashboard/kubernetes-dashboard
   version: ~4.3.1
 
+- name: kubedashboard-admin-sa
+  chart: ../charts/kubedashboard-admin-sa
+
 - name: prometheus-stack
   chart: prometheus-community/kube-prometheus-stack
   version: ~17.0.3

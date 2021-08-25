@@ -1,0 +1,9 @@
+apiVersion: v2
+name: kubedashboard-admin-sa
+description: Dumb helm-chart to create admin service account to interact with kube-dashboard
+type: application
+version: 0.1.0
+maintainers:
+  # TODO: Change maintainers list
+  - email: dm3ch@dm3ch.net
+    name: dm3ch
