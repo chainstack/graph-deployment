@@ -16,6 +16,8 @@ releases:
 #   - values/postgres.secret.yaml
 - name: postgres
   chart: ../charts/postgres
+  labels:
+    component: postgres
 
 - name: ipfs
   chart: helm-stable/ipfs

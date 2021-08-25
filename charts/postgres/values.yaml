@@ -8,9 +8,10 @@ numberOfInstances: 2
 volume:
   size: 250Gi
 users:
-  graph-node: []
-    # - superuser
-    # - createdb
-databases: {}
+  node:
+    - superuser
+    - createdb
+databases:
+  node: "node"
 postgresql:
   version: "13"
