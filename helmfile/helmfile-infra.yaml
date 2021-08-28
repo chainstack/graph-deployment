@@ -72,8 +72,6 @@ releases:
           folderAnnotation: "grafana_folder"
           provider:
             foldersFromFilesStructure: true
-      persistence:
-        enabled: true
 
 - name: graph-grafana-dashboards
   chart: ../charts/graph-grafana-dashboards

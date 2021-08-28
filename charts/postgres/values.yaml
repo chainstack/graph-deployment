@@ -16,6 +16,7 @@ databases:
   indexer: "indexer"
 postgresql:
   version: "13"
+resources: {}
 
 # Workaround NO_SSL mode in graph-node code
 # https://github.com/graphprotocol/graph-node/blob/v0.23.1/store/postgres/src/notification_listener.rs#L130
