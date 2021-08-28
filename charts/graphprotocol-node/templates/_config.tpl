@@ -3,10 +3,9 @@
 {{- $pgHost := required "postgres.host wasn't specified" .Values.postgres.host }}
 {{- $pgDB := required "postgres.db wasn't specified" .Values.postgres.db }}
 {{- $pgUser := required "postgres.user wasn't specified" .Values.postgres.user }}
-{{- $pgPass := required "postgres.password wasn't specified" .Values.postgres.password }}
 [store]
 [store.primary]
-  connection = "postgresql://{{ $pgUser }}:{{ $pgPass }}@{{ $pgHost }}/{{ $pgDB }}"
+  connection = "postgresql://{{ $pgUser }}:$PG_PASS@{{ $pgHost }}/{{ $pgDB }}"
   weight = 1
   pool_size = 10
 

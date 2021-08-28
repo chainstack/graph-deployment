@@ -63,11 +63,21 @@ spec:
               value: "true"
             - name: GRAPH_NODE_CONFIG
               value: "/etc/graph-node/config.toml"
+            - name: PG_PASS
+              valueFrom:
+                secretKeyRef:
+                {{- if hasKey .Values.postgres.password "fromSecret" }}
+                  name: {{ .Values.postgres.password.fromSecret.name }}
+                  key: {{ .Values.postgres.password.fromSecret.key }}
+                {{- else }}
+                  name: {{ include "graphprotocol-node.fullname" . }}
+                  key: pgPass
+                {{- end }}
           ports:
-            - name: metrics 
+            - name: metrics
               containerPort: 8040
               protocol: TCP
-            - name: json-rpc 
+            - name: json-rpc
               containerPort: 8020
               protocol: TCP
             - name: graphql
@@ -98,7 +108,7 @@ spec:
       volumes:
       - name: config
         secret:
-          secretName: {{ include "graphprotocol-node.fullname" . }}-config
+          secretName: {{ include "graphprotocol-node.fullname" . }}
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}

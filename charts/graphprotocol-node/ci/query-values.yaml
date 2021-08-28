@@ -1,7 +1,8 @@
 postgres:
   host: host
   user: user
-  password: password
+  password:
+    value: password
 
 config:
   ipfs: ipfs
