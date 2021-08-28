@@ -8,10 +8,10 @@ numberOfInstances: 2
 volume:
   size: 250Gi
 users:
-  node:
-    - superuser
-    - createdb
-databases:
+  node: []
+  indexer: []
+databases: #TODO: Try to delete this section
   node: "node"
+  indexer: "indexer"
 postgresql:
   version: "13"

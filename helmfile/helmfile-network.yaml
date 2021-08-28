@@ -6,12 +6,16 @@ repositories:
   url: https://charts.bitnami.com/bitnami
 
 releases:
+# - name: postgres
+#   chart: bitnami/postgresql
+#   version: ~10.4.9
+#   values:
+#   - values/postgres.yaml
+#   - values/postgres.secret.yaml
 - name: postgres
-  chart: bitnami/postgresql
-  version: ~10.4.9
-  values:
-  - values/postgres.yaml
-  - values/postgres.secret.yaml
+  chart: ../charts/postgres
+  labels:
+    component: postgres
 
 - name: graphprotocol-node-index
   chart: ../charts/graphprotocol-node

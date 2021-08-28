@@ -1,7 +1,7 @@
 postgres:
-  db: graph-node
+  db: indexer
   host: postgres-postgresql
-  user: postgres
+  user: indexer
 
 config:
   ethereum:
