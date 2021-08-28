@@ -10,7 +10,8 @@ volume:
 users:
   node: []
   indexer: []
-databases: #TODO: Try to delete this section
+# TODO: Try to delete this section
+databases:
   node: "node"
   indexer: "indexer"
 postgresql:

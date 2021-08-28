@@ -62,7 +62,14 @@ spec:
             - name: INDEXER_AGENT_GRAPH_NODE_ADMIN_ENDPOINT
               value: {{ required "config.graphEndpoints.admin wasn't specified" .Values.config.graphEndpoints.admin | quote }}
             - name: INDEXER_AGENT_GRAPH_NODE_STATUS_ENDPOINT
-              value: {{ required "config.graphEndpoints.status wasn't specified" .Values.config.graphEndpoints.status | quote }}            
+              value: {{ required "config.graphEndpoints.status wasn't specified" .Values.config.graphEndpoints.status | quote }}
+            {{- if hasKey .Values.postgres.password "fromSecret" }}
+            - name: INDEXER_AGENT_POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.postgres.password.fromSecret.name }}
+                  key: {{ .Values.postgres.password.fromSecret.key }}
+            {{- end }}
           envFrom:
             - secretRef:
                 name: {{ include "graphprotocol-indexer-agent.fullname" . }}
