@@ -11,7 +11,4 @@ spec:
   users: {{ toYaml .Values.users | nindent 4 }}
   databases: {{ toYaml .Values.databases | nindent 4 }}
   postgresql: {{ toYaml .Values.postgresql | nindent 4 }}
-  patroni:
-    pg_hba:
-    - local all all trust
-    - host all all 0.0.0.0/0 md5
+  patroni: {{ toYaml .Values.patroni | nindent 4 }}

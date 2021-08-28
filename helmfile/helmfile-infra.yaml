@@ -26,6 +26,9 @@ releases:
 - name: postgres-operator
   chart: postgres-operator/postgres-operator
   version: ~1.6.3
+  values:
+  - configKubernetes:
+      enable_pod_antiaffinity: "true"
 
 - name: cert-manager
   chart: jetstack/cert-manager
