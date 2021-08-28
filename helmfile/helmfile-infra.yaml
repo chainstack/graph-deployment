@@ -25,10 +25,13 @@ releases:
 
 - name: postgres-operator
   chart: postgres-operator/postgres-operator
-  version: ~1.6.3
+  version: ~1.7.0
+  # Fixes CRD installation
+  disableValidationOnInstall: true
   values:
   - configKubernetes:
-      enable_pod_antiaffinity: "true"
+      enable_pod_antiaffinity: true
+
 
 - name: cert-manager
   chart: jetstack/cert-manager
