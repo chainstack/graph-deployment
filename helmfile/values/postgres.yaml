@@ -1,0 +1,3 @@
+numberOfInstances: 2
+volume:
+  size: 250Gi

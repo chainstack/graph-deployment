@@ -4,9 +4,9 @@
 nameOverride: ""
 fullnameOverride: ""
 
-numberOfInstances: 2
+numberOfInstances: 1
 volume:
-  size: 250Gi
+  size: 10Gi
 users:
   node: []
   indexer: []

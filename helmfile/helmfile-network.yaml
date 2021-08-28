@@ -1,21 +1,13 @@
 helmDefaults:
   wait: true
 
-repositories:
-- name: bitnami
-  url: https://charts.bitnami.com/bitnami
-
 releases:
-# - name: postgres
-#   chart: bitnami/postgresql
-#   version: ~10.4.9
-#   values:
-#   - values/postgres.yaml
-#   - values/postgres.secret.yaml
 - name: postgres
   chart: ../charts/postgres
   labels:
     component: postgres
+  values:
+  - values/postgres.yaml
 
 - name: graphprotocol-node-index
   chart: ../charts/graphprotocol-node
