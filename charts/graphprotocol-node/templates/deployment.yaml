@@ -34,6 +34,13 @@ spec:
       {{- end }}
       securityContext:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
+      initContainers:
+        - name: wait-for-rta
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          command: ["/bin/sh", "-c"]
+          args:
+            - "until nc -z -w2 {{ .Values.postgres.host }} 5432; do echo 'waiting for postgres'; sleep 2; done;"
       containers:
         - name: {{ .Chart.Name }}
           securityContext:
