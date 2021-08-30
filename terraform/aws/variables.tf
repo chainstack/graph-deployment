@@ -41,7 +41,7 @@ variable "node_groups" {
     default = {
       desired_capacity  = 1
       max_capacity      = 3
-      min_capacity      = 1
+      min_capacity      = 0
       enable_monitoring = false
 
       instance_types = ["m4.xlarge"]

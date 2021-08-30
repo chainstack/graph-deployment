@@ -29,6 +29,19 @@ provider "kubernetes" {
   token                  = data.aws_eks_cluster_auth.cluster.token
 }
 
+locals {
+  # Splitting node groups per AZ (subnet) to make EBS PVs triger scale up of needed AZ
+  # https://github.com/kubernetes/autoscaler/issues/1431, https://github.com/kubernetes/autoscaler/issues/3845,
+  # Based on: https://github.com/terraform-aws-modules/terraform-aws-eks/issues/346#issuecomment-544857715
+
+  node_groups = flatten([
+    for i, subnet in module.vpc.public_subnets :
+    [
+      for ng_name, ng in var.node_groups : merge(ng, { subnets : [subnet], _name : "${ng_name}-${module.vpc.azs[i]}" })
+    ]
+  ])
+}
+
 module "cluster" {
   source          = "terraform-aws-modules/eks/aws"
   version         = "~>17.1.0"
@@ -40,5 +53,7 @@ module "cluster" {
   enable_irsa      = true
   write_kubeconfig = false
 
-  node_groups = var.node_groups
+  node_groups = {
+    for i in local.node_groups : i._name => i
+  }
 }
