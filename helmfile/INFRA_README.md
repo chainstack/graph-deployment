@@ -20,6 +20,9 @@ Small staff helm chart for configuring cert-manager to use let's encrypt for iss
 https://kubernetes.io/docs/tasks/access-application-cluster/web-ui-dashboard/
 WebUI allows you to see and edit workloads, read pod's logs and etc.
 
+### KubeDashboard Admin ServiceAccount
+Creates kubernetes service account with admin rights that would be used to access Kubernetes Dashboard.
+
 ### Prometheus stack
 This includes Prometheus, Exporters, Grafana and basic kubernetes dashboards
 
@@ -41,10 +44,15 @@ Run the following command to configure a proxy between your local machine and k8
 kubectl proxy
 ```
 
+To get admin token issued for KubeDashboard Admin ServiceAccount run following command:
+```
+NS=<namespace>; kubectl -n $NS get secret $(kubectl -n $NS get sa kube-dashboard-admin -o jsonpath='{.secrets[0].name}') -o jsonpath='{.data.token}' | base64 -d
+```
+
 Open the following link in a browser. Don't forget to replace `<namespace>` with the actual namespace used during the installation.
 `http://127.0.0.1:8001/api/v1/namespaces/<namespace>/services/https:kubernetes-dashboard:https/proxy/`.
 
-On login page, select `kubeconfig` option and upload your kubeconfig file located in `~/.kube/config` by default. Note: typically this directory is hidden.
+On login page, select `token` option and past token you got in previous step.
 
 ### Grafana
 Run the following command to configure forwarding between grafana k8s service and your local machine:
