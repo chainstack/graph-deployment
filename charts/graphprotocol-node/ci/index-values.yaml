@@ -1,7 +1,10 @@
 postgres:
   host: host
   user: user
-  password: password
+  password:
+    fromSecret:
+      name: name
+      key: key
 
 config:
   ipfs: ipfs

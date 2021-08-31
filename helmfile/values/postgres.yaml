@@ -1,10 +1,3 @@
-postgresqlUsername: postgres
-#postgresqlPassword: "ChangeMe"
-postgresqlDatabase: graph-node
-
-postgresqlSharedPreloadLibraries: pg_stat_statements
-
-
 resources:
   requests:
     cpu: "2"
@@ -13,5 +6,6 @@ resources:
     cpu: "2.5"
     memory: 1Gi
 
-persistence:
+numberOfInstances: 2
+volume:
   size: 250Gi

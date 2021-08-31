@@ -6,6 +6,9 @@ This directory contains helmfile and helm charts that are used to install infra 
 [Nginx Ingress](https://www.nginx.com/products/nginx-ingress-controller/) is an [Kubernetes Ingress Controller](https://kubernetes.io/docs/concepts/services-networking/ingress-controllers/) that handles http/https routing and TLS termination.
 We are using 3rd party ingress controller instead of clouds' built-in to prevent maintaining different configurations and different TLS certs' issuing mechanisms.
 
+### Postgres operator
+[Postgres operator](https://postgres-operator.readthedocs.io/en/latest/) is an [kubernetes operator](https://kubernetes.io/docs/concepts/extend-kubernetes/operator/) for postgres. It installs postgres and manages it's upgrades, failover, etc.
+
 ### Cert-Manager
 Cert-Manager is an application for automatic https certificate issuing and renewal.
 https://cert-manager.io/docs/

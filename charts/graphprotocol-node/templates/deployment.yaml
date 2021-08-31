@@ -34,6 +34,13 @@ spec:
       {{- end }}
       securityContext:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
+      initContainers:
+        - name: wait-for-rta
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          command: ["/bin/sh", "-c"]
+          args:
+            - "until nc -z -w2 {{ .Values.postgres.host }} 5432; do echo 'waiting for postgres'; sleep 2; done;"
       containers:
         - name: {{ .Chart.Name }}
           securityContext:
@@ -63,11 +70,21 @@ spec:
               value: "true"
             - name: GRAPH_NODE_CONFIG
               value: "/etc/graph-node/config.toml"
+            - name: PG_PASS
+              valueFrom:
+                secretKeyRef:
+                {{- if hasKey .Values.postgres.password "fromSecret" }}
+                  name: {{ .Values.postgres.password.fromSecret.name }}
+                  key: {{ .Values.postgres.password.fromSecret.key }}
+                {{- else }}
+                  name: {{ include "graphprotocol-node.fullname" . }}
+                  key: pgPass
+                {{- end }}
           ports:
-            - name: metrics 
+            - name: metrics
               containerPort: 8040
               protocol: TCP
-            - name: json-rpc 
+            - name: json-rpc
               containerPort: 8020
               protocol: TCP
             - name: graphql
@@ -98,7 +115,7 @@ spec:
       volumes:
       - name: config
         secret:
-          secretName: {{ include "graphprotocol-node.fullname" . }}-config
+          secretName: {{ include "graphprotocol-node.fullname" . }}
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}

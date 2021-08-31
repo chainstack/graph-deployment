@@ -11,7 +11,10 @@ config:
 postgres:
   host: host
   user: user
-  password: password
+  password:
+    fromSecret:
+      name: name
+      key: key
 
 service:
   annotations:

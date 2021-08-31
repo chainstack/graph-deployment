@@ -69,7 +69,11 @@ postgres:
   db: graph
   host:
   user:
-  password:
+  password: {}
+    # value:
+    # fromSecret:
+    #   name:
+    #   key:
 
 # Shouldn't have - sign, cause it would be replaced with _
 blockIngestorNodeId: index_node

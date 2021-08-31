@@ -1,0 +1,9 @@
+apiVersion: v2
+name: postgres
+description: A Helm chart for deploying Zolando postgres CRD to k8s.
+type: application
+version: 0.1.0
+maintainers:
+  # TODO: Change maintainers list
+  - email: dm3ch@dm3ch.net
+    name: dm3ch

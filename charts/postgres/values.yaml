@@ -1,0 +1,34 @@
+# Default values for postgres.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+nameOverride: ""
+fullnameOverride: ""
+
+numberOfInstances: 1
+volume:
+  size: 10Gi
+users:
+  node: []
+  indexer: []
+# TODO: Try to delete this section
+databases:
+  node: "node"
+  indexer: "indexer"
+postgresql:
+  version: "13"
+resources: {}
+
+# Workaround NO_SSL mode in graph-node code
+# https://github.com/graphprotocol/graph-node/blob/v0.23.1/store/postgres/src/notification_listener.rs#L130
+patroni:
+  # Default generated pg_hba with hostnossl reject deleted and host all md5 allow added
+  pg_hba:
+    - local   all             all          trust
+    - hostssl all             +zalandos    127.0.0.1/32       pam
+    - host    all             all          127.0.0.1/32       md5
+    - hostssl all             +zalandos    ::1/128            pam
+    - host    all             all          ::1/128            md5
+    - local   replication     standby      trust
+    - hostssl replication     standby      all                md5
+    - hostssl all             +zalandos    all                pam
+    - host    all             all          all                md5
