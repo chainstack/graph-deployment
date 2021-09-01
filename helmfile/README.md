@@ -5,7 +5,7 @@ Graph protocol indexer could be installed in two different modes:
 
 ## Prerequisites
 You will need to install the following tools before proceeding
-1. [kubectl](https://kubernetes.io/docs/tasks/tools/) 
+1. [kubectl](https://kubernetes.io/docs/tasks/tools/)
 2. [helmfile](https://github.com/roboll/helmfile)
 3. [helm-diff](https://github.com/databus23/helm-diff)
 
@@ -13,14 +13,40 @@ Make sure to setup the kubectl config to point to the right kubernetes instance,
 
 ## Network mode
 You can deploy graph node in network mode. In this case additional graph indexer components gets deployed, so that the node can join the graph network.
-
+This The Graph doc could be useful - https://thegraph.com/docs/indexing .
 ### Installation
 Prepare values in `values` directory first. `<namespace>` can be any string of your choice.
 ```
 helmfile -f helmfile-network.yaml -n <namespace> apply
 ```
 
-**TODO: document full installation, setup and usage** - https://github.com/chainstack/graph-deployment/issues/15
+### Install graph-cli and indexer-cli
+It's needed to configure indexer-agent rules and check status
+https://thegraph.com/docs/indexing#from-npm-packages
+
+### Check indexer status
+```
+kubectl -n <namespace> port-forward svc/graphprotocol-indexer-agent 18000:8000
+graph indexer status
+```
+
+### Interacting with indexer-agent
+First you need to run port-forward command:
+```
+kubectl -n <namespace> port-forward svc/graphprotocol-indexer-agent 18000:8000
+```
+
+Connect cli:
+```
+graph indexer connect http://localhost:18000
+```
+
+Request indexer status:
+```
+graph indexer status
+```
+
+Other useful commands for subgraphs and cost model configuration could be found there: https://thegraph.com/docs/indexing#usage-1
 
 ## Standalone mode
 You can deploy graph nodes in standalone mode. In this case separate IPFS node gets deployed together with the graph node. It allows you to install subgraphs locally without connecting to the Graph network.
@@ -54,7 +80,7 @@ Should timeouts be experienced or if you noticed that some pods are experiencing
 it suggests that there are configuration errors.
 
 Some possible errors could be
-1. Blank fields in files found in `value`, if the field is not needed or optional. Remember to comment them out.
+1. Blank network providers found in `values/graphprotocol-node*` in `config.chains`, if the network wasn't configure don't remember to comment it out.
 
 
 ### Deploy subgraph
@@ -139,7 +165,7 @@ If everything is ok you will get a response containing indexed info.
 
 ### Exposing Graph Protocol Node to the Internet
 The graph protocol node does not expose itself to the internet by default.
-One method of exposure is to utilize the LoadBalancer service. 
+One method of exposure is to utilize the LoadBalancer service.
 Do note that the downside of this approach is that it would expose the installation to the web.
 
 In `values/graphprotocol-node-query.yaml` add the following line at the bottom
@@ -149,7 +175,7 @@ service:
 
 ```
 
-This would expose ports used by the graph protocol node to the web. 
+This would expose ports used by the graph protocol node to the web.
 Do note you'll need to run the below commands for changes to be reflected.
 ```
 helmfile -f helmfile-standalone.yaml -n <namespace> apply
