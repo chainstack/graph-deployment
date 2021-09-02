@@ -29,7 +29,12 @@ spec:
         runAsUser: 1000
       containers:
       - name: {{ .Chart.Name }}
-        image: {{ .Values.image }}
+        image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+        imagePullPolicy: {{ .Values.image.pullPolicy }}
+        command:
+          {{- toYaml .Values.command | nindent 10 }}
+        args:
+          {{- toYaml .Values.args | nindent 10 }}
         livenessProbe:
           httpGet:
             path: /debug/metrics/prometheus

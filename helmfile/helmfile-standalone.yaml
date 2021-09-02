@@ -1,10 +1,6 @@
 helmDefaults:
   wait: true
 
-repositories:
-- name: helm-stable
-  url: https://charts.helm.sh/stable
-
 releases:
 - name: postgres
   chart: ../charts/postgres
@@ -14,11 +10,15 @@ releases:
   - values/postgres.yaml
 
 - name: ipfs
-  chart: helm-stable/ipfs
+  chart: ../charts/ipfs
   labels:
     component: ipfs
   values:
-  - image: ipfs/go-ipfs:v0.9.1
+  - args:
+    - --migrate=true
+    # Prevent IPFS from connecting to IPFS network
+    # It would prevent your files from sharing with network and would prevent your applications from using external files
+    - --offline
 
 - name: graphprotocol-node-index
   chart: ../charts/graphprotocol-node

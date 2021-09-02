@@ -1,6 +1,16 @@
 replicaCount: 1
 
-image: ipfs/go-ipfs:v0.4.22
+image:
+  repository: ipfs/go-ipfs
+  pullPolicy: IfNotPresent
+  # Overrides the image tag whose default is the chart appVersion.
+  tag: ""
+
+command:
+  - /usr/local/bin/start_ipfs
+  - daemon
+args:
+  - --migrate=true
 
 service:
   type: ClusterIP
