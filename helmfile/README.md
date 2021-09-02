@@ -13,7 +13,7 @@ Make sure to setup the kubectl config to point to the right kubernetes instance,
 
 ## Network mode
 You can deploy graph node in network mode. In this case additional graph indexer components gets deployed, so that the node can join the graph network.
-This The Graph doc could be useful - https://thegraph.com/docs/indexing .
+More information about indexing could be found [here](https://thegraph.com/docs/indexing).
 ### Installation
 Prepare values in `values` directory first. `<namespace>` can be any string of your choice.
 ```
@@ -21,8 +21,7 @@ helmfile -f helmfile-network.yaml -n <namespace> apply
 ```
 
 ### Install graph-cli and indexer-cli
-It's needed to configure indexer-agent rules and check status
-https://thegraph.com/docs/indexing#from-npm-packages
+Please, install graph-cli and indexer-cli according to the following [guide](https://thegraph.com/docs/indexing#from-npm-packages).
 
 ### Check indexer status
 ```
@@ -31,22 +30,18 @@ graph indexer status
 ```
 
 ### Interacting with indexer-agent
-First you need to run port-forward command:
+First, you need to run the port-forward command:
 ```
 kubectl -n <namespace> port-forward svc/graphprotocol-indexer-agent 18000:8000
 ```
 
-Connect cli:
+Then, connect with graph-cli and check status:
 ```
 graph indexer connect http://localhost:18000
-```
-
-Request indexer status:
-```
 graph indexer status
 ```
 
-Other useful commands for subgraphs and cost model configuration could be found there: https://thegraph.com/docs/indexing#usage-1
+Other useful commands for subgraphs and cost model configuration could be found [here](https://thegraph.com/docs/indexing#usage-1).
 
 ## Standalone mode
 You can deploy graph nodes in standalone mode. In this case separate IPFS node gets deployed together with the graph node. It allows you to install subgraphs locally without connecting to the Graph network.
@@ -80,7 +75,7 @@ Should timeouts be experienced or if you noticed that some pods are experiencing
 it suggests that there are configuration errors.
 
 Some possible errors could be
-1. Blank network providers found in `values/graphprotocol-node*` in `config.chains`, if the network wasn't configure don't remember to comment it out.
+Don't forget to fill in the `config.chains` value in the `values/graphprotocol-node*` file.
 
 
 ### Deploy subgraph
