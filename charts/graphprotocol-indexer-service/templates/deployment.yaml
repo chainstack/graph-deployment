@@ -47,11 +47,11 @@ spec:
             - name: INDEXER_SERVICE_POSTGRES_HOST
               value: {{ required "postgres.host wasn't specified" .Values.postgres.host | quote }}
             - name: INDEXER_SERVICE_GRAPH_NODE_QUERY_ENDPOINT
-              value: {{ required "config.graphEndpoints.query wasn't specified" .Values.config.graphEndpoints.query | quote }}
+              value: {{ required "config.graphNodeEndpoints.query wasn't specified" .Values.config.graphNodeEndpoints.query | quote }}
             - name: INDEXER_SERVICE_GRAPH_NODE_ADMIN_ENDPOINT
-              value: {{ required "config.graphEndpoints.admin wasn't specified" .Values.config.graphEndpoints.admin | quote }}
+              value: {{ required "config.graphNodeEndpoints.admin wasn't specified" .Values.config.graphNodeEndpoints.admin | quote }}
             - name: INDEXER_SERVICE_GRAPH_NODE_STATUS_ENDPOINT
-              value: {{ required "config.graphEndpoints.status wasn't specified" .Values.config.graphEndpoints.status | quote }}
+              value: {{ required "config.graphNodeEndpoints.status wasn't specified" .Values.config.graphNodeEndpoints.status | quote }}
             {{- if hasKey .Values.postgres.password "fromSecret" }}
             - name: INDEXER_SERVICE_POSTGRES_PASSWORD
               valueFrom:

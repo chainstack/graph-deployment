@@ -13,7 +13,7 @@ config:
   clientSignerAddress: 0xe1EC4339019eC9628438F8755f847e3023e4ff9c
   ethereum:
     network: rinkeby
-  graphEndpoints:
+  graphNodeEndpoints:
     admin: http://graphprotocol-node-index:8020/
     status: http://graphprotocol-node-index:8030/graphql
     query: http://graphprotocol-node-query:8000/

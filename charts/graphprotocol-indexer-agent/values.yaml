@@ -57,7 +57,7 @@ config:
     address:
     mnemonic:
   coordinates:
-  graphEndpoints:
+  graphNodeEndpoints:
     query:
     admin:
     status:
@@ -68,7 +68,7 @@ config:
   subgraphDeployment: QmaUBw7sr8pBrwNgz6JkbmmGoUU7KJSaeRvCaY3NPDbQ7A
 
 postgres:
-  db: graph
+  db:
   host:
   user:
   password:
