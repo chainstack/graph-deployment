@@ -10,7 +10,6 @@ volume:
 users:
   node: []
   indexer: []
-# TODO: Try to delete this section
 databases:
   node: "node"
   indexer: "indexer"
