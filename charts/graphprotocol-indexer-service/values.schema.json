@@ -23,12 +23,12 @@
     "image": {
       "description": "Container Image",
       "required": [
-        "repo",
+        "repository",
         "tag",
         "pullPolicy"
       ],
       "properties": {
-        "repo": {
+        "repository": {
           "type": "string"
         },
         "tag": {
@@ -198,8 +198,31 @@
           "description": "user"
         },
         "password": {
-          "type": "string",
-          "description": "password"
+          "type": "object",
+          "description": "password",
+          "properties": {
+            "fromSecret": {
+              "type": "object",
+              "required": [
+                "key",
+                "name"
+              ],
+              "properties": {
+                "key": {
+                  "type": "string",
+                  "description": "key containing postgres password in secret"
+                },
+                "name": {
+                  "type": "string",
+                  "description": "name of secret containing postgres password"
+                }
+              }
+            },
+            "value": {
+              "type": "string",
+              "description": "postgres password"
+            }
+          }
         }
       }
     },

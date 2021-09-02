@@ -9,6 +9,7 @@ config:
     query: http://graphprotocol-node-query:8000/
 
 postgres:
+  db: database
   host: host
   user: user
   password:

@@ -52,26 +52,31 @@ affinity: {}
 
 config:
   ethereum:
-    url:
+    url: ""
     network: mainnet
-    address:
-    mnemonic:
-  coordinates:
+    address: ""
+    mnemonic: ""
+  coordinates: ""
   graphNodeEndpoints:
-    query:
-    admin:
-    status:
-  publicUrl:
+    query: ""
+    admin: ""
+    status: ""
+  publicUrl: ""
   networkSubgraphEndpoint: https://gateway.thegraph.com/network
   collectReceiptsEndpoint: https://gateway.network.thegraph.com/collect-receipts
   daiContract: 0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48
   subgraphDeployment: QmaUBw7sr8pBrwNgz6JkbmmGoUU7KJSaeRvCaY3NPDbQ7A
 
 postgres:
-  db:
-  host:
-  user:
+  db: ""
+  host: ""
+  user: ""
   password:
+    value: ""
+    # fromSecret:
+    #   name:
+    #   key:
+
 # Should equals to node id of graphprotocol-node with index role
 blockIngestorNodeIds: index_node
 
