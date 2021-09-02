@@ -16,8 +16,11 @@
     "affinity",
     "config",
     "postgres",
+    "blockIngestorNodeId",
+    "role",
+    "monitoring",
     "ingress",
-    "monitoring"
+    "ingressWebsocket"
   ],
   "properties": {
     "image": {
@@ -66,7 +69,10 @@
         "annotations",
         "type",
         "metricsPort",
-        "httpPort"
+        "jsonRpcPort",
+        "graphqlPort",
+        "graphqlWsPort",
+        "indexPort"
       ],
       "properties": {
         "annotations": {
@@ -84,7 +90,16 @@
         "metricsPort": {
           "type": "integer"
         },
-        "httpPort": {
+        "jsonRpcPort": {
+          "type": "integer"
+        },
+        "graphqlPort": {
+          "type": "integer"
+        },
+        "graphqlWsPort": {
+          "type": "integer"
+        },
+        "indexPort": {
           "type": "integer"
         }
       }
@@ -102,76 +117,20 @@
       "type": "object"
     },
     "config": {
-      "description": "Graph indexer service config options",
+      "description": "Graph indexer agent config options",
       "type": "object",
       "required": [
-        "ethereum",
-        "graphNodeEndpoints",
-        "networkSubgraphEndpoint",
-        "subgraphDeployment",
-        "clientSignerAddress"
+        "ipfs",
+        "chains"
       ],
       "properties": {
-        "ethereum": {
+        "ipfs": {
+          "type": "string",
+          "description": "IPFS storage endpoint"
+        },
+        "chains": {
           "type": "object",
-          "required": [
-            "url",
-            "network",
-            "address",
-            "mnemonic"
-          ],
-          "properties": {
-            "url": {
-              "type": "string",
-              "description": "URL of ethereum node"
-            },
-            "network": {
-              "type": "string",
-              "description": "Name of ethereum network"
-            },
-            "address": {
-              "type": "string",
-              "description": "Address of wallet used for receiving indexing rewards"
-            },
-            "mnemonic": {
-              "type": "string",
-              "description": "Mnemonic password for wallet which was used for staking"
-            }
-          }
-        },
-        "graphNodeEndpoints": {
-          "type": "object",
-          "required": [
-            "query",
-            "admin",
-            "status"
-          ],
-          "properties": {
-            "query": {
-              "type": "string",
-              "description": "URL of graphprotocol node query endpoint"
-            },
-            "admin": {
-              "type": "string",
-              "description": "URL of graphprotocol node admin endpoint"
-            },
-            "status": {
-              "type": "string",
-              "description": "URL of graphprotocol node status endpoint"
-            }
-          }
-        },
-        "networkSubgraphEndpoint": {
-          "type": "string",
-          "description": "network subgraph URL for The Graph network"
-        },
-        "subgraphDeployment": {
-          "type": "string",
-          "description": "subgraph deployment for The Graph network"
-        },
-        "clientSignerAddress": {
-          "type": "string",
-          "description": "clientSignerAddress for The Graph network"
+          "description": "Definition of network providers for different blockchain networks"
         }
       }
     },
@@ -226,28 +185,17 @@
         }
       }
     },
-    "ingress": {
-      "type": "object",
-      "required": [
-        "enabled",
-        "annotations",
-        "hosts",
-        "tls"
-      ],
-      "properties": {
-        "enabled": {
-          "type": "boolean"
-        },
-        "annotations": {
-          "type": "object"
-        },
-        "hosts": {
-          "type": "array"
-        },
-        "tls": {
-          "type": "array"
-        }
-      }
+    "blockIngestorNodeId": {
+      "type": "string",
+      "description": "graphprotocol ingest node id"
+    },
+    "role": {
+      "type": "string",
+      "description": "role of the deployed graphprotocol node",
+      "enum": [
+        "query-node",
+        "index-node"
+      ]
     },
     "monitoring": {
       "type": "object",
@@ -257,6 +205,52 @@
       "enabled": {
         "type": "boolean",
         "description": "enabled ServiceMonitor object creation"
+      }
+    }
+  },
+  "ingress": {
+    "type": "object",
+    "required": [
+      "enabled",
+      "annotations",
+      "hosts",
+      "tls"
+    ],
+    "properties": {
+      "enabled": {
+        "type": "boolean"
+      },
+      "annotations": {
+        "type": "object"
+      },
+      "hosts": {
+        "type": "array"
+      },
+      "tls": {
+        "type": "array"
+      }
+    }
+  },
+  "ingressWebsocket": {
+    "type": "object",
+    "required": [
+      "enabled",
+      "annotations",
+      "hosts",
+      "tls"
+    ],
+    "properties": {
+      "enabled": {
+        "type": "boolean"
+      },
+      "annotations": {
+        "type": "object"
+      },
+      "hosts": {
+        "type": "array"
+      },
+      "tls": {
+        "type": "array"
       }
     }
   }

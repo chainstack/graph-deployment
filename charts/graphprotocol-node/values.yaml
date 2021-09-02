@@ -55,7 +55,7 @@ tolerations: []
 affinity: {}
 
 config:
-  ipfs:
+  ipfs: ""
   chains: {}
     # mainnet:
     #   providers:
@@ -66,11 +66,11 @@ config:
     #     headers: {"Authorization": "Bearer foo"}
 
 postgres:
-  db: graph
-  host:
-  user:
-  password: {}
-    # value:
+  db: ""
+  host: ""
+  user: ""
+  password:
+    value: ""
     # fromSecret:
     #   name:
     #   key:
