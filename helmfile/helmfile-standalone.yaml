@@ -17,6 +17,8 @@ releases:
   chart: helm-stable/ipfs
   labels:
     component: ipfs
+  values:
+  - image: ipfs/go-ipfs:v0.9.1
 
 - name: graphprotocol-node-index
   chart: ../charts/graphprotocol-node
