@@ -35,6 +35,9 @@ spec:
           {{- toYaml .Values.command | nindent 10 }}
         args:
           {{- toYaml .Values.args | nindent 10 }}
+        env:
+        - name: IPFS_PROFILE
+          value: {{ .Values.profile | quote }}
         livenessProbe:
           httpGet:
             path: /debug/metrics/prometheus
