@@ -1,0 +1,262 @@
+{
+  "$schema": "https://json-schema.org/draft-07/schema#",
+  "title": "Values",
+  "type": "object",
+  "required": [
+    "image",
+    "imagePullSecrets",
+    "nameOverride",
+    "fullnameOverride",
+    "podSecurityContext",
+    "securityContext",
+    "service",
+    "resources",
+    "nodeSelector",
+    "tolerations",
+    "affinity",
+    "config",
+    "postgres",
+    "blockIngestorNodeIds",
+    "monitoring"
+  ],
+  "properties": {
+    "image": {
+      "description": "Container Image",
+      "required": [
+        "repository",
+        "tag",
+        "pullPolicy"
+      ],
+      "properties": {
+        "repository": {
+          "type": "string"
+        },
+        "tag": {
+          "type": "string"
+        },
+        "pullPolicy": {
+          "type": "string",
+          "enum": [
+            "Always",
+            "IfNotPresent",
+            "Never"
+          ]
+        }
+      },
+      "type": "object"
+    },
+    "imagePullSecrets": {
+      "type": "array"
+    },
+    "nameOverride": {
+      "type": "string"
+    },
+    "fullnameOverride": {
+      "type": "string"
+    },
+    "podSecurityContext": {
+      "type": "object"
+    },
+    "securityContext": {
+      "type": "object"
+    },
+    "service": {
+      "type": "object",
+      "required": [
+        "annotations",
+        "type",
+        "metricsPort",
+        "managementPort",
+        "syncingPort"
+      ],
+      "properties": {
+        "annotations": {
+          "type": "object"
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "ClusterIP",
+            "ExternalName",
+            "LoadBalancer",
+            "NodePort"
+          ]
+        },
+        "metricsPort": {
+          "type": "integer"
+        },
+        "managementPort": {
+          "type": "integer"
+        },
+        "syncingPort": {
+          "type": "integer"
+        }
+      }
+    },
+    "resources": {
+      "type": "object"
+    },
+    "nodeSelector": {
+      "type": "object"
+    },
+    "tolerations": {
+      "type": "array"
+    },
+    "affinity": {
+      "type": "object"
+    },
+    "config": {
+      "description": "Graph indexer agent config options",
+      "type": "object",
+      "required": [
+        "ethereum",
+        "graphNodeEndpoints",
+        "publicUrl",
+        "networkSubgraphEndpoint",
+        "collectReceiptsEndpoint",
+        "daiContract",
+        "subgraphDeployment"
+      ],
+      "properties": {
+        "ethereum": {
+          "type": "object",
+          "required": [
+            "url",
+            "network",
+            "address",
+            "mnemonic"
+          ],
+          "properties": {
+            "url": {
+              "type": "string",
+              "description": "URL of ethereum node"
+            },
+            "network": {
+              "type": "string",
+              "description": "Name of ethereum network"
+            },
+            "address": {
+              "type": "string",
+              "description": "Address of wallet used for receiving indexing rewards"
+            },
+            "mnemonic": {
+              "type": "string",
+              "description": "Mnemonic password for wallet which was used for staking"
+            }
+          }
+        },
+        "coordinates": {
+          "type": "string",
+          "description": "Geographical coordinates of indexer location"
+        },
+        "graphNodeEndpoints": {
+          "type": "object",
+          "required": [
+            "query",
+            "admin",
+            "status"
+          ],
+          "properties": {
+            "query": {
+              "type": "string",
+              "description": "URL of graphprotocol node query endpoint"
+            },
+            "admin": {
+              "type": "string",
+              "description": "URL of graphprotocol node admin endpoint"
+            },
+            "status": {
+              "type": "string",
+              "description": "URL of graphprotocol node status endpoint"
+            }
+          }
+        },
+        "publicUrl": {
+          "type": "string",
+          "description": "URL that indexer would be externally available"
+        },
+        "networkSubgraphEndpoint": {
+          "type": "string",
+          "description": "network subgraph URL for The Graph network"
+        },
+        "collectReceiptsEndpoint": {
+          "type": "string",
+          "description": "collect receipts URL for The Graph network"
+        },
+        "daiContract": {
+          "type": "string",
+          "description": "daiContract id for The Graph network"
+        },
+        "subgraphDeployment": {
+          "type": "string",
+          "description": "subgraph deployment for The Graph network"
+        }
+      }
+    },
+    "postgres": {
+      "description": "Postgres DB configuration",
+      "type": "object",
+      "required": [
+        "db",
+        "host",
+        "user",
+        "password"
+      ],
+      "properties": {
+        "db": {
+          "type": "string",
+          "description": "database name"
+        },
+        "host": {
+          "type": "string",
+          "description": "host"
+        },
+        "user": {
+          "type": "string",
+          "description": "user"
+        },
+        "password": {
+          "type": "object",
+          "description": "password",
+          "properties": {
+            "fromSecret": {
+              "type": "object",
+              "required": [
+                "key",
+                "name"
+              ],
+              "properties": {
+                "key": {
+                  "type": "string",
+                  "description": "key containing postgres password in secret"
+                },
+                "name": {
+                  "type": "string",
+                  "description": "name of secret containing postgres password"
+                }
+              }
+            },
+            "value": {
+              "type": "string",
+              "description": "postgres password"
+            }
+          }
+        }
+      }
+    },
+    "blockIngestorNodeIds": {
+      "type": "string",
+      "description": "list of graphprotocol ingest nodes' ids delimited by ,"
+    },
+    "monitoring": {
+      "type": "object",
+      "required": [
+        "enabled"
+      ],
+      "enabled": {
+        "type": "boolean",
+        "description": "enabled ServiceMonitor object creation"
+      }
+    }
+  }
+}

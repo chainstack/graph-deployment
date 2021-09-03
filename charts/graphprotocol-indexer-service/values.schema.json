@@ -1,0 +1,263 @@
+{
+  "$schema": "https://json-schema.org/draft-07/schema#",
+  "title": "Values",
+  "type": "object",
+  "required": [
+    "image",
+    "imagePullSecrets",
+    "nameOverride",
+    "fullnameOverride",
+    "podSecurityContext",
+    "securityContext",
+    "service",
+    "resources",
+    "nodeSelector",
+    "tolerations",
+    "affinity",
+    "config",
+    "postgres",
+    "ingress",
+    "monitoring"
+  ],
+  "properties": {
+    "image": {
+      "description": "Container Image",
+      "required": [
+        "repository",
+        "tag",
+        "pullPolicy"
+      ],
+      "properties": {
+        "repository": {
+          "type": "string"
+        },
+        "tag": {
+          "type": "string"
+        },
+        "pullPolicy": {
+          "type": "string",
+          "enum": [
+            "Always",
+            "IfNotPresent",
+            "Never"
+          ]
+        }
+      },
+      "type": "object"
+    },
+    "imagePullSecrets": {
+      "type": "array"
+    },
+    "nameOverride": {
+      "type": "string"
+    },
+    "fullnameOverride": {
+      "type": "string"
+    },
+    "podSecurityContext": {
+      "type": "object"
+    },
+    "securityContext": {
+      "type": "object"
+    },
+    "service": {
+      "type": "object",
+      "required": [
+        "annotations",
+        "type",
+        "metricsPort",
+        "httpPort"
+      ],
+      "properties": {
+        "annotations": {
+          "type": "object"
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "ClusterIP",
+            "ExternalName",
+            "LoadBalancer",
+            "NodePort"
+          ]
+        },
+        "metricsPort": {
+          "type": "integer"
+        },
+        "httpPort": {
+          "type": "integer"
+        }
+      }
+    },
+    "resources": {
+      "type": "object"
+    },
+    "nodeSelector": {
+      "type": "object"
+    },
+    "tolerations": {
+      "type": "array"
+    },
+    "affinity": {
+      "type": "object"
+    },
+    "config": {
+      "description": "Graph indexer service config options",
+      "type": "object",
+      "required": [
+        "ethereum",
+        "graphNodeEndpoints",
+        "networkSubgraphEndpoint",
+        "subgraphDeployment",
+        "clientSignerAddress"
+      ],
+      "properties": {
+        "ethereum": {
+          "type": "object",
+          "required": [
+            "url",
+            "network",
+            "address",
+            "mnemonic"
+          ],
+          "properties": {
+            "url": {
+              "type": "string",
+              "description": "URL of ethereum node"
+            },
+            "network": {
+              "type": "string",
+              "description": "Name of ethereum network"
+            },
+            "address": {
+              "type": "string",
+              "description": "Address of wallet used for receiving indexing rewards"
+            },
+            "mnemonic": {
+              "type": "string",
+              "description": "Mnemonic password for wallet which was used for staking"
+            }
+          }
+        },
+        "graphNodeEndpoints": {
+          "type": "object",
+          "required": [
+            "query",
+            "admin",
+            "status"
+          ],
+          "properties": {
+            "query": {
+              "type": "string",
+              "description": "URL of graphprotocol node query endpoint"
+            },
+            "admin": {
+              "type": "string",
+              "description": "URL of graphprotocol node admin endpoint"
+            },
+            "status": {
+              "type": "string",
+              "description": "URL of graphprotocol node status endpoint"
+            }
+          }
+        },
+        "networkSubgraphEndpoint": {
+          "type": "string",
+          "description": "network subgraph URL for The Graph network"
+        },
+        "subgraphDeployment": {
+          "type": "string",
+          "description": "subgraph deployment for The Graph network"
+        },
+        "clientSignerAddress": {
+          "type": "string",
+          "description": "clientSignerAddress for The Graph network"
+        }
+      }
+    },
+    "postgres": {
+      "description": "Postgres DB configuration",
+      "type": "object",
+      "required": [
+        "db",
+        "host",
+        "user",
+        "password"
+      ],
+      "properties": {
+        "db": {
+          "type": "string",
+          "description": "database name"
+        },
+        "host": {
+          "type": "string",
+          "description": "host"
+        },
+        "user": {
+          "type": "string",
+          "description": "user"
+        },
+        "password": {
+          "type": "object",
+          "description": "password",
+          "properties": {
+            "fromSecret": {
+              "type": "object",
+              "required": [
+                "key",
+                "name"
+              ],
+              "properties": {
+                "key": {
+                  "type": "string",
+                  "description": "key containing postgres password in secret"
+                },
+                "name": {
+                  "type": "string",
+                  "description": "name of secret containing postgres password"
+                }
+              }
+            },
+            "value": {
+              "type": "string",
+              "description": "postgres password"
+            }
+          }
+        }
+      }
+    },
+    "ingress": {
+      "type": "object",
+      "required": [
+        "enabled",
+        "annotations",
+        "hosts",
+        "tls"
+      ],
+      "properties": {
+        "enabled": {
+          "type": "boolean"
+        },
+        "annotations": {
+          "type": "object"
+        },
+        "hosts": {
+          "type": "array"
+        },
+        "tls": {
+          "type": "array"
+        }
+      }
+    },
+    "monitoring": {
+      "type": "object",
+      "required": [
+        "enabled"
+      ],
+      "enabled": {
+        "type": "boolean",
+        "description": "enabled ServiceMonitor object creation"
+      }
+    }
+  }
+}

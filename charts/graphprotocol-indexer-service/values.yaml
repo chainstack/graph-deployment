@@ -53,23 +53,27 @@ affinity: {}
 
 config:
   ethereum:
-    url:
+    url: ""
     network: mainnet
-    address:
-    mnemonic:
-  graphEndpoints:
-    query:
-    admin:
-    status:
+    address: ""
+    mnemonic: ""
+  graphNodeEndpoints:
+    query: ""
+    admin: ""
+    status: ""
   networkSubgraphEndpoint: https://gateway.thegraph.com/network
   subgraphDeployment: QmaUBw7sr8pBrwNgz6JkbmmGoUU7KJSaeRvCaY3NPDbQ7A
   clientSignerAddress: 0x982D10c56b8BBbD6e09048F5c5f01b43C65D5aE0
 
 postgres:
-  db: graph
-  host:
-  user:
+  db: ""
+  host: ""
+  user: ""
   password:
+    value: ""
+    # fromSecret:
+    #   name:
+    #   key:
 
 ingress:
   enabled: false
