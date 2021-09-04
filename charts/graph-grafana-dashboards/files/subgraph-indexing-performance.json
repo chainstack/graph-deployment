@@ -1,19 +1,4 @@
 {
-  "__inputs": [],
-  "__requires": [
-    {
-      "type": "grafana",
-      "id": "grafana",
-      "name": "Grafana",
-      "version": "8.0.5"
-    },
-    {
-      "type": "panel",
-      "id": "timeseries",
-      "name": "Time series",
-      "version": ""
-    }
-  ],
   "annotations": {
     "list": [
       {
@@ -30,7 +15,6 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
-  "id": null,
   "links": [],
   "panels": [
     {
@@ -206,7 +190,7 @@
     },
     {
       "datasource": null,
-      "description": "Duration of eth rpc requests grouped by subgraph and eth rpc method.",
+      "description": "Duration of eth rpc requests.",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -247,10 +231,6 @@
               {
                 "color": "green",
                 "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
               }
             ]
           },
@@ -275,13 +255,31 @@
           "mode": "single"
         }
       },
+      "pluginVersion": "8.0.5",
       "targets": [
         {
           "exemplar": true,
-          "expr": "avg_over_time(deployment_eth_rpc_request_duration[5m])",
+          "expr": "histogram_quantile(0.99, increase(eth_rpc_request_duration_bucket[1m]))",
+          "instant": false,
           "interval": "",
-          "legendFormat": "{{ deployment }} - {{ method }}",
+          "legendFormat": "0.99 - {{ method }}",
           "refId": "A"
+        },
+        {
+          "exemplar": true,
+          "expr": "histogram_quantile(0.9, increase(eth_rpc_request_duration_bucket[1m]))",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "0.9 - {{ method }}",
+          "refId": "B"
+        },
+        {
+          "exemplar": true,
+          "expr": "histogram_quantile(0.5, increase(eth_rpc_request_duration_bucket[1m]))",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "0.5 - {{ method }}",
+          "refId": "C"
         }
       ],
       "title": "Subgraph ETH RPC request duration",
@@ -384,5 +382,5 @@
   "timezone": "",
   "title": "Subgraph indexing performance",
   "uid": "C9aWrrWnz",
-  "version": 7
+  "version": 1
 }
