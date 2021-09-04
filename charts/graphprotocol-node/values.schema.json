@@ -152,6 +152,10 @@
           "type": "string",
           "description": "host"
         },
+        "replicaHost": {
+          "type": "string",
+          "description": "replica host"
+        },
         "user": {
           "type": "string",
           "description": "user"
