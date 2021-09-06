@@ -54,30 +54,6 @@ In the example bellow external ethereum mainnet endpoint is used, cause the inde
 ```
 helmfile -f helmfile-standalone.yaml -n <namespace> apply
 ```
-
-## Potential Installation Bugs and Troubleshooting
-
-### Monitoring Infrastructure Not Present
-```
-Error: Failed to render chart: exit status 1: Error: unable to build kubernetes objects from release manifest: unable to recognize "": no matches for kind "ServiceMonitor" in version "monitoring.coreos.com/v1"
-```
-
-If you experienced the error above, it means you do not have the monitoring infrastructure components configured.
-See `INFRA_README.md` for setup instructions.
-If monitoring is not a priority or desired feature you can do away with it. Under the `values` folder, set monitoring to false in affected files.
-```
-monitoring:
-  enabled: false
-```
-
-### Timeouts and Pods experiencing `CrashLoopBackOff`
-Should timeouts be experienced or if you noticed that some pods are experiencing `CrashLoopBackOff` errors when you run `kubectl get pods -n <namespace>`,
-it suggests that there are configuration errors.
-
-Some possible errors could be
-Don't forget to fill in the `config.chains` value in the `values/graphprotocol-node*` file.
-
-
 ### Deploy subgraph
 This instruction is based on https://thegraph.com/docs/developer/quick-start
 
@@ -163,6 +139,26 @@ The graph protocol node does not expose itself to the internet by default.
 One method of exposure is to utilize the LoadBalancer service.
 Do note that the downside of this approach is that it would expose the installation to the web.
 
+#### Ingress resource
+You can use built-in ingress support to expose graph node to the internet.
+You can configure that using `ingress` and `ingressWebsocket` structure in `values/graphprotocol-node-query.yaml` .
+
+This would expose ports used by the graph protocol node to the web.
+Do note you'll need to run the below commands for changes to be reflected.
+```
+helmfile -f helmfile-standalone.yaml -n <namespace> apply
+
+or
+
+helmfile -f helmfile-network.yaml -n <namespace> apply
+```
+
+Once the changed have been applied get the external ip for the the query ingress.
+```
+$ kubectl get ing -n <namespace>
+```
+
+#### Loadbalancer service
 In `values/graphprotocol-node-query.yaml` add the following line at the bottom
 ```
 service:
@@ -182,7 +178,7 @@ helmfile -f helmfile-network.yaml -n <namespace> apply
 
 Once the changed have been applied get the external ip for the the query service.
 ```
-$ kubectl get svc -n graph
+$ kubectl get svc -n <namespace>
 NAME                           TYPE           CLUSTER-IP      EXTERNAL-IP                               PORT(S)                                                       AGE
 graphprotocol-node-index       ClusterIP      some ip         <none>                                    8040/TCP,8020/TCP,8000/TCP,8001/TCP,8030/TCP                  64m
 graphprotocol-node-query       LoadBalancer   some ip         *Service external address (CNAME or IP)*  8040:31563/TCP,8020:32350/TCP,8000:30795/TCP,8001:31281/TCP   64m
@@ -190,3 +186,29 @@ ipfs-ipfs                      ClusterIP      some ip         <none>            
 postgres-postgresql            ClusterIP      some ip         <none>                                    5432/TCP                                                      65m
 postgres-postgresql-headless   ClusterIP      None            <none>                                    5432/TCP                                                      65m
 ```
+
+## Securely store values in repository
+You can install [helm-secret](https://github.com/jkroepke/helm-secrets) if you want to store your helm values containing secrets inside git repository in encrypted form.
+helm-secret readme covers how to use it proper way.
+
+## Potential Installation Bugs and Troubleshooting
+
+### Monitoring Infrastructure Not Present
+```
+Error: Failed to render chart: exit status 1: Error: unable to build kubernetes objects from release manifest: unable to recognize "": no matches for kind "ServiceMonitor" in version "monitoring.coreos.com/v1"
+```
+
+If you experienced the error above, it means you do not have the monitoring infrastructure components configured.
+See `INFRA_README.md` for setup instructions.
+If monitoring is not a priority or desired feature you can do away with it. Under the `values` folder, set monitoring to false in affected files.
+```
+monitoring:
+  enabled: false
+```
+
+### Timeouts and Pods experiencing `CrashLoopBackOff`
+Should timeouts be experienced or if you noticed that some pods are experiencing `CrashLoopBackOff` errors when you run `kubectl get pods -n <namespace>`,
+it suggests that there are configuration errors.
+
+Some possible errors could be
+Don't forget to fill in the `config.chains` value in the `values/graphprotocol-node*` file.
