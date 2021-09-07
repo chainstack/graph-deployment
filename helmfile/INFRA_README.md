@@ -29,20 +29,20 @@ This includes Prometheus, Exporters, Grafana and basic kubernetes dashboards
 ### Graph Grafana dashboards
 Includes The Graph specific dashboards for grafana. Also includes configuration of postgres datasource for grafana.
 
-Some of dashboards was inspired or based on https://github.com/StakeSquid/graphprotocol-mainnet-docker/tree/advanced/grafana/provisioning/dashboards
+Some of the dashboards were inspired or based on https://github.com/StakeSquid/graphprotocol-mainnet-docker/tree/advanced/grafana/provisioning/dashboards.
 
 **Postgres datasource**:
 Unfortunately postgresql password (used for postgres datasource) is not known before graph installation.
-In order to make dashboards that uses postgres data work you should pass postgres password to values after graph installation and reapply infra helmfile.
+In order to make the dashboards that uses postgres data work you have to pass postgres password to values after graph installation and reapply infra helmfile.
 
 You can get needed postgres password using following command:
 ```
 kubectl -n <graph-node namespace> get secret node.postgres-postgres.credentials.postgresql.acid.zalan.do -o json | jq -r ".data.password" | base64 -d`
 ```
 
-You should pass it to `postgresDatasource.password` field in `infra.secret.yaml` and run appli command again.
+You have to pass it to `postgresDatasource.password` field in `infra.secret.yaml` and run `apply` command again.
 
-After that you should restart grafana pod to make changes take effect.
+After that, restart grafana pod to make changes take effect.
 
 ## Installation
 Copy `values-example.yaml` to `values.yaml`. Replace values with actual values.
