@@ -4,6 +4,7 @@ config:
 postgres:
   db: node
   host: postgres-postgres
+  replicaHost: postgres-postgres-repl
   user: node
   password:
     fromSecret:

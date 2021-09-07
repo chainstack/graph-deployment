@@ -9,6 +9,12 @@
   weight = 1
   pool_size = 10
 
+{{- if .Values.postgres.replicaHost }}
+[store.primary.replicas.replica]
+  connection = "postgresql://{{ $pgUser }}:$PG_PASS@{{ .Values.postgres.replicaHost }}/{{ $pgDB }}"
+  weight = 1
+{{- end }}
+
 [chains]
   ingestor = "{{ .Values.blockIngestorNodeId }}"
   {{- range $name, $conf := .Values.config.chains }}

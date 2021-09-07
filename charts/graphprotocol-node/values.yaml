@@ -68,6 +68,7 @@ config:
 postgres:
   db: ""
   host: ""
+  replicaHost: ""
   user: ""
   password:
     value: ""

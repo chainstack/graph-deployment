@@ -1,6 +1,7 @@
 postgres:
   db: db
   host: host
+  replicaHost: replicaHost
   user: user
   password:
     value: password
