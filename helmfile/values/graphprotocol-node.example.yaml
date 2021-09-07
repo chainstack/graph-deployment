@@ -1,4 +1,5 @@
 config:
+  # Configuration of connected blockchain metrics and their providers
   chains:
     # mainnet:
     #   providers:

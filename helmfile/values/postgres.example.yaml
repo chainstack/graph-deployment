@@ -2,10 +2,11 @@ resources:
   requests:
     cpu: "2"
     memory: 0.5Gi
-  limits: #TODO: Tune requests during acceptance tests
+  limits:
     cpu: "2.5"
     memory: 1Gi
 
 numberOfInstances: 2
+
 volume:
   size: 250Gi
