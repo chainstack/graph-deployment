@@ -26,7 +26,7 @@ releases:
     component: node-index
   values:
   - values/graphprotocol-node-index.yaml
-  - values/graphprotocol-node.secret.yaml
+  - values/graphprotocol-node.yaml
   - config:
       ipfs: {{ .Values.ipfsEndpoint }}
   needs:
@@ -38,7 +38,7 @@ releases:
     component: node-query
   values:
   - values/graphprotocol-node-query.yaml
-  - values/graphprotocol-node.secret.yaml
+  - values/graphprotocol-node.yaml
   - config:
       ipfs: {{ .Values.ipfsEndpoint }}
   needs:
@@ -50,7 +50,6 @@ releases:
     component: indexer-agent
   values:
   - values/graphprotocol-indexer-agent.yaml
-  - values/graphprotocol-indexer-agent.secret.yaml
   needs:
   - postgres
   - graphprotocol-node-index
@@ -63,7 +62,6 @@ releases:
     component: indexer-service
   values:
   - values/graphprotocol-indexer-service.yaml
-  - values/graphprotocol-indexer-service.secret.yaml
   needs:
   - postgres
   - graphprotocol-node-index
