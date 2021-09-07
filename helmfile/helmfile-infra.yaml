@@ -22,6 +22,7 @@ releases:
 - name: ingress-nginx
   chart: ingress-nginx/ingress-nginx
   version: ~3.35.0
+  installed: {{ .Values.ingressNginx.enabled }}
 
 - name: postgres-operator
   chart: postgres-operator/postgres-operator
@@ -31,13 +32,14 @@ releases:
   values:
   - configKubernetes:
       enable_pod_antiaffinity: true
-
+  installed: {{ .Values.postgresOperator.enabled }}
 
 - name: cert-manager
   chart: jetstack/cert-manager
   version: ~1.4.1
   values:
   - installCRDs: true
+  installed: {{ .Values.certManager.enabled }}
 
 - name: letsencrypt-prod-clusterissuer
   chart: ../charts/letsencrypt-prod-clusterissuer
@@ -47,13 +49,16 @@ releases:
   - email: "{{ .Values.email }}"
   needs:
   - cert-manager
+  installed: {{ .Values.letsencryptProdIssuer.enabled }}
 
 - name: kubernetes-dashboard
   chart: kubernetes-dashboard/kubernetes-dashboard
   version: ~4.3.1
+  installed: {{ .Values.kubernetesDashboard.enabled }}
 
 - name: kubedashboard-admin-sa
   chart: ../charts/kubedashboard-admin-sa
+  installed: {{ .Values.kubernetesDashboardSA.enabled }}
 
 - name: prometheus-stack
   chart: prometheus-community/kube-prometheus-stack
@@ -80,8 +85,10 @@ releases:
             foldersFromFilesStructure: true
       persistence:
         enabled: true
+  installed: {{ .Values.prometheusStack.enabled }}
 
 - name: graph-grafana-dashboards
   chart: ../charts/graph-grafana-dashboards
   values:
   - postgresDatasource: {{ toYaml .Values.postgresDatasource | nindent 6 }}
+  installed: {{ .Values.graphGrafanaDashboards.enabled }}
