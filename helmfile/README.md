@@ -17,7 +17,7 @@ More information about indexing could be found [here](https://thegraph.com/docs/
 ### Installation
 Prepare values in `values` directory first. `<namespace>` can be any string of your choice.
 ```
-helmfile -f helmfile-network.yaml -n <namespace> apply
+helmfile -f helmfile.yaml -e network -n <namespace> apply
 ```
 
 ### Install graph-cli and indexer-cli
@@ -52,7 +52,7 @@ Prepare values in `values` directory first. `<namespace>` can be any string of y
 In the example bellow external ethereum mainnet endpoint is used, cause the indexing contract for the example subgraph is located in ethereum mainnet.
 
 ```
-helmfile -f helmfile-standalone.yaml -n <namespace> apply
+helmfile -f helmfile.yaml -e standalone -n <namespace> apply
 ```
 
 ## Potential Installation Bugs and Troubleshooting
@@ -173,11 +173,11 @@ service:
 This would expose ports used by the graph protocol node to the web.
 Do note you'll need to run the below commands for changes to be reflected.
 ```
-helmfile -f helmfile-standalone.yaml -n <namespace> apply
+helmfile -f helmfile.yaml -e standalone -n <namespace> apply
 
 or
 
-helmfile -f helmfile-network.yaml -n <namespace> apply
+helmfile -f helmfile.yaml -e network -n <namespace> apply
 ```
 
 Once the changed have been applied get the external ip for the the query service.

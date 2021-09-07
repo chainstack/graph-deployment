@@ -1,6 +1,17 @@
 helmDefaults:
   wait: true
 
+environments:
+  standalone:
+    values:
+    - installIpfs: true
+    - installIndexer: false
+    - ipfsEndpoint: "http://ipfs-ipfs:5001/"
+  network:
+    values:
+    - installIpfs: false
+    - installIndexer: true
+    - ipfsEndpoint: "https://ipfs.network.thegraph.com"
 releases:
 - name: postgres
   chart: ../charts/postgres
@@ -16,6 +27,8 @@ releases:
   values:
   - values/graphprotocol-node-index.yaml
   - values/graphprotocol-node.secret.yaml
+  - config:
+      ipfs: {{ .Values.ipfsEndpoint }}
   needs:
   - postgres
 
@@ -26,6 +39,8 @@ releases:
   values:
   - values/graphprotocol-node-query.yaml
   - values/graphprotocol-node.secret.yaml
+  - config:
+      ipfs: {{ .Values.ipfsEndpoint }}
   needs:
   - postgres
 
@@ -40,6 +55,7 @@ releases:
   - postgres
   - graphprotocol-node-index
   - graphprotocol-node-query
+  installed: {{ .Values.installIndexer }}
 
 - name: graphprotocol-indexer-service
   chart: ../charts/graphprotocol-indexer-service
@@ -52,3 +68,16 @@ releases:
   - postgres
   - graphprotocol-node-index
   - graphprotocol-node-query
+  installed: {{ .Values.installIndexer }}
+
+- name: ipfs
+  chart: ../charts/ipfs
+  labels:
+    component: ipfs
+  values:
+  - args:
+    - --migrate=true
+    # Prevent IPFS from connecting to IPFS network
+    # It would prevent your files from sharing with network and would prevent your applications from using external files
+    - --offline
+  installed: {{ .Values.installIpfs }}
