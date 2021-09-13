@@ -1,5 +1,5 @@
 # Email that would be used during issuing https certs. It would be used by let's encrypt to notify about expiring certs.
-email: dm3ch@dm3ch.com
+email: example@domain.com
 
 postgresDatasource:
   url: postgres-postgres.graph:5432 # Postgres host, format postgres-postgres.<graph-node namespace>:5432
