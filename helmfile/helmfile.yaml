@@ -26,7 +26,6 @@ releases:
     component: node-index
   values:
   - values/graphprotocol-node-index.yaml
-  - values/graphprotocol-node.yaml
   - config:
       ipfs: {{ .Values.ipfsEndpoint }}
   needs:
@@ -38,7 +37,6 @@ releases:
     component: node-query
   values:
   - values/graphprotocol-node-query.yaml
-  - values/graphprotocol-node.yaml
   - config:
       ipfs: {{ .Values.ipfsEndpoint }}
   needs:
