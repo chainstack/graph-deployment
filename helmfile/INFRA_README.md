@@ -45,7 +45,7 @@ You have to pass it to `postgresDatasource.password` field in `infra.secret.yaml
 After that, restart grafana pod to make changes take effect.
 
 ## Installation
-Copy `values-example.yaml` to `values.yaml`. Replace values with actual values.
+Copy `values/infra.example.yaml` to `values/infra.yaml` and change values if needed. Replace values with actual values.
 
 Run following command:
 ```

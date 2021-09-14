@@ -14,6 +14,9 @@ config:
   clientSignerAddress: 0xe1EC4339019eC9628438F8755f847e3023e4ff9c
   ethereum:
     network: rinkeby
+    url:
+    address:
+    mnemonic:
   graphNodeEndpoints:
     admin: http://graphprotocol-node-index:8020/
     status: http://graphprotocol-node-index:8030/graphql
@@ -25,6 +28,13 @@ config:
 ingress:
   annotations:
     cert-manager.io/cluster-issuer: "letsencrypt-prod"
+  enabled: true
+  hosts:
+  - some.domain
+  tls:
+  - hosts:
+    - some.domain
+    secretName: indexer-service-https
 
 monitoring:
   enabled: true

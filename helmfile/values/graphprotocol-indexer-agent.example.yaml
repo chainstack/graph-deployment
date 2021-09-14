@@ -8,9 +8,14 @@ postgres:
       name: indexer.postgres-postgres.credentials.postgresql.acid.zalan.do
       key: password
 
+# See environment variable section in https://github.com/graphprotocol/indexer/blob/main/docs/networks.md for configuration details
 config:
+  coordinates:
   ethereum:
     network: rinkeby
+    url:
+    address:
+    mnemonic:
   graphNodeEndpoints:
     admin: http://graphprotocol-node-index:8020/
     status: http://graphprotocol-node-index:8030/graphql
@@ -19,6 +24,8 @@ config:
   collectReceiptsEndpoint: https://gateway.testnet.thegraph.com/collect-receipts
   daiContract: 0x9e7e607afd22906f7da6f1ec8f432d6f244278be
   subgraphDeployment: QmYnGeUXVNZd3MupWqPwZekCriF2CVkpoXZbuSZB9t7eQS
+  # URL that would be used to access indexer installation (indexer-service ingress address) from the internet
+  publicUrl:
 
 monitoring:
   enabled: true

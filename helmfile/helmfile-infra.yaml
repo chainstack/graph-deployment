@@ -16,7 +16,7 @@ repositories:
 environments:
   default:
     values:
-    - ./values/infra.secret.yaml
+    - ./values/infra.yaml
 
 releases:
 - name: ingress-nginx
