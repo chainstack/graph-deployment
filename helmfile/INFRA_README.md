@@ -1,82 +1,106 @@
-# Infra helmfile
-This directory contains helmfile and helm charts that are used to install infra applications to k8s cluster.
+# Infra Helmfile
+
+This directory contains the Helmfile and the Helm charts to install infra applications to the Kubernetes cluster.
 
 ## Components
-### Nginx Ingress
-[Nginx Ingress](https://www.nginx.com/products/nginx-ingress-controller/) is an [Kubernetes Ingress Controller](https://kubernetes.io/docs/concepts/services-networking/ingress-controllers/) that handles http/https routing and TLS termination.
-We are using 3rd party ingress controller instead of clouds' built-in to prevent maintaining different configurations and different TLS certs' issuing mechanisms.
+
+### Nginx ingress
+
+[Nginx Ingress](https://www.nginx.com/products/nginx-ingress-controller/) is a [Kubernetes ingress controller](https://kubernetes.io/docs/concepts/services-networking/ingress-controllers/) that handles the HTTP/HTTPS routing and TLS termination.
+
+We are using a third-party ingress controller instead of clouds' built-in ones to prevent maintaining different configurations and different TLS certs' issuing mechanisms.
 
 ### Postgres operator
-[Postgres operator](https://postgres-operator.readthedocs.io/en/latest/) is an [kubernetes operator](https://kubernetes.io/docs/concepts/extend-kubernetes/operator/) for postgres. It installs postgres and manages it's upgrades, failover, etc.
 
-### Cert-Manager
-Cert-Manager is an application for automatic https certificate issuing and renewal.
-https://cert-manager.io/docs/
+[Postgres operator](https://postgres-operator.readthedocs.io/en/latest/) is a [Kubernetes operator](https://kubernetes.io/docs/concepts/extend-kubernetes/operator/) for Postgres. It installs Postgres and manages its upgrades, failover, etc.
 
-### Let's Encrypt prod clusterissuer
-Small staff helm chart for configuring cert-manager to use let's encrypt for issuing certs.
+### cert-manager
+
+cert-manager is an application for automatic HTTPS certificate issuing and renewal. See the [cert-manager documentation](https://cert-manager.io/docs/).
+
+### Let's Encrypt prod ClusterIssuer
+
+A Helm chart for configuring cert-manager to use [Let's Encrypt](https://letsencrypt.org/) for issuing certs.
 
 ### Kubernetes Dashboard
-https://kubernetes.io/docs/tasks/access-application-cluster/web-ui-dashboard/
-WebUI allows you to see and edit workloads, read pod's logs and etc.
+
+The [Web UI](https://kubernetes.io/docs/tasks/access-application-cluster/web-ui-dashboard/) that allows you to see and edit workloads, read pod logs, etc.
 
 ### KubeDashboard Admin ServiceAccount
-Creates kubernetes service account with admin rights that would be used to access Kubernetes Dashboard.
+
+Creates a Kubernetes service account with admin rights to access Kubernetes Dashboard.
 
 ### Prometheus stack
-This includes Prometheus, Exporters, Grafana and basic kubernetes dashboards
+
+This includes Prometheus, Exporters, Grafana and basic Kubernetes dashboards.
 
 ### Graph Grafana dashboards
-Includes The Graph specific dashboards for grafana. Also includes configuration of postgres datasource for grafana.
 
-Some of the dashboards were inspired or based on https://github.com/StakeSquid/graphprotocol-mainnet-docker/tree/advanced/grafana/provisioning/dashboards.
+Includes The Graph specific dashboards for Grafana. Also includes configuration of the Postgres datasource for Grafana.
 
-**Postgres datasource**:
-Unfortunately postgresql password (used for postgres datasource) is not known before graph installation.
-In order to make the dashboards that uses postgres data work you have to pass postgres password to values after graph installation and reapply infra helmfile.
+Some of the dashboards were inspired or based on [StakeSquid dashboard](https://github.com/StakeSquid/graphprotocol-mainnet-docker/tree/advanced/grafana/provisioning/dashboards).
 
-You can get needed postgres password using following command:
+**Postgres datasource**
+
+Unfortunately, the PostgreSQL password (used for the Postgres datasource) is not known before The Graph installation.
+
+To make the dashboards that use Postgres data work, you have to pass the Postgres password to values after The Graph installation and reapply the infra Helmfile.
+
+You can get the Postgres password using the following command:
+
 ```
 kubectl -n <graph-node namespace> get secret node.postgres-postgres.credentials.postgresql.acid.zalan.do -o json | jq -r ".data.password" | base64 -d`
 ```
 
-You have to pass it to `postgresDatasource.password` field in `infra.secret.yaml` and run `apply` command again.
+You must pass it to the `postgresDatasource.password` field in `infra.secret.yaml` and run the `apply` command again.
 
-After that, restart grafana pod to make changes take effect.
+After that, restart the Grafana pod to make the changes take effect.
 
 ## Installation
-Copy `values/infra.example.yaml` to `values/infra.yaml` and change values if needed. Replace values with actual values.
+
+Copy `values/infra.example.yaml` to `values/infra.yaml` and change the values if needed. Replace the prefilled values with the actual ones.
 
 Run following command:
+
 ```
 helmfile -n <namespace> apply
 ```
 
 ## Usage
+
 ### Kubernetes Dashboard
-Run the following command to configure a proxy between your local machine and k8s API:
+
+Run the following command to configure a proxy between your local machine and the Kubernetes API:
+
 ```
 kubectl proxy
 ```
 
-To get admin token issued for KubeDashboard Admin ServiceAccount run following command:
+To get the admin token issued for KubeDashboard Admin ServiceAccount, run following command:
+
 ```
 NS=<namespace>; kubectl -n $NS get secret $(kubectl -n $NS get sa kube-dashboard-admin -o jsonpath='{.secrets[0].name}') -o jsonpath='{.data.token}' | base64 -d
 ```
 
 Open the following link in a browser. Don't forget to replace `<namespace>` with the actual namespace used during the installation.
+
 `http://127.0.0.1:8001/api/v1/namespaces/<namespace>/services/https:kubernetes-dashboard:https/proxy/`.
 
-On login page, select `token` option and past token you got in previous step.
+On the login page, select the `token` option and pass the token you received at the previous step.
 
 ### Grafana
-Run the following command to configure forwarding between grafana k8s service and your local machine:
+
+Run the following command to configure forwarding between the Grafana Kubernetes service and your local machine:
+
 ```
 kubectl -n <namespace> port-forward svc/prometheus-stack-grafana 8001:80
 ```
 
 Open `http://localhost:8001`, you will be redirected to a login screen.
+
 Use the following basic authentication credentials to login:`admin:prom-operator`.
-There are two folders with Dashboards:
-- Kubernetes - kubernetes cluster monitoring info
-- The Graph - graphprotocol installation subgraph status and application specific monitoring info
+
+There are two folders with dashboards:
+
+- Kubernetes - Kubernetes cluster monitoring information.
+- The Graph - The Graph protocol installation subgraph status and application specific monitoring information.

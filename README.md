@@ -1,18 +1,39 @@
-# TheGraph - IaaC tooling
-This repo contains infrastructure as a code definition deploying The Graph stack to public clouds using Terraform, Kubernetes, Helm and Helmfile.
-Currently supported clouds: AWS, GCP, Azure.
+# The Graph — IaC tooling
 
-Each part of IaaC in this repo could be used completely separately.
+This repository contains the infrastructure as code (IaC) definition to deploy The Graph stack to public clouds using the tools:
 
-## IaaC parts:
-* `terraform/` - contains terraform definitions separate for each supported Cloud. Deploys network and k8s cluster to selected cloud.
-* `charts/` - contains helm charts for deploying The Graph stack.
-* `helmfile/` - contains definition of helm releases that would be deployed to k8s cluster.
+* Terraform
+* Kubernetes
+* Helm
+* Helmfile
+
+Currently supported clouds:
+
+* Amazon Web Services (AWS)
+* Google Cloud Platform (GCP)
+* Microsoft Azure
+
+Each part of IaC in this repository can be used completely separately.
+
+## IaC parts
+
+* `terraform/` — contains the Terraform definitions separate for each supported cloud. Each of the definitions deploys the network and the Kubernetes cluster to the selected cloud.
+* `charts/` — contains the Helm charts to deploy The Graph stack.
+* `helmfile/` - contains the definition of Helm releases that would be deployed to the Kubernetes cluster.
 
 ## Quickstart
-1. Set up your Kubernetes cluster. See the `terraform` for specific cloud provider integration. AWS, Azure, and GCP are supported. See the relevant `README.md` in `terraform/<provider name` for further instructions on how to set up the Kubernetes cluster. The terraform setup will take approximately 10 minutes.
-2. Install infra components following instructions in `helmfile/INFRA_README.md`
-3. Install The Graph stack following instructions in `helmfile/README.md`
+
+1. Set up your Kubernetes cluster.
+
+   See `terraform/` for specific cloud provider integration.
+
+   See the relevant `README.md` in `terraform/<provider_name>` for further instructions on how to set up the Kubernetes cluster.
+
+   The Terraform setup takes approximately 10 minutes.
+
+1. Install the infrastructure components by following the instructions in `helmfile/INFRA_README.md`
+1. Install The Graph stack by following the instructions in `helmfile/README.md`
 
 ## Contributions
-We are welcome to community contributions.
+
+We welcome community contributions.
