@@ -43,7 +43,7 @@ monitoring:
 
 # If you are using standalone installation option it could be useful for you to enable ingress to allow your application outside of the cluster connect to query-nodes by graphql.
 ingress:
-  enabled: true
+  enabled: false
   hosts:
   - graph.example.com
   tls:
