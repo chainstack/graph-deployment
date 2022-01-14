@@ -63,7 +63,7 @@ Copy `values/infra.example.yaml` to `values/infra.yaml` and change the values if
 Run following command:
 
 ```
-helmfile -n <namespace> apply
+helmfile -f helmfile-infra.yaml -n <namespace> apply
 ```
 
 ## Usage
