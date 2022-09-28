@@ -1,5 +1,5 @@
 {{- if .Values.ingress.enabled -}}
-apiVersion: networking.k8s.io/v1beta1
+apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: {{ include "graphprotocol-node.fullname" . }}
@@ -28,13 +28,15 @@ spec:
           - path: /
             pathType: Prefix
             backend:
-              serviceName: {{ include "graphprotocol-node.fullname" $ }}
-              servicePort: graphql
+              service:
+                name: {{ include "graphprotocol-node.fullname" $ }}
+                port:
+                  number: 443
     {{- end }}
 {{- end }}
 ---
 {{- if .Values.ingressWebsocket.enabled -}}
-apiVersion: networking.k8s.io/v1beta1
+apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: {{ include "graphprotocol-node.fullname" . }}-ws
@@ -63,7 +65,9 @@ spec:
           - path: /
             pathType: Prefix
             backend:
-              serviceName: {{ include "graphprotocol-node.fullname" $ }}
-              servicePort: graphql-ws
+              service:
+                name: {{ include "graphprotocol-node.fullname" $ }}
+                port:
+                  number: 443
     {{- end }}
 {{- end }}

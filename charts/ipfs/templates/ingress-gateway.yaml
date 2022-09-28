@@ -1,6 +1,6 @@
 {{- if .Values.ingressGateway.enabled -}}
 {{- $serviceName := include "ipfs.fullname" . -}}
-apiVersion: networking.k8s.io/v1beta1
+apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   labels:
@@ -22,8 +22,10 @@ spec:
         paths:
           - path: /{{ rest $url | join "/" }}
             backend:
-              serviceName: {{ $serviceName }}
-              servicePort: 8080
+              service:
+                name: {{ $serviceName }}
+                port: 
+                  number: 8080
         {{- end -}}
         {{- if .Values.ingressGateway.tls }}
   tls:

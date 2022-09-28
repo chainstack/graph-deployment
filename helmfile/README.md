@@ -12,6 +12,7 @@ You will need to install the following tools before proceeding:
 1. [kubectl](https://kubernetes.io/docs/tasks/tools/)
 1. [helmfile](https://github.com/roboll/helmfile)
 1. [helm-diff](https://github.com/databus23/helm-diff)
+1. Install postgres operator in your cluster: https://postgres-operator.readthedocs.io/en/latest/quickstart/
 
 Make sure to set up the kubectl config to point to the right Kubernetes instance. See `terraform/<respective cloud provider>` for instructions.
 
