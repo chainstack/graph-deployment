@@ -21,12 +21,12 @@ environments:
 releases:
 - name: ingress-nginx
   chart: ingress-nginx/ingress-nginx
-  version: ~3.35.0
+  version: ~4.4.0
   installed: {{ .Values.ingressNginx.enabled }}
 
 - name: postgres-operator
   chart: postgres-operator/postgres-operator
-  version: ~1.7.0
+  version: ~1.9.0
   # Fixes CRD installation
   disableValidationOnInstall: true
   values:
@@ -36,7 +36,7 @@ releases:
 
 - name: cert-manager
   chart: jetstack/cert-manager
-  version: ~1.4.1
+  version: ~1.11.0
   values:
   - installCRDs: true
   installed: {{ .Values.certManager.enabled }}
